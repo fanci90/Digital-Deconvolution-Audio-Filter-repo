@@ -1,0 +1,14 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Signal processing}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Periodic sine sweep for system identification}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{impulse response estimation}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Spectral impulse response modification}{section.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Blind estimation of T60 reverberation times for each bin}{subsection.2.3}% 6
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Application of the decay function}{subsection.2.3}% 7
+\BOOKMARK [2][-]{subsection.2.4}{Filterbank application}{section.2}% 8
+\BOOKMARK [1][-]{section.3}{Test setup}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{Objective}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{Subjective}{section.3}% 11
+\BOOKMARK [1][-]{section.4}{Results}{}% 12
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 13
+\BOOKMARK [1][-]{section.6}{Supplements}{}% 14

@@ -1,0 +1,14 @@
+Die folgende Hintergrundinfo gebe ich bewusst erst nach den zu bewertenden Audiodateien: 
+Ich habe vor einem Jahr etwa einen Algorithmus entwickelt, der bei einkanaligen Rohaufnahmen das eigentliche Quellen-Signal aus schlechten Umgebungsbedingungen restauriert: 
+frühe Reflexionen, 
+Nachhall und 
+Frequenzgang, 
+werden hauptsächlich möglichst herausgefiltert. 
+
+Die Aufnahmen sind mit dem Mikrophon meines Laptops gemacht, die Aufnahmebedingungen waren alles andere als geeignet. 
+Der Algorithmus basiert auf der Entfaltung mittels gemessener Impulsantwort (Raumcharakteristik sowie Recording-Setup). 
+Es ist erstmal basis Systemtheorie, wie man sie als Ingenieur im Studium lernt...
+diese anzuwenden und daraus dann etwas Sinnvolles und vor allem etwas neues daraus zu schaffen, braucht Zeit und Erfahrung.
+Nach meiner Recherche auch mittels KI-Asistenten hat sich gezeigt, dass es den Algorithmus so noch nicht gibt, dieser ist durchaus neu.
+Womöglich gibt es ähnliche und weiter entwickeltere Algorithmen, die das selbe Ziel verfolgen und evtl. bessere Ergebnisse liefern können.
+Solche Algorithmen sind häufig Prorietär, doch ähnliche Methoden gibt es in z.T. frei verfügbaren Forschungspapieren zu finde..

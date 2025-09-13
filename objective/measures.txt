@@ -1,0 +1,130 @@
+output_2025-08-10_19-14-00:
+speech.wav
+periodic_sine_sweep_Schreibtisch hinten im Eck 1
+
+Calculation time: 8.32 seconds
+the snr in db is:
+9.507624388490033
+Initial Room vomlume in square-meter (oversimplified room shape):
+67.94142092900151
+Most relevant initial echo time in seconds:
+0.02379290209044369
+Filtered Room vomlume in square-meter (oversimplified room shape):
+44.451599356451496
+Most relevant filtered echo time in seconds:
+0.020655307878270763
+
+
+STOI of original recording (degraded), and the filtered recording (reference): the original recording has same STOI compared to filtered recording
+STOI: 0.9807
+STOI of filtered recodring (degraded), and the original recording (reference): the filtered recording has same STOI compared to original recording
+STOI: 0.9807
+
+PESQ of original recording (degraded), and the filtered recording (reference): the original recording has fair quality compared to the filtered recording
+PESQ: 4.4410
+PESQ of filtered recodring (degraded), and the original recording (reference): the filtered recording has excellent quality compared to original recording
+PESQ: 4.4319
+
+mosqito metrics: {
+'loudness_ref': 0.1439289212568009, 
+'loudness_deg': 0.14764052364049463, 
+
+'roughness_ref': 0.2194618357356162, 
+'roughness_deg': 0.21995197218551255,
+
+'sharpness_ref': 3.1603852000980934, 
+'sharpness_deg': 3.0984598257012053, 
+}
+
+output_2025-08-10_19-15-00:
+speech.wav
+periodic_sine_sweep_Schreibtisch hinten im Eck 2 (same as first one)
+
+Calculation time: 7.92 seconds
+the snr in db is:
+7.642407367740105
+Initial Room vomlume in square-meter (oversimplified room shape):
+67.94142092900151
+Most relevant initial echo time in seconds:
+0.02379290209044369
+Filtered Room vomlume in square-meter (oversimplified room shape):
+62.186826156381045
+Most relevant filtered echo time in seconds:
+0.02310124253412969
+
+
+output_2025-08-10_19-16-01:
+Record.wav
+periodic_sine_sweep_beside_the_drums.wav
+
+Calculation time: 11.72 seconds
+the snr in db is:
+-9.648152271236404
+Initial Room vomlume in square-meter (oversimplified room shape):
+95.78550701561915
+Most relevant initial echo time in seconds:
+0.026678975185358358
+Filtered Room vomlume in square-meter (oversimplified room shape):
+158.22011651465377
+Most relevant filtered echo time in seconds:
+0.03153719830561307
+
+STOI compares Speech intelligibility and does not really apply to Drum Records:
+STOI Score	Interpretation
+~1.0		Excellent intelligibility
+0.8 – 1.0	Good intelligibility
+0.6 – 0.8	Fair intelligibility
+< 0.6		Poor intelligibility
+STOI of original recording (degraded), and the filtered recording (reference): the original recording has slightly lower STOI compared to filtered recording
+0.9956
+STOI of filtered recodring (degraded), and the original recording (reference): the filtered recording has slightly higher STOI compared to original recording
+0.9960
+
+PESQ measures clarity of a audio channel. 
+Higher PESQ scores indicate better (speech) quality.
+It models human auditory perception, capturing effects like distortion, background noise, clipping, and delay.
+Widely used in telecom, VoIP, and audio processing to measure speech enhancement or degradation.
+Higher PESQ = better perceived audio quality
+PESQ ≈ 4.5 means near-perfect clarity.
+PESQ < 2.0 means very poor or unintelligible speech.
+PESQ Score	MOS Value	Quality Category
+4.0 - 4.5	4 - 5		Excellent (No noticeable defects)
+3.0 - 3.99	3		Fair
+2.0 - 2.99	2		Poor
+  < 2.0		1		Bad
+PESQ of original recording (degraded), and the filtered recording (reference): the original recording has fair quality compared to the filtered recording
+3.6052
+PESQ of filtered recodring (degraded), and the original recording (reference): the filtered recording has excellent quality compared to original recording
+4.1774
+
+
+mosqito metrics: {
+'loudness_ref': 0.6032870693534635, durch das Filtern nimmt die Laufstärke ab (maximale Amplitude weiterhin auf 1 normaliesiert)
+'loudness_deg': 0.9031945889737392, 
+
+'sharpness_ref': 3.5044575475109614, durch das Filtern wird der Klang schärfer / klarer
+'sharpness_deg': 3.260948639769844, 
+
+'roughness_ref': 0.2280222122268355, durch das Filtern wird der Klang wniger rauh
+'roughness_deg': 0.23021562221729847
+}
+
+
+
+output_2025-08-27_20-51-52 bare impulse response:
+Record.wav
+periodic_sine_sweep_beside_the_drums.wav
+
+-10.655416250228882
+d:\privat\musik projekte\python\digital convolution audio filter by frequency bin specific decayed discrete impulse response\digital convolution audio filter by frequency bin specific decayed discrete impulse response.py:91: RuntimeWarning: invalid value encountered in divide
+  cumulative_energy /= cumulative_energy[0, :]
+Initial Room vomlume in square-meter (oversimplified room shape):
+95.7854920270615
+Most relevant initial echo time in seconds:
+0.026678973793779082
+Filtered Room vomlume in square-meter (oversimplified room shape):
+141.7391250617723
+Most relevant filtered echo time in seconds:
+0.03040178790105315
+
+Overall PESQ score (averaged over chunks): 1.9293

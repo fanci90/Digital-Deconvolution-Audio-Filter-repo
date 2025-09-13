@@ -1,0 +1,17 @@
+Name: Raphael
+Datum: 11.08.2025
+
+which audio sounds more...
+clear:              x
+dry:                x
+noisy:              none
+reverberant:        y
+natural:            y
+artificial:         none
+raw studio quality: y
+poor microphone:    x
+ai-modified:        none
+
+Other feedback
+x appears more compressed / distant / lower quality with harsher treble
+y sounds better with stronger low end and better eq

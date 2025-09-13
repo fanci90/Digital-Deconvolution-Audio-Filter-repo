@@ -1,0 +1,18 @@
+Name: Raphael
+Datum: 11.08.2025
+
+which audio sounds more... 
+clear:              z
+dry:                x
+noisy:              x/y/z
+reverberant:        none
+natural:            y/z
+artificial:         none
+raw studio quality: none
+poor microphone:    none
+ai-modified:        none
+
+Other feedback:
+- x/y/z have all too much noise
+- y appears more distant
+- quality differences are subtle, x&y appear to have slightly better quality 

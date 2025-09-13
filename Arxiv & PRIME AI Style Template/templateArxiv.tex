@@ -1,0 +1,645 @@
+\documentclass{article}
+
+
+\usepackage{PRIMEarxiv}
+
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage{soul}
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{amsmath}        % clean equation numbering and reference
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{lipsum}
+\usepackage{fancyhdr}       % header
+\usepackage{graphicx}       % graphics
+\graphicspath{{media/}}     % organize your images and other figures under media/ folder
+\usepackage{multirow}
+\usepackage{makecell} % For multi-line cells
+\usepackage{subfigure} 
+\usepackage{xcolor}
+%Header
+\pagestyle{fancy}
+\thispagestyle{empty}
+\rhead{ \textit{ }} 
+
+% Update your Headers here
+%\fancyhead[LO]{Running Title for Header}
+% \fancyhead[RE]{Firstauthor and Secondauthor} % Firstauthor et al. if more than 2 - must use \documentclass[twoside]{article}
+
+
+  
+%% Title
+\title{Digital Convolution Audio Filter by Frequency Bin-Specific Decayed Discrete Impulse Response
+%%%% Cite as
+%%%% Update your official citation here when published 
+\thanks{\textit{\underline{Citation}}: 
+\textbf{Authors. Title. Pages.... DOI:000000/11111.}} 
+}
+
+\author{
+Stefan Ciba \\
+\href{https://www.researchgate.net/profile/Stefan-Ciba}{https://www.researchgate.net/profile/Stefan-Ciba} \\
+  %% examples of more authors
+   \And
+ % M. Ciba \\
+%\href{https://www.researchgate.net/profile/Manuel-Ciba}{https://www.researchgate.net/profile/Manuel-Ciba} \\
+  %% \AND
+  %% Coauthor \\
+  %% Affiliation \\
+  %% Address \\
+  %% \texttt{email} \\
+  %% \And
+  %% Coauthor \\
+  %% Affiliation \\
+  %% Address \\
+  %% \texttt{email} \\
+  %% \And
+  %% Coauthor \\
+  %% Affiliation \\
+  %% Address \\
+  %% \texttt{email} \\
+}
+
+
+\begin{document}
+\maketitle
+%  “Essentially, all models are wrong, but some are useful.”- George E.P. Box (1919-present
+
+\begin{abstract}
+The developed method focuses on the calculation and modification of a discrete \textit{impulse response} in order to filter the characteristics from a known digital single channel recording setup and room characteristics such as early reflections and reverberations. The aim is a dryer and clearer signal reconstruction, which ideally would be the direct-path signal. The time domain \textit{impulse response} is calculated from the cepstral domain and modified by means of frequency bin specific exponential decay in the spectrum. The decay rates are obtained by using the blind estimates of reverberation time ratio between recorded output and test signals for each frequency bin. The modified \textit{impulse response} does filter a recorded audio-signal by deconvolution. The blind estimation stands out for its robustness to noise and non-idealities.
+This simple, yet powerful method, could potentially offer advantages in scenarios, where adjustment for early reflections and frequency bin specific reverberation characteristics is crucial, such as in audio production, acoustic simulation, or virtual reality applications, where acoustic characteristics don't change significantly during the record. %Simply spoken, the method consists of an equalizer that fades resonant frequencies out the \textit{impulse response} spectrum. 
+This filter accounts for not optimal recording conditions and can be applied as one of the first steps in post-processing of a single audio channel. Some real-time applications can benefit from this method, but some might need to have real-time or spatial adaption, when the \textit{impulse response} changes during the record and manual recalibration process would not be an option. The proposed method shows less early reflections and less reverberation compared to deconvolution with non modified \textit{impulse response}. Estimation of a direct path signal is key to many applications. %\cite{rosseel2025}% and also improves the \textit{Signal to Noise Ratio} (SNR). % ( To do: compare SNR)  % e.g. because listeners enter or leave the room or the microphone was moved...
+\end{abstract}
+
+
+% keywords can be removed
+\keywords{Spectral impulse response modification \and digital early reflections and dereverberation convolution filter}
+
+
+\section{Introduction}
+The field of digital audio signal processing has undergone significant development since the advent of digital techniques in the 1960s and 1970s, which enabled to manipulate sound with unprecedented precision and flexibility~\cite{oppenheim1989frequency,smith2011spectral}. %Early work in digital filtering provided the foundation for subsequent innovations in audio effects, artificial reverberation, and room acoustics simulation~\cite{moorer1979reverberation}.
+
+Modeling and modification of the acoustic characteristics of room and recording setups, based on convolution with \textit{impulse response}, is a key technique in digital audio processing. The Linear Time Invariant (LTI) system approach consisting of convolution of a audio signal with a measured or synthesized \textit{impulse response}, makes it possible to e.g. simulate reverberation, filter out early reflections, and compensate for coloration introduced by the recording chain~\cite{smith2011spectral,moorer1979reverberation}.
+
+Traditional methods for reverberation and dereverberation often rely on parametric models or sparse representations of the \textit{impulse response}~\cite{moorer1979reverberation,HabetsThesis2007}. However, convolution with a sparse, spectrally modified \textit{impulse response}, that explicitly incorporates the $T60$ decay through exponential functions offers a direct and flexible approach for single-channel audio filtering. This method enables targeted suppression of early reflections, reverberation, and undesired recording characteristics, based on established signal processing principles. This novel approach differs from closely related state of the art work such as "Speech Dereverberation in the Time-Frequency Domain" \cite{oyzerman2012}, "Approximation of Real Impulse Response Using IIR Structures" \cite{primavera2011} and "Representation and Identification of Systems in the Discrete-Time Wavelet Transform Domain" \cite{asm2007} and was not yet found in literature.
+
+\newpage
+\section{Signal processing}
+\subsection{Periodic sine sweep for system identification}
+To characterize a system, a periodic linear sine sweep (chirp) can be used as the test signal \cite{farina2000}. 
+The frequency of the positive chirp increases linearly from $f_0$ to $f_1$ within a duration $T$:
+\begin{equation}
+    \acute{x}(t) = \sin\left(2\pi \left[ f_0 t + \frac{f_1 - f_0}{2T} t^2 \right]\right), \quad t \in [0, T].
+\end{equation}
+The signals are being sampled with the sample rate $f_s=48$ kHz and thus contain $N=T f_s$ samples, counting $n=0,1,2, ... N-1$. By indexing with $t_n = \frac{n \bmod N}{f_s}$ the expression for the positive chirp becomes discrete and periodic:
+\begin{equation}
+\acute{x}_n = \sin\left(2\pi \left( f_0 t_n + \frac{f_1 - f_0}{2T} t_n^2 \right)\right).
+\end{equation}
+The chirp vector can be further extended for $P$ periods by array tiling:
+\begin{equation}
+x_{n} = \bigoplus_{p=0}^{P-1} \acute{x}_{n - pN}.
+\end{equation}
+
+
+
+\subsection{impulse response estimation}
+Given discrete time series $x_n$ and its recorded signal $y_n$ with $N$ samples, their relation can be described by a discrete LTI System with $y_n=x_n*h_n$. Therein the \textit{impulse response} $h_n$ describes the signal chain, that can include unpleasant room characteristics that cause e.g. early reflections, reverberation, resonance and add non-linearity of the sensor and the loudspeaker.
+\\
+The \textit{impulse response} can be decorrelated by deconvolution from the related signals for system identification:  
+\begin{equation}
+h_n=y_n*x_n^{-1}.
+\end{equation}
+The deconvolution method of choice is the frame-wise subtraction of the test signal and the recorded signal in cepstral domain, followed by back transformation into time domain. The \textit{impulse responses} are subsequently combined and normalized to get one time domain representation. \\  
+The discrete time signals are split into $N_{\text{frames}}$ frames with a frame length of $ N_{\text{DFT}}= 5 \cdot f_s $, so the DFT size was chosen in relation to the sample rate $f_s$, for the \textit{impulse response} to have a time duration that respects usual reverberation and delay time. 
+For each frame index $ \eta = 0,1,2,..., N_{\text{frames}}-1 $ the frame boundaries are shifted over the signal with hop length $ N_{hop}=\frac{N_{\text{DFT}}}{2}$, which makes up a overlap of $o=50\%$. 
+The frequency bins are counted by index $\mu=0,1,2,...,N_{\text{DFT}-1}$. In the same manner, the discrete time step is respected by the index $\nu$, to count the samples in a frame.
+Subbands can be expressed as angular frequency $\Omega=\frac{2 \pi}{N_{\text{DFT}}}$ times index $\mu$.
+DFT spectra are processed frame by frame with rectangular window $\omega^{\text{(rect)}}_\nu$. \\
+The complex windowed short-time spectrum is:
+\begin{equation}
+\label{eq:STFT}
+\underline{Y}_{\mu, \eta}=\sum_{\nu=0}^{N_{\text{DFT}}-1}y_{\eta N_{hop}-\nu} \cdot \omega^{\text{(rect)}}_\nu e^{-j\Omega \nu}.
+\end{equation}
+%A \textit{Fast Fourier Transform} (FFT) algorithm can be used to perform the spectral transformation which requires N_{dft} to be a power of two.
+%The conjugate complex spectral components get neglected by using $M=\frac{N_{\text{DFT}}}{2}+1$ bins, because of redundancy.
+%\\
+%The phase $\varphi_{\mu, \eta}$ of the complex spectrum $\underline{Y_{\mu, \eta}}=Y_{\mu, \eta}\cdot e^{j\varphi_{\mu, \eta}}$, wherein $Y_{\mu, \eta}$ is the magnitude spectrum, gets saved for back transformation later. \\
+%However this has to be taken into account by mirror the spectrum again for correct back transformation. 
+%For numerical efficiency a FFT algorithm is used to perform the spectral transformation which requires N_{dft} to be a power of two.
+
+
+
+The original signal short time spectrum is $\underline{X}_{\mu, \eta}$. %(reference the original sine-wave or chirp Signal which was used here, to respect the periodicity).
+The recorded short time spectrum is $\underline{Y}_{\mu, \eta}$. 
+They are regularized by $|\underline{X}_{\mu, \eta}|_{\varepsilon} = \max(|\underline{X}_{\mu, \eta}|, \varepsilon)$ for numerical stability.
+
+The real Cepstrum is obtained by transformation as follows: 
+\begin{equation}
+  C^{(x)}_{\mu,\eta} = \Re\left\{ \frac{1}{N_{\text{DFT}}}  \sum_{\mu=0}^{N_{\text{DFT}}-1} \ln|\underline{X}_{\mu, \eta}|_{\varepsilon} e^{j\Omega \mu} \right\}.
+\end{equation}
+
+%Why Real Cepstrum Often Works Better
+%Minimum-phase assumption: The real cepstrum ignores phase, reconstructing a minimum-phase version of the signal. Many room impulse responses and physical systems naturally have minimum-phase or near-minimum-phase characteristics.
+%
+%Robustness: The real cepstrum is less sensitive to phase wrapping/unwrapping artifacts, which can plague the complex cepstrum—especially with noisy or non-minimum-phase signals. Errors in phase estimation can degrade results.
+%
+%Practical advantages: The real cepstrum avoids difficult phase handling, is simpler to implement, and commonly separates “excitation” (source) and “filter” (system) effects for speech and audio processing, which is often all that's needed for clean deconvolution or echo estimation.
+%
+%Feature extraction: In many applications (pitch detection, speaker recognition), only the amplitude information matters, not the phase, so the real cepstrum gives more robust, interpretable features.
+%
+%Artifacts in complex cepstrum: If the signal is not strictly minimum-phase, exact phase recovery in complex cepstrum can introduce artifacts due to phase discontinuities or wrap-around. The real cepstrum sidesteps these issues, potentially delivering smoother, more useful results.
+
+
+
+In cepstral domain the deconvolutions are accomplished by subtractions, in order to obtain the \textit{impulse responses}:
+\begin{equation}
+  C^{(h)}_{\mu,\eta} =  C^{(y)}_{\mu,\eta} -  C^{(x)}_{\mu,\eta}.
+\end{equation}
+The \textit{impulse responses} transform back into the time domain vise versa. Although the imaginary part should be zero, only the real part is used, to prevent numerical errors:
+\begin{equation}
+h_{\nu,\eta} = \Re\left\{ \frac{1}{N_{\text{DFT}}} \sum_{\mu=0}^{N_{\text{DFT}}-1}  \overbrace{e^{\left(   \sum_{\mu=0}^{N_{\text{DFT}}-1}C^{(h)}_{\mu, \eta}  e^{-j\Omega \mu}    \right)}}^{H_{\mu, \eta}}   e^{j\Omega \mu} \right\}.
+\end{equation}
+The \textit{impulse responses} accumulate by averaging:
+\begin{equation}
+\overline{h}_{\nu}=\frac{1}{N_{\text{frames}}} \sum_{\eta=0}^{N_{\text{frames}}-1} h_{\nu,\eta}.
+\end{equation}
+To ensure the \textit{impulse response} has a consistent scale, with maximum absolute value $1$, it is normalized:
+\begin{equation}
+   h_{\nu} = \frac{\overline{h}_{\nu}}{\max_{\nu} |\overline{h}_{\nu}|}. \label{eq:IR}
+\end{equation}
+This yields a single, normalized \textit{impulse response}, that is suitable as a good overall representation.
+
+
+\subsection{Spectral \textit{impulse response} modification}
+The time domain \textit{impulse response}, e.g. from equation \eqref{eq:IR}, is transformed by STFT, to add decay to certain frequency bins. 
+
+
+\subsubsection{Blind estimation of $T60$ reverberation times for each bin}
+The ISO 3382 standard \cite{iso3382} formally defines $T60$ as the time required for spatial sound energy to decay by 60 dB. 
+This work uniquely uses blind estimate of $T60$, despite the \textit{impulse response} is known, to shape the decay of each frequency bin in the \textit{impulse response}, targeting specific acoustic and system artifacts for convolution filter, which is an approach not yet found in literature. Furthermore the $T60$ reverberation time is a quantity that is traditionally used for measurement, characterizing and shaping room acoustics usually as a global or band-averaged parameter ~\cite{kuttruff2016room}.
+Ratnam et al. provide the maximum-likelihood framework for single-channel blind $T60$ estimation \cite{ratnam2003}.
+To do the frequency bin specific modifications on the \textit{impulse response}, the necessary array of decay parameters is obtained by the following procedure.
+\\
+The Power Spectral Density (PSD) for a discrete signal $x_n$ is its STFT magnitude squared:
+
+\begin{equation}
+S_{\mu, \eta} = |\underline{X}_{\mu, \eta}|^2 \label{eq:PSD}.
+\end{equation}
+
+The energy for each frequency bin is: % (counting backwards in time) :
+
+\begin{equation}
+E_{\mu, \eta} = \frac{\sum_{\eta' = \eta}^{N_{\text{frames}}-1} S_{\mu, \eta'}}{\sum_{\mu' = 0}^{N_{\text{DFT}}-1} S_{\mu, \eta'}}.
+\end{equation}
+
+The $T60$ time for each frequency bin is defined as the time it takes for the cumulative energy to fall below a threshold (e.g., 0.001, corresponding to -60 dB of magnitude):
+
+\begin{equation}
+\eta^{\text{(T60)}}_{\mu} = \min \left\{ \eta : E_{\mu, \eta} < 0.001 \right\}.
+\end{equation}
+
+The overlap factor is:
+\begin{equation}
+o = 1- \frac{N_{hop}}{N_{\text{DFT}}}},
+\end{equation}
+
+the $T60$ estimate in seconds for every frequency bin is:
+
+\begin{equation}
+T60_{\mu} = \frac{o \cdot \eta^{\text{(T60)}}_{\mu} }{f_s}. \label{eq:T60mu}
+\end{equation}
+
+
+%---
+%
+%
+%## 3. Summary Table of Variables
+%
+%| Symbol               | Description                        |
+%|----------------------|------------------------------------|
+%| $$ S(k, m) $$        | STFT power at bin $$ k $$, frame $$ m $$ |
+%| $$ E_{\text{cum}} $$ | Cumulative normalized energy       |
+%| $$ m_{T_{60}}(k) $$  | Frame index where energy < 0.001   |
+%| $$ T_{60}(k) $$      | T60 time for bin $$ k $$           |
+%| $$ d_k(m) $$         | Decay function for bin $$ k $$     |
+%| $$ S'(k, m) $$       | Decay-modified STFT                |
+%| $$ f_s $$            | Sample rate                        |
+%| $$ n_{\text{FFT}} $$ | FFT size                           |
+%| $$ \text{hop\_length} $$ | STFT hop size                  |
+%
+%---
+
+
+\subsubsection{Application of the decay function}
+The ratio $\rho$ between the $T60$'s of the original test signal $x_n$ and its recorded signal $y_n$, weights the exponential decay for every frequency bin: $\rho^{\text{(T60's)}}_{\mu} =\frac{T60_{\mu}(y_n)}{T60_{ \mu}(x_n)}$.
+
+%By the ratio $\rho$ of $T60$ parameters from $x_n$ and $y_n$ \eqref{eq:T60mu}, exponential decay is applied on the \textit{impulse response} spectrum for every frequency bin $\rho T60_{\mu} =k \cdot \ \frac{T60_{\mu}(y_n)}{T60_{ \mu}(x_n)}$, with constant $k=1$ chosen to weight decay. 
+With the frame wise time duration $ \tau = \eta \cdot \frac{N_{hop}}{f_s} $, the exponential decay function is:
+\begin{equation}
+D_{\mu, \eta} = e^{\left(-\frac{\tau}{\rho^{\text{(T60's)}}_{\mu}}\right)}.
+\end{equation}
+
+The frame wise decay modified \textit{impulse response} is:
+\begin{equation}
+h'_{ \nu , \eta} = \frac{1}{N_{\text{DFT}}} \sum_{\mu=0}^{N_{\text{DFT}}-1}  \underline{H}_{\mu, \eta} \cdot D_{\mu, \eta} \text{ } e^{-j\Omega \mu}.
+\end{equation}
+ 
+The synthesis window (Hann) is applied by $\omega^{\text{(hann)}}_\nu$ \cite{smith2011spectral} and furthermore the overlap has to be handled, done by \textit{Constant Overlap Add Method} (COLA):
+% wherin the indicator function $\mathbb{I}_{[0,N_{\text{DFT}}-1]}(k)$ selects valid indexes (1 if $k \in [0, N_{\text{DFT}}-1]$, 0 otherwise): 
+%\begin{equation}
+%h'_n = \sum_{\eta=0}^{N_{\mathrm{frames}}-1} \omega_{n - \eta N_{hop}} \cdot x_{n - \eta N_{hop},\,\eta} \cdot \mathbb{I}_{[0,\,L-1]}(n - \eta N_{hop}).
+%\end{equation}
+
+\begin{equation}
+h'_n = \sum_{\substack{\eta \\ 0 \leq n - \eta N_{hop} < N_{\text{DFT}}}}{\omega^{\text{(hann)}}_{n - \eta N_{hop}} \cdot h'_{n - \eta N_{hop}, \eta} }.
+\end{equation}
+
+
+\subsection{Filterbank application}
+Finally, additional overall exponential decay $dk$ can be applied to the modified \textit{impulse response} $h''_n= h'_n \cdot e^{-dk \cdot n}$ to avoid echoes. The \textit{impulse response} is applied as spectral filter bank $\underline{H}''_{\mu,\eta}$ for any recorded signal spectrum $\underline{Z}_{\mu,\eta}$ by deconvolution:
+\begin{equation}
+\underline{Z}''_{\mu,\eta}=\frac{\underline{Z}_{\mu,\eta}}{\underline{H}''_{\mu,\eta}}. \label{eq:system}
+\end{equation}
+Hann-windowing applies for STFT and iSTFT. The COLA method applies for iSTFT, respectively. The frame size was set to number of samples of the \textit{impulse response} and gain was normalized by strictly preventing clipping if necessary to get the desired filtered signal $\hat{z}''_{n} = z''_{n}  / max(|z'_{n}|)$.
+
+\section{Test setup}
+
+A sine-sweep and a speech audio was recorded by integrated microphone from a \textit{Convertible Workstation}
+%\href{https://doi-product-assets.s3.amazonaws.com/pub/Manufacturer-Brochure/1061215910.pdf}
+( \href{https://web.archive.org/web/20201031164451/https://h20195.www2.hp.com/v2/GetDocument.aspx?docname=c05939925}{HP ZBook Studio x360 G5 (6TW61EA#ABD)} ), on a desk, located in a pitched roof area corner of a livingroom, that has about 1 Ar. The sine-sweep sound was played back from the internal loudspeakers of the \textit{Convertible Workstation}. The integrated noise reduction was turned off. The goal was to improve the speech sound quality with the aim of having dry and clear sound when speaker sits in front of the \textit{Convertible Workstation}. A Futher assumption was, that degraded speech intelligibility could get better.
+\\ \\
+In the same manner the sine-sweep and a drum-set groove have been recorded from the same location. The sine-sweep was played back on a \href{https://archive.org/details/manualsbase-id-372739/page/n21/mode/2up}{Alesis Active M1 MKII (8N)} near-field monitor beside the drum-set. The goal was to have dry and clear studio-like raw recording quality despite poor recording-conditions.
+
+\subsection{Objective}
+Several objective measures prove the applicability of the Method. They can be found in the Results section table \ref{tab:Objective}. 
+The $T60$ of the \textit{impulse response}-filtered signal and the $T60$ of the filtered signal by modified \textit{impulse response} can be compared.
+\\ \\
+The logarithmic \textit{Signal to Noise Ratio} (SNR) \cite{Fliege1991} was used to indicate the efficiency of the filter by taking the original signal $z_n$ and the filtered audio signal $z''_n$ into account. The averages of signal and noise power are calculated by	
+    $S = \overline{z''_n^2}$ and
+    $N = \overline{(z_n - z''_n)^2}$.
+		The logarithmic fraction of them is:
+	\begin{equation}
+	SNR=10log_{10} \left(\frac{S}{N}\right).
+	\end{equation}
+\\ \\
+The STOI measures the speech intelligibility. It is only applicable to speech audio.
+\\ \\
+The \textit{Perceptual Evaluation of Speech Quality} (PESQ) is an algorithm that models human auditory perception, capturing effects like distortion, background noise, clipping, and delay.
+It measures clarity of an audio channel, which is also necessary for non-speech audio channels. Higher PESQ scores indicate better quality of the audio channel.
+It is widely used in telecom, VoIP, and audio processing to measure speech enhancement or degradation cite{...}.
+The PESQs of the original signal and the filtered signal are compared due to their difference. Therein the PESQ from a degraded signal was estimated from its filtered signal as reference and vise versa. 
+\\ \\
+Zwicker’s time-varying \textit{loudness} model estimates how intense or loud a sound is perceived by human listeners cite{...}.
+\\ \\
+\textit{Sharpness} from DIN 45692 standard (Zwicker’s model) quantifies how piercing or shrill sound feels, based on how present the frequencies above 3kHz are cite{...}.
+\\ \\
+\textit{Roughness} measures how harsh or "fluttery" a sound feels, linked to rapid, audible amplitude fluctuations in the range most noticeable to human ears (20–300Hz modulation).
+\\ \\
+The Algorithms to measure perceptive sound quality can be used from the \textit{Modular Sound Quality Index Toolbox} \href{https://github.com/Eomys/MoSQITo}{(MoSQITo)} \cite{mosqito2025}, \href{https://github.com/ludlows/python-pesq.git}{PESQ} \cite{pesq2025} and the \href{https://github.com/mpariente/pystoi}{STOI} \cite{stoi2025}, respectively. Further measures have been evaluated by proprietary software, namely the Cubase 5.0.1 build 147 (\href{https://o.steinberg.net/index.php?id=1782&L=1}{Steinberg Media Technologies GmbH}) \cite{cubase501}.
+
+
+\subsection{Subjective}
+Furthermore subjective hearing tests where performed. 
+Some listener notice the difference of acoustic signal with less reverb, at least the experts do. 
+
+
+
+\section{Results}
+
+%                    Drum-Set     Drum-Set       Speech       Speech
+%                    degraded     filtered       degraded     filtered
+%min sample value    -1           -0.961         -0.045       -0.052       
+%max sample value    +1            +1             0.046        0.045        
+%peak amplitude      0dB           0dB           -26.75dB     -25.73dB     
+%DC offset          -87.70dB      -91.67dB       -85.31dB     -88.32dB
+%Estimated Pitch    2207.5Hz/C#6  5057.2Hz/D#7  1452.2Hz/F#5  1834.9Hz/A#5
+%Min RMS Power      -67.68dB      -96.45dB       -61.02dB     -63.10dB
+%Max RMS Power       -4.58dB      -11.67dB       -32.82dB     -32.08dB
+%Average            -19.92dB      -24.63dB       -41.34dB     -41.29dB
+%SNR                        9.648dB                     9.507dB
+%T60                 31.537ms      26.679ms       23.793ms     20.655dB
+%STOI                   -             -           0.9807       0.9807
+%$\Delta$ STOI                   -                           0
+%PESQ                3.6052        4.1774         4.4319       4.4410
+%$\DELTA$ PESQ
+%Loudness            0.90320       0.60329        0.14764      0.14393
+%Roughness           0.23022       0.22802        0.21995      0.21946
+%Sharpness           3.26095       3.50446        3.09846      3.16039
+
+
+\begin{table}[ht]
+\centering
+\caption{Objective measures. Statistics with asterisk (\textit{name}$^*$) derived from Cubase 5.0.1 build 147.}
+\label{tab:Objective}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{ } & \multirow{2}{*}{\makecell{Drum-Set \\ degraded ($z_n$)}} & \multirow{2}{*}{\makecell{Drum-Set \\ filtered ($z''_n$)}} & \multirow{2}{*}{\makecell{Speech \\ degraded ($z_n$)}} & \multirow{2}{*}{\makecell{Speech \\ filtered ($z''_n$)}} \\
+&       &       &       &       \\
+\hline
+\textit{min sample value}$^*$ &   -1    &   -0.961    &   -0.045   &    -0.052   \\
+\hline
+\textit{max sample value}$^*$ &   +1    &    +1       &    0.046   &     0.045   \\
+\hline
+\textit{peak amplitude}$^*$ &   0dB    &    0dB   &   -26.75dB    &    -25.73dB     \\
+\hline
+\textit{DC offset}$^*$ &   -87.70dB    &    -91.67dB    &    -85.31dB   &    -88.32dB   \\
+\hline
+\textit{Estimated Pitch}$^*$ &    2207.5Hz / C\#6    &    5057.2Hz / D\#7   &    1452.2Hz / F\#5    &    1834.9Hz / A\#5   \\
+\hline
+\textit{Min RMS Power}$^*$ &   -67.68dB    &    -96.45dB    &    -61.02dB    &    -63.10dB   \\
+\hline
+\textit{Max RMS Power}$^*$ &    -4.58dB    &    -11.67dB   &    -32.82dB   &    -32.08dB   \\
+\hline
+\textit{Average}$^*$  &   -19.92dB    &    -24.63dB    &    -41.34dB   &    -41.29dB   \\
+\hline
+SNR &       \multicolumn{2}{c|}{-9.648dB}       &     \multicolumn{2}{c|}{-9.507dB}      \\
+\hline
+T60  &    31.537ms   &   26.679ms    &    23.793ms   &    20.655dB   \\
+\hline
+STOI &    N/A   &    N/A   &   0.9807    &    0.9807   \\
+\hline
+$\Delta$ STOI   &    \multicolumn{2}{c|}{N/A}       &      \multicolumn{2}{c|}{0}      \\
+\hline
+PESQ &    3.6052   &    4.1774    &    4.4319    &    4.4410   \\
+\hline
+$\Delta$ PESQ &      \multicolumn{2}{c|}{0.5722}      &      \multicolumn{2}{c|}{9.1E-3}       \\
+\hline
+\textit{Loudness}  &    0.90320   &    0.60329   &    0.14764   &    0.14393   \\
+\hline
+\textit{Roughness} &    0.23022   &    0.22802   &    0.21995    &   0.21946    \\
+\hline
+\textit{Sharpness} &    3.26095   &    3.50446   &    3.09846   &    3.16039   \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+The results are shown in figure \ref{fig:results}. ....
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.70\textwidth]{diagrams/DecayMatrix.png}
+	\caption{The $T60$ decay matrix.}
+	\label{fig:Decaymatrix}
+\end{figure}
+
+\begin{figure}[h]
+     \centering
+     \subfigure[Original.]{\includegraphics[width=0.9\textwidth]{diagrams/impulse response.png}}
+     \hfill
+     \subfigure[Modified.]{\includegraphics[width=0.9\textwidth]{diagrams/impulse response modified.png}}
+\\%[1ex]	
+\caption{\textit{Impulse response}.}
+	\label{fig:results}
+\end{figure}
+
+
+
+%See awesome Table~\ref{tab:table}.
+
+%\begin{table}
+% \caption{Sample table title}
+%  \centering
+%  \begin{tabular}{lll}
+%    \toprule
+%    \multicolumn{2}{c}{Part}                   \\
+%    \cmidrule(r){1-2}
+%    Name     & Description     & Measurement \\
+%    \midrule
+%    A & Input  & $\sim$100     \\
+%    B     & Output terminal & $\sim$10      \\
+%    C     & Prediction Error       & up to $10^6$  \\
+%    \bottomrule
+%  \end{tabular}
+%  \label{tab:table}
+%\end{table}
+
+
+
+\section{Conclusion}
+\\
+Future work will focus on a cepstral lifter approach during the \textit{impulse response} estimation.
+Instead of the T60 coefficient estimation a artificial neural network might learn to optimize features from the impulse response.
+
+\section{Supplements}
+%\subsection{Linear sine sweep}
+%The implementation of the linear frequency sweep generation and periodic repetition was done as follows. The core chirp equation follows the standard linear sweep formulation [3][7], while the modulo operation in $$ t_n $$ handles the periodic extension through array tiling.
+% 
+%### Time Vector
+%$$
+%t_n = \frac{n}{f_s}, \quad n = 0,1,\ldots,N-1 \quad \text{where } N = T_{\text{dur}} \cdot f_s
+%$$
+%- $$ f_s $$: Sampling rate (`sample_rate`)
+%- $$ T_{\text{dur}} $$: Duration in seconds (`duration_sec`)
+%
+%### Linear Sine Sweep Signal
+%$$
+%x(t) = \sin\left(2\pi \left( f_0 t + \frac{f_1 - f_0}{2T_{\text{dur}}} t^2 \right)\right)
+%$$
+%- $$ f_0 $$: Start frequency (`start_freq`)
+%- $$ f_1 $$: End frequency (`end_freq`)
+%- Matches `method='linear'` in `scipy.signal.chirp` [3][7]
+%
+%### Periodic Extension (array tiling):
+%$$
+%x_{\text{periodic}}(t) = \bigoplus_{k=0}^{P-1} x(t - kT_{\text{dur}})
+%$$
+%- $$ P $$: Number of periods (`periods`)
+%- $$ \oplus $$: Concatenation/tiling operation (`np.tile`)
+%**Full equation with discrete indexing:**
+%$$
+%x_{\text{periodic}}[n] = \sin\left(2\pi \left( f_0 t_n + \frac{f_1 - f_0}{2T_{\text{dur}}} t_n^2 \right)\right), \quad t_n = \frac{n \bmod %N}{f_s}
+%$$
+
+%[1] https://tex.stackexchange.com/questions/162648/how-to-draw-a-sinewave-in-tikz
+%[2] https://stackoverflow.com/questions/22597392/generating-swept-sine-waves
+%[3] https://www.recordingblogs.com/wiki/sine-sweep
+%[4] https://tex.stackexchange.com/questions/40160/math-symbol-question-vertical-bar-for-evaluated-at
+%[5] https://matthewvaneerde.wordpress.com/2009/08/03/how-to-calculate-a-sine-sweep-the-wrong-way/
+%[6] https://www.hsu-hh.de/ant/wp-content/uploads/sites/699/2022/02/Exponential-Sine-Sweep-Measurement-Implementation-Targeting-FPGA-Platforms-KLEMDNOWAKRIVERAGERATZOeLZERKLAUER.pdf
+%[7] https://endaq.com/pages/sine-sweep-testing
+%[8] https://en.wikibooks.org/wiki/LaTeX/Advanced_Mathematics
+
+%\subsection{}
+The Python-code of the studied method and audio samples are to be found at: \href{https://git...}{https://git...}.
+%Interessant: Ein System, das ein sich wiederholendes Verhalten zeigen sollte, kann evtl. in das Reservoir "eingelernt" werden. Wenn die Prediction und der Messwert größere Abweichungen zeigt, dann kann eine Benachrichtigung / Warnung gegeben werden, damit sich z.B. jemand das System genauer anschaut.
+
+
+\section*{Acknowledgments}
+The author(s) acknowledge the use of the AI language model \href{https://www.perplexity.ai/search/dear-perple-how-are-you-today}{Perplexity}, developed by Perplexity AI, for assistance in literature and code review in this work.
+%This was supported in part by......
+
+%\section{This is how Perplexity would write the whole theory part for the Paper at once:}
+%Here is a scientific "Theory" section in LaTeX that systematically covers the core algorithms from your code, including periodic sine sweep generation, impulse response estimation via cepstral deconvolution, T60 estimation, frequency-dependent decay processing, and signal filtering. All equations are referenced to open-access literature where possible.
+
+%```latex
+%\section{Theory}
+
+%\subsection{Periodic Sine Sweep Generation}
+
+%To characterize a system, a periodic linear sine sweep is generated as the test signal. The instantaneous frequency of the sweep increases linearly from $f_0$ to $f_1$ over a duration $T$:
+%\begin{equation}
+%    s(t) = \sin\left(2\pi \left[ f_0 t + \frac{f_1 - f_0}{2T} t^2 \right]\right), \quad t \in [0, T]
+%\end{equation}
+%The sweep is repeated $P$ times to form a periodic excitation:
+%\begin{equation}
+%    s_{\text{periodic}}(t) = \sum_{p=0}^{P-1} s(t - pT), \quad t \in [0, PT]
+%\end{equation}
+%(See \cite{farina2000} for sweep-based system identification.)
+
+%\subsection{Reverberation Time ($T_{60}$) Estimation}
+
+%The reverberation time $T_{60}$ is the time for the energy envelope to decay by 60 dB. For each frequency bin $k$, compute the energy decay curve:
+%\begin{align}
+%    P(k, m) &= |S(k, m)|^2 \\
+%    E_{\text{cum}}(k, m) &= \frac{\sum_{m' = m}^{M-1} P(k, m')}{\sum_{m' = 0}^{M-1} P(k, m')}
+%\end{align}
+%$T_{60}$ is estimated as the time where $E_{\text{cum}}(k, m)$ first drops below $0.001$:
+%\begin{equation}
+%    T_{60}(k) = m_{T_{60}}(k) \cdot \frac{H}{f_s}, \quad m_{T_{60}}(k) = \min \{m : E_{\text{cum}}(k, m) < 0.001\}
+%\end{equation}
+%(See \cite{ratnam2003} for blind T60 estimation.)
+
+%\subsection{Frequency-Dependent Decay Adjustment}
+
+%To spectrally modify the impulse response, a frequency-dependent exponential decay is applied in the time-frequency domain:
+%\begin{align}
+%    D_k(m) &= \exp\left(-\frac{t_m}{\Delta_{T_{60}}(k)}\right), \quad t_m = m \cdot \frac{H}{f_s} \\
+%    \Delta_{T_{60}}(k) &= \frac{0.1}{T_{60,\text{test}}(k)} \cdot T_{60,\text{recorded}}(k)
+%\end{align}
+%The adjusted STFT is
+%\begin{equation}
+%    S'_{\mathrm{IR}}(k, m) = S_{\mathrm{IR}}(k, m) \cdot D_k(m)
+%\end{equation}
+%and the adjusted impulse response is obtained by inverse STFT:
+%\begin{equation}
+%    h_{\text{adj}}[n] = \mathrm{ISTFT}\{ S'_{\mathrm{IR}}(k, m) \}
+%\end{equation}
+
+%\subsection{Signal Filtering and Post-processing}
+
+%The filtered signal is obtained by convolving the test signal $x_{\text{test}}[n]$ with the adjusted impulse response:
+%\begin{equation}
+%    y[n] = h_{\text{adj}}[n] * x_{\text{test}}[n]
+%\end{equation}
+%Optionally, a gain factor $\alpha$ is applied to match RMS levels:
+%\begin{equation}
+%    \alpha = \frac{\mathrm{RMS}(x_{\text{test}})}{\mathrm{RMS}(h_{\text{adj}})}
+%\end{equation}
+%and the result is $y[n] \leftarrow \alpha y[n]$.
+
+%\subsection{Smoothing and Visualization}
+
+%impulse responses may be smoothed using a moving average or low-pass filter:
+%\begin{align}
+%    h_{\text{smooth}}[n] &= \frac{1}{W} \sum_{i=0}^{W-1} h[n-i] \\
+%    h_{\text{smooth}}[n] &= \text{LPF}\{h[n]\}
+%\end{align}
+%Time-frequency representations (STFT, CWT, cepstrum) are visualized as described in \cite{smith2011spectral}.
+
+\begin{thebibliography}{9}
+
+%\bibitem{rosseel2025},
+% H.~Rosseel, T.~van Waterschoot, ``Accelerated Interactive Auralization of Highly Reverberant Spaces using Graphics Hardware,'' 2025.\\
+% \url{https://arxiv.org/abs/2509.04390}
+
+\bibitem{farina2000}
+A.~Farina, ``Simultaneous measurement of impulse response and distortion with a swept-sine technique,'' \emph{AES Convention 108}, 2000.\\
+\url{https://www.aes.org/e-lib/browse.cfm?elib=10211}
+
+
+%\bibitem{oppenheim1999discrete}
+%A.~V.~Oppenheim and R.~W.~Schafer, \emph{Discrete-Time Signal Processing}, 2nd~ed., Prentice Hall, 1999. ISBN: 978-0137549207.
+
+
+\bibitem{moorer1979reverberation}
+J.~A.~Moorer, ``About this reverberation business,'' \emph{Computer Music Journal}, vol.~3, no.~2, pp.~13--28, 1979. doi:10.2307/3680287.
+
+%\bibitem{habets2010single}
+%E.~A.~P.~Habets, I.~Cohen, and S.~Gannot, ``Single-channel speech dereverberation using spectral enhancement,'' in \emph{Speech %Dereverberation}, Springer, 2010, pp.~229--254. doi:10.1007/978-1-4419-6114-3\_9.
+
+\bibitem{HabetsThesis2007}
+E.~A.~P. Habets,
+\newblock ``Single- and multi-microphone speech dereverberation using spectral enhancement,''
+\newblock Ph.D. dissertation, Technische Universiteit Eindhoven, The Netherlands, 2007.
+\newblock [Online]. Available: \url{https://research.tue.nl/files/1972985/200710970.pdf}
+
+%%%%%%%%%%%%% Related work (This work itself can be considered noval approach)
+\bibitem{oyzerman2012}
+A. Oyzerman, I. Cohen, ``Speech Dereverberation in the Time-Frequency Domain,'' M.Sc. Thesis, Technion, 2012. \url{https://israelcohen.com/wp-content/uploads/2018/05/AnnaOyzerman_MSc_2012.pdf}
+
+\bibitem{primavera2011}
+A. Primavera et al., ``Approximation of Real impulse response Using IIR Structures,'' Proc. EUSIPCO, 2011. \url{https://www.eurasip.org/Proceedings/Eusipco/Eusipco2011/papers/1569422051.pdf}
+
+\bibitem{asm2007}
+I. Cohen, ``Representation and Identification of Systems in the Discrete-Time Wavelet Transform Domain,'' IEEE Trans. Signal Processing, 2007. \url{https://israelcohen.com/wp-content/uploads/2018/05/ASM2007.pdf}
+
+%%%%%%%%%%%%%% Signal Processing fundamentals
+\bibitem{oppenheim1989frequency}
+A.~V.~Oppenheim, R.~W.~Schafer, \emph{Discrete-Time Signal Processing}, Prentice Hall, 1989.\\
+ISBN: 0-13-216292-X
+
+\bibitem{smith2011spectral}
+Julius O. Smith III, \emph{Spectral Audio Signal Processing}, W3K Publishing, 2011.\\
+Available online: \url{https://ccrma.stanford.edu/~jos/sasp/}
+
+%%%%%%%%%%%%%% T60 related
+\bibitem{ratnam2003}
+R.~Ratnam et al., \emph{Blind Estimation of Reverberation Time}, J. Acoust. Soc. Am., 114(5), pp. 2877-2892, 2003. \\
+\url{https://www.ee.columbia.edu/~dpwe/papers/Ratnam03-reverb.pdf}
+
+\bibitem{doire2015}
+C.~Doire et al., \emph{Single-Channel Blind Estimation of Reverberation Parameters}, Proc. EUSIPCO, 2015. \\
+\url{https://www.commsp.ee.ic.ac.uk/~sap/wp-content/uploads/2015/07/Doire2015.pdf}
+
+\bibitem{liu2023}
+Y.~Liu et al., \emph{A Composite T60 Regression and Classification Approach for Speech Dereverberation}, arXiv:2302.04932, 2023. \\
+\url{https://arxiv.org/abs/2302.04932}
+
+\bibitem{kuttruff2016}
+H.~Kuttruff, \emph{Room Acoustics} (6th ed.), CRC Press, 2016. (Open access chapters available) \\
+ISBN: 978-1498740436
+
+\bibitem{iso3382}
+ISO 3382-1:2009, \emph{Acoustics -- Measurement of room acoustic parameters -- Part 1: Performance spaces}. \\
+\url{https://www.iso.org/standard/40979.html} (Standard available for purchase, but methods widely referenced in open literature)
+
+%%%%%% 
+\bibitem{mosqito}
+Green Forge Coop. MOSQITO (Version 1.1.1). \url{https://doi.org/10.5281/zenodo.10629475}
+
+\bibitem{Fliege1991}
+N.~Fliege, \emph{Systemtheorie}. B. G. Teubner Stuttgart 1991 (Informationstechnik).  \\ 
+ISBN: 3-519-06140-6
+
+
+\bibitem{mosqito2025}
+Eomys Engineering, Modular Sound Quality Index Toolbox (MoSQITo), 2025. \\ 
+Available at: \url{https://github.com/Eomys/MoSQITo}
+
+\bibitem{pesq2025}
+C.~Ludlow, python-pesq: Perceptual Evaluation of Speech Quality (PESQ), 2025. \\
+Available at: \url{https://github.com/ludlows/python-pesq.git}
+
+\bibitem{stoi2025}
+M.~Pariente, pystoi: Short-Time Objective Intelligibility (STOI), 2025. \\
+Available at: \url{https://github.com/mpariente/pystoi}
+
+\bibitem{cubase501}
+Steinberg Media Technologies GmbH, Cubase 5.0.1 build 147 [Computer Software], 2009. \\
+Available at: \url{https://o.steinberg.net/index.php?id=1782&L=1}
+
+
+\end{thebibliography}
+
+
+
+\end{thebibliography}
+
+\end{document}
