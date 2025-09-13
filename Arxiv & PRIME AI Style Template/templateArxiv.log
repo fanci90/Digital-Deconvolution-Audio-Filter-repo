@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  13 SEP 2025 14:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  13 SEP 2025 17:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -432,22 +432,22 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 (./templateArxiv.aux)
 \openout1 = `templateArxiv.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 69.
-LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -515,7 +515,7 @@ LaTeX Font Info:    ... okay on input line 69.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 69.
+Package hyperref Info: Link coloring OFF on input line 66.
 (c:/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 
@@ -527,22 +527,22 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count287
 )
-LaTeX Info: Redefining \ref on input line 69.
-LaTeX Info: Redefining \pageref on input line 69.
-LaTeX Info: Redefining \nameref on input line 69.
+LaTeX Info: Redefining \ref on input line 66.
+LaTeX Info: Redefining \pageref on input line 66.
+LaTeX Info: Redefining \nameref on input line 66.
 
 (./templateArxiv.out) (./templateArxiv.out)
 \@outlinefile=\write3
 \openout3 = `templateArxiv.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 69.
+LaTeX Info: Redefining \microtypecontext on input line 66.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 69.
+LaTeX Info: Redefining \showhyphens on input line 66.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -576,7 +576,7 @@ e
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 72.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 69.
 
 
 (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -585,7 +585,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (c:/texlive/2020/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 72.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 69.
 
 
 (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -599,18 +599,18 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 {c:/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 170.
+(hyperref)                removing `math shift' on input line 180.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 170.
+(hyperref)                removing `math shift' on input line 180.
 
 
-LaTeX Warning: Citation `kuttruff2016room' on page 3 undefined on input line 17
+LaTeX Warning: Citation `kuttruff2016room' on page 3 undefined on input line 18
 2.
 
 ! Extra }, or forgotten $.
-l.196 o = 1- \frac{N_{hop}}{N_{\text{DFT}}}}
+l.206 o = 1- \frac{N_{hop}}{N_{\text{DFT}}}}
                                             ,
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -622,7 +622,7 @@ deleted material, e.g., by typing `I$}'.
 ! You can't use `macro parameter character #' in horizontal mode.
 <argument> HP ZBook Studio x360 G5 (6TW61EA##
                                              ABD)
-l.262 ...5}{HP ZBook Studio x360 G5 (6TW61EA#ABD)}
+l.272 ...5}{HP ZBook Studio x360 G5 (6TW61EA#ABD)}
                                                    ), on a desk, located in ...
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
@@ -630,49 +630,49 @@ If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--265
+Underfull \hbox (badness 10000) in paragraph at lines 270--275
 
  []
 
 ! Double superscript.
 <argument> z''_n^
                  2
-l.271     $S = \overline{z''_n^2}
+l.281     $S = \overline{z''_n^2}
                                  $ and
 I treat `x^1^2' essentially like `x^1{}^2'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 267--274
+Underfull \hbox (badness 10000) in paragraph at lines 277--284
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 276--292
+Underfull \hbox (badness 10000) in paragraph at lines 286--302
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 276--292
+Underfull \hbox (badness 10000) in paragraph at lines 286--302
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 276--292
+Underfull \hbox (badness 10000) in paragraph at lines 286--302
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 276--292
+Underfull \hbox (badness 10000) in paragraph at lines 286--302
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 276--292
+Underfull \hbox (badness 10000) in paragraph at lines 286--302
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 276--292
+Underfull \hbox (badness 10000) in paragraph at lines 286--302
 
  []
 
@@ -680,7 +680,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 276--292
 <diagrams/DecayMatrix.png, id=154, 590.205pt x 388.45125pt>
 File: diagrams/DecayMatrix.png Graphic file (type png)
 <use diagrams/DecayMatrix.png>
-Package pdftex.def Info: diagrams/DecayMatrix.png  used on input line 375.
+Package pdftex.def Info: diagrams/DecayMatrix.png  used on input line 385.
 (pdftex.def)             Requested size: 328.82706pt x 216.4228pt.
 
 
@@ -689,36 +689,36 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <diagrams/impulse response.png, id=156, 731.73375pt x 388.45125pt>
 File: diagrams/impulse response.png Graphic file (type png)
 <use diagrams/impulse response.png>
-Package pdftex.def Info: diagrams/impulse response.png  used on input line 382.
+Package pdftex.def Info: diagrams/impulse response.png  used on input line 392.
 
 (pdftex.def)             Requested size: 422.77661pt x 224.4365pt.
 <diagrams/impulse response modified.png, id=157, 731.73375pt x 388.45125pt>
 File: diagrams/impulse response modified.png Graphic file (type png)
 <use diagrams/impulse response modified.png>
 Package pdftex.def Info: diagrams/impulse response modified.png  used on input 
-line 384.
+line 394.
 (pdftex.def)             Requested size: 422.77661pt x 224.4365pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-! LaTeX Error: There's no line here to end.
+Underfull \hbox (badness 10000) in paragraph at lines 401--406
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.415 F
-       uture work will focus on a cepstral lifter approach during the \texti...
+ []
 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
 
-[5]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
-42.
- (c:/texlive/2020/texmf-dist/tex/latex/base/t1cmtt.fd
+Underfull \hbox (badness 10000) in paragraph at lines 401--406
+
+ []
+
+
+Underfull \vbox (badness 5563) has occurred while \output is active []
+
+ [5]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 4
+90.
+
+(c:/texlive/2020/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 Package microtype Info: Loading generic protrusion settings for font family
@@ -734,7 +734,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.631 \end{thebibliography}
+l.579 \end{thebibliography}
                            
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -743,7 +743,7 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.631 \end{thebibliography}
+l.579 \end{thebibliography}
                            
 Things are pretty mixed up, but I think the worst is over.
 
@@ -756,11 +756,11 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 9995 strings out of 479917
- 153287 string characters out of 5886664
+ 9989 strings out of 479917
+ 153227 string characters out of 5886664
  646947 words of memory out of 5000000
  26121 multiletter control sequences out of 15000+600000
- 593916 words of font info for 187 fonts, out of 8000000 for 9000
+ 593561 words of font info for 183 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,19n,77p,1031b,449s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texl
@@ -780,7 +780,7 @@ fb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/202
 0/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2020/texmf-dist/font
 s/type1/urw/times/utmr8a.pfb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/
 utmri8a.pfb>
-Output written on templateArxiv.pdf (8 pages, 306360 bytes).
+Output written on templateArxiv.pdf (8 pages, 306144 bytes).
 PDF statistics:
  286 PDF objects out of 1000 (max. 8388607)
  250 compressed objects within 3 object streams

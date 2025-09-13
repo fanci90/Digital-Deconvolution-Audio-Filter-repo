@@ -41,25 +41,22 @@
 \textbf{Authors. Title. Pages.... DOI:000000/11111.}} 
 }
 
-\author{
-Stefan Ciba \\
-\href{https://www.researchgate.net/profile/Stefan-Ciba}{https://www.researchgate.net/profile/Stefan-Ciba} \\
+\author{Stefan Ciba \\ \href{https://www.researchgate.net/profile/Stefan-Ciba}{https://www.researchgate.net/profile/Stefan-Ciba}
   %% examples of more authors
-   \And
- % M. Ciba \\
-%\href{https://www.researchgate.net/profile/Manuel-Ciba}{https://www.researchgate.net/profile/Manuel-Ciba} \\
-  %% \AND
-  %% Coauthor \\
+  \And
+  %%\href{https://www.researchgate.net/profile/Manuel-Ciba}{Manuel Ciba} \\
+  %%\AND
+  %% Simon Ciba \\
   %% Affiliation \\
   %% Address \\
   %% \texttt{email} \\
-  %% \And
-  %% Coauthor \\
+  %%\And
+  %% Raphael Schwirtlich \\
   %% Affiliation \\
   %% Address \\
   %% \texttt{email} \\
-  %% \And
-  %% Coauthor \\
+  %%\And
+  %% Mathias Herbert \\
   %% Affiliation \\
   %% Address \\
   %% \texttt{email} \\
@@ -78,6 +75,7 @@ This filter accounts for not optimal recording conditions and can be applied as 
 
 
 % keywords can be removed
+% Add most closely related keywords
 \keywords{Spectral impulse response modification \and digital early reflections and dereverberation convolution filter}
 
 
@@ -273,7 +271,7 @@ A sine-sweep and a speech audio was recorded by integrated microphone from a \te
 %\href{https://doi-product-assets.s3.amazonaws.com/pub/Manufacturer-Brochure/1061215910.pdf}
 ( \href{https://web.archive.org/web/20201031164451/https://h20195.www2.hp.com/v2/GetDocument.aspx?docname=c05939925}{HP ZBook Studio x360 G5 (6TW61EA#ABD)} ), on a desk, located in a pitched roof area corner of a livingroom, that has about 1 Ar. The sine-sweep sound was played back from the internal loudspeakers of the \textit{Convertible Workstation}. The integrated noise reduction was turned off. The goal was to improve the speech sound quality with the aim of having dry and clear sound when speaker sits in front of the \textit{Convertible Workstation}. A Futher assumption was, that degraded speech intelligibility could get better.
 \\ \\
-In the same manner the sine-sweep and a drum-set groove have been recorded from the same location. The sine-sweep was played back on a \href{https://archive.org/details/manualsbase-id-372739/page/n21/mode/2up}{Alesis Active M1 MKII (8N)} near-field monitor beside the drum-set. The goal was to have dry and clear studio-like raw recording quality despite poor recording-conditions.
+In the same manner the sine-sweep and a drum-set groove have been recorded from the same location. The sine-sweep was played back on a \href{https://ia601909.us.archive.org/31/items/manualsbase-id-372739/372739.pdf}{Alesis Active M1 MKII (8N)} near-field monitor beside the drum-set. The goal was to have dry and clear studio-like raw recording quality despite poor recording-conditions.
 
 \subsection{Objective}
 Several objective measures prove the applicability of the Method. They can be found in the Results section table \ref{tab:Objective}. 
@@ -399,81 +397,19 @@ The results are shown in figure \ref{fig:results}. ....
 	\label{fig:results}
 \end{figure}
 
-
-
-%See awesome Table~\ref{tab:table}.
-
-%\begin{table}
-% \caption{Sample table title}
-%  \centering
-%  \begin{tabular}{lll}
-%    \toprule
-%    \multicolumn{2}{c}{Part}                   \\
-%    \cmidrule(r){1-2}
-%    Name     & Description     & Measurement \\
-%    \midrule
-%    A & Input  & $\sim$100     \\
-%    B     & Output terminal & $\sim$10      \\
-%    C     & Prediction Error       & up to $10^6$  \\
-%    \bottomrule
-%  \end{tabular}
-%  \label{tab:table}
-%\end{table}
-
-
-
 \section{Conclusion}
-\\
-Future work will focus on a cepstral lifter approach during the \textit{impulse response} estimation.
-Instead of the T60 coefficient estimation a artificial neural network might learn to optimize features from the impulse response.
+The conclusion.
+\\ \\
+%Future work will focus on a cepstral lifter approach during the \textit{impulse response} estimation.
+%Instead of the T60 coefficient estimation a artificial neural network might learn to optimize features from the impulse response.
+%Interessant: Ein System, das ein sich wiederholendes Verhalten zeigen sollte, kann evtl. in das Reservoir "eingelernt" werden - NGRC. Wenn die Prediction und der Messwert größere Abweichungen zeigt, dann kann eine Benachrichtigung / Warnung gegeben werden, damit sich z.B. jemand das System genauer anschaut.
 
 \section{Supplements}
-%\subsection{Linear sine sweep}
-%The implementation of the linear frequency sweep generation and periodic repetition was done as follows. The core chirp equation follows the standard linear sweep formulation [3][7], while the modulo operation in $$ t_n $$ handles the periodic extension through array tiling.
-% 
-%### Time Vector
-%$$
-%t_n = \frac{n}{f_s}, \quad n = 0,1,\ldots,N-1 \quad \text{where } N = T_{\text{dur}} \cdot f_s
-%$$
-%- $$ f_s $$: Sampling rate (`sample_rate`)
-%- $$ T_{\text{dur}} $$: Duration in seconds (`duration_sec`)
-%
-%### Linear Sine Sweep Signal
-%$$
-%x(t) = \sin\left(2\pi \left( f_0 t + \frac{f_1 - f_0}{2T_{\text{dur}}} t^2 \right)\right)
-%$$
-%- $$ f_0 $$: Start frequency (`start_freq`)
-%- $$ f_1 $$: End frequency (`end_freq`)
-%- Matches `method='linear'` in `scipy.signal.chirp` [3][7]
-%
-%### Periodic Extension (array tiling):
-%$$
-%x_{\text{periodic}}(t) = \bigoplus_{k=0}^{P-1} x(t - kT_{\text{dur}})
-%$$
-%- $$ P $$: Number of periods (`periods`)
-%- $$ \oplus $$: Concatenation/tiling operation (`np.tile`)
-%**Full equation with discrete indexing:**
-%$$
-%x_{\text{periodic}}[n] = \sin\left(2\pi \left( f_0 t_n + \frac{f_1 - f_0}{2T_{\text{dur}}} t_n^2 \right)\right), \quad t_n = \frac{n \bmod %N}{f_s}
-%$$
-
-%[1] https://tex.stackexchange.com/questions/162648/how-to-draw-a-sinewave-in-tikz
-%[2] https://stackoverflow.com/questions/22597392/generating-swept-sine-waves
-%[3] https://www.recordingblogs.com/wiki/sine-sweep
-%[4] https://tex.stackexchange.com/questions/40160/math-symbol-question-vertical-bar-for-evaluated-at
-%[5] https://matthewvaneerde.wordpress.com/2009/08/03/how-to-calculate-a-sine-sweep-the-wrong-way/
-%[6] https://www.hsu-hh.de/ant/wp-content/uploads/sites/699/2022/02/Exponential-Sine-Sweep-Measurement-Implementation-Targeting-FPGA-Platforms-KLEMDNOWAKRIVERAGERATZOeLZERKLAUER.pdf
-%[7] https://endaq.com/pages/sine-sweep-testing
-%[8] https://en.wikibooks.org/wiki/LaTeX/Advanced_Mathematics
-
-%\subsection{}
 The Python-code of the studied method and audio samples are to be found at: \href{https://git...}{https://git...}.
-%Interessant: Ein System, das ein sich wiederholendes Verhalten zeigen sollte, kann evtl. in das Reservoir "eingelernt" werden. Wenn die Prediction und der Messwert größere Abweichungen zeigt, dann kann eine Benachrichtigung / Warnung gegeben werden, damit sich z.B. jemand das System genauer anschaut.
 
 
 \section*{Acknowledgments}
 The author(s) acknowledge the use of the AI language model \href{https://www.perplexity.ai/search/dear-perple-how-are-you-today}{Perplexity}, developed by Perplexity AI, for assistance in literature and code review in this work.
-%This was supported in part by......
 
 %\section{This is how Perplexity would write the whole theory part for the Paper at once:}
 %Here is a scientific "Theory" section in LaTeX that systematically covers the core algorithms from your code, including periodic sine sweep generation, impulse response estimation via cepstral deconvolution, T60 estimation, frequency-dependent decay processing, and signal filtering. All equations are referenced to open-access literature where possible.
@@ -581,6 +517,10 @@ A. Primavera et al., ``Approximation of Real impulse response Using IIR Structur
 I. Cohen, ``Representation and Identification of Systems in the Discrete-Time Wavelet Transform Domain,'' IEEE Trans. Signal Processing, 2007. \url{https://israelcohen.com/wp-content/uploads/2018/05/ASM2007.pdf}
 
 %%%%%%%%%%%%%% Signal Processing fundamentals
+\bibitem{Fliege1991}
+N.~Fliege, \emph{Systemtheorie}. B. G. Teubner Stuttgart 1991 (Informationstechnik).  \\ 
+ISBN: 3-519-06140-6
+
 \bibitem{oppenheim1989frequency}
 A.~V.~Oppenheim, R.~W.~Schafer, \emph{Discrete-Time Signal Processing}, Prentice Hall, 1989.\\
 ISBN: 0-13-216292-X
@@ -610,14 +550,10 @@ ISBN: 978-1498740436
 ISO 3382-1:2009, \emph{Acoustics -- Measurement of room acoustic parameters -- Part 1: Performance spaces}. \\
 \url{https://www.iso.org/standard/40979.html} (Standard available for purchase, but methods widely referenced in open literature)
 
-%%%%%% 
+%%%%%%
+
 \bibitem{mosqito}
 Green Forge Coop. MOSQITO (Version 1.1.1). \url{https://doi.org/10.5281/zenodo.10629475}
-
-\bibitem{Fliege1991}
-N.~Fliege, \emph{Systemtheorie}. B. G. Teubner Stuttgart 1991 (Informationstechnik).  \\ 
-ISBN: 3-519-06140-6
-
 
 \bibitem{mosqito2025}
 Eomys Engineering, Modular Sound Quality Index Toolbox (MoSQITo), 2025. \\ 
