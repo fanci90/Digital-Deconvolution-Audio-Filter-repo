@@ -1,11 +1,13 @@
 Die folgende Hintergrundinfo gebe ich bewusst erst nach den zu bewertenden Audiodateien: 
-Ich habe vor einem Jahr etwa einen Algorithmus entwickelt, der bei einkanaligen Rohaufnahmen das eigentliche Quellen-Signal aus schlechten Umgebungsbedingungen restauriert: 
-frühe Reflexionen, 
-Nachhall und 
-Frequenzgang, 
-werden hauptsächlich möglichst herausgefiltert. 
+Ich habe vor einem Jahr etwa einen Algorithmus entwickelt, der bei einkanaligen Rohaufnahmen das eigentliche Quellen-Signal von der Raumcharakteristik filtern soll:
+Hauptsächlich Nichtlinearitäten im Frequenzgan und Nachhall werden vermindert. 
+
 
 Die Aufnahmen sind mit dem Mikrophon meines Laptops gemacht, die Aufnahmebedingungen waren alles andere als geeignet. 
+Der Laptop steht auf dem Schreibtisch hinten im Eck unter einer Dachschräge nebst einem Schrank sowie Papier-Paravent in einer offenen Dachgeschosswohnung. 
+Das Schlagzeug steht wenige Meter entfernt auf einem Teppich, sonst überwiegend gefließter Boden, sowie Parkett.
+Der direkte Schallweg zum Laptop hin ist nur teilweise gegeben. Die Aufnhame mehrere Meter Entfernt hat jedoch den Vorteil eines geringeren Schalldruckes am Mikrophon (Schlaginstrument haben in direkter Nähe häufig großen Schalldruck im Zeitraum des Schlages).
+Das Mikrophon zielt in parallele Richtung vom Schalgzeug weg.
 Der Algorithmus basiert auf der Entfaltung mittels gemessener Impulsantwort (Raumcharakteristik sowie Recording-Setup). 
 Es ist erstmal basis Systemtheorie, wie man sie als Ingenieur im Studium lernt...
 diese anzuwenden und daraus dann etwas Sinnvolles und vor allem etwas neues daraus zu schaffen, braucht Zeit und Erfahrung.

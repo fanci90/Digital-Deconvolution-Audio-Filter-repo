@@ -1,0 +1,13 @@
+Name:Joe Ciba
+Datum: 18.09.2025
+
+which audio sounds more... 
+clear:              x/y/z/None	y
+dry:                x/y/z/None	y
+noisy:              x/y/z/None	y
+reverberant:        x/y/z/None	none
+natural:            x/y/z/None	y
+artificial:         x/y/z/None	z
+raw studio quality: x/y/z/None	y
+poor microphone:    x/y/z/None	y
+ai-modified:        x/y/z/None	none

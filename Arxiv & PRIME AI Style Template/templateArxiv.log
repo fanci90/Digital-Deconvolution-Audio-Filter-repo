@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  14 SEP 2025 12:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  22 SEP 2025 00:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -754,6 +754,9 @@ Package rerunfilecheck Info: File `templateArxiv.out' has not changed.
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
  9989 strings out of 479917
@@ -780,7 +783,7 @@ fb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/202
 0/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2020/texmf-dist/font
 s/type1/urw/times/utmr8a.pfb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/
 utmri8a.pfb>
-Output written on templateArxiv.pdf (8 pages, 306159 bytes).
+Output written on templateArxiv.pdf (8 pages, 306131 bytes).
 PDF statistics:
  286 PDF objects out of 1000 (max. 8388607)
  250 compressed objects within 3 object streams

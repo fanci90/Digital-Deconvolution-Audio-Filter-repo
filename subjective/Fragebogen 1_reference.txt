@@ -1,0 +1,21 @@
+Name: Stefan Ciba
+Datum: 19.09.2025
+
+which audio sounds more...
+clear:              x & y
+dry:                x
+noisy:              none
+reverberant:        y
+natural:            x & y
+artificial:         none
+raw studio quality: none
+poor microphone:    none
+ai-modified:        none
+
+The Signal x is based on Signal y. Since y didn't introduce noise, both are considered "clean" (no noise).
+x was filtered due to bin-specific decayed impulse response.
+The filter makes the sound "dry" (less reverb), and linearizes frequencies: if the representation of the room impulse response was good, both sound "natural" (in their own way).
+None sound "artificial".
+None of both are considered "raw studio quality", because the microphone placement wasn't optimized: at least for the drum record the direct path was impaired.
+The microphone was the integrated one from the workstation: since it catches many frequencies and seems to have a relatively flat impulse response, I wouldn't consider it a "poor microphone"... compared to reference microphone it is.
+None of both was modified using ai-based audio modification techniques.
