@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  5 OCT 2025 23:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  2 NOV 2025 12:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -605,10 +605,6 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 180.
 
-
-LaTeX Warning: Citation `kuttruff2016room' on page 3 undefined on input line 18
-2.
-
 ! Extra }, or forgotten $.
 l.206 o = 1- \frac{N_{hop}}{N_{\text{DFT}}}}
                                             ,
@@ -677,7 +673,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 286--302
  []
 
 [4]
-<diagrams/DecayMatrix.png, id=154, 590.205pt x 388.45125pt>
+<diagrams/DecayMatrix.png, id=156, 590.205pt x 388.45125pt>
 File: diagrams/DecayMatrix.png Graphic file (type png)
 <use diagrams/DecayMatrix.png>
 Package pdftex.def Info: diagrams/DecayMatrix.png  used on input line 385.
@@ -686,13 +682,13 @@ Package pdftex.def Info: diagrams/DecayMatrix.png  used on input line 385.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<diagrams/impulse response.png, id=156, 731.73375pt x 388.45125pt>
+<diagrams/impulse response.png, id=158, 731.73375pt x 388.45125pt>
 File: diagrams/impulse response.png Graphic file (type png)
 <use diagrams/impulse response.png>
 Package pdftex.def Info: diagrams/impulse response.png  used on input line 392.
 
 (pdftex.def)             Requested size: 422.77661pt x 224.4365pt.
-<diagrams/impulse response modified.png, id=157, 731.73375pt x 388.45125pt>
+<diagrams/impulse response modified.png, id=159, 731.73375pt x 388.45125pt>
 File: diagrams/impulse response modified.png Graphic file (type png)
 <use diagrams/impulse response modified.png>
 Package pdftex.def Info: diagrams/impulse response modified.png  used on input 
@@ -750,20 +746,13 @@ Things are pretty mixed up, but I think the worst is over.
 [8] (./templateArxiv.aux)
 Package rerunfilecheck Info: File `templateArxiv.out' has not changed.
 (rerunfilecheck)             Checksum: 375E44CE96DD7738197D4AD21C05B76C;934.
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 9990 strings out of 479917
- 153237 string characters out of 5886664
+ 9992 strings out of 479917
+ 153254 string characters out of 5886664
  647947 words of memory out of 5000000
- 26122 multiletter control sequences out of 15000+600000
- 593466 words of font info for 183 fonts, out of 8000000 for 9000
+ 26121 multiletter control sequences out of 15000+600000
+ 593596 words of font info for 185 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,19n,77p,1031b,449s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texl
@@ -783,10 +772,10 @@ fb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/202
 0/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2020/texmf-dist/font
 s/type1/urw/times/utmr8a.pfb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/
 utmri8a.pfb>
-Output written on templateArxiv.pdf (8 pages, 306131 bytes).
+Output written on templateArxiv.pdf (8 pages, 305615 bytes).
 PDF statistics:
- 286 PDF objects out of 1000 (max. 8388607)
- 250 compressed objects within 3 object streams
+ 287 PDF objects out of 1000 (max. 8388607)
+ 251 compressed objects within 3 object streams
  69 named destinations out of 1000 (max. 500000)
  27264 words of extra memory for PDF output out of 29859 (max. 10000000)
 

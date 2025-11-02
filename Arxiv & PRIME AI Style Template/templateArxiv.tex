@@ -179,7 +179,7 @@ The time domain \textit{impulse response}, e.g. from equation \eqref{eq:IR}, is 
 
 \subsubsection{Blind estimation of $T60$ reverberation times for each bin}
 The ISO 3382 standard \cite{iso3382} formally defines $T60$ as the time required for spatial sound energy to decay by 60 dB. 
-This work uniquely uses blind estimate of $T60$, despite the \textit{impulse response} is known, to shape the decay of each frequency bin in the \textit{impulse response}, targeting specific acoustic and system artifacts for convolution filter, which is an approach not yet found in literature. Furthermore the $T60$ reverberation time is a quantity that is traditionally used for measurement, characterizing and shaping room acoustics usually as a global or band-averaged parameter ~\cite{kuttruff2016room}.
+This work uniquely uses blind estimate of $T60$, despite the \textit{impulse response} is known, to shape the decay of each frequency bin in the \textit{impulse response}, targeting specific acoustic and system artifacts for convolution filter, which is an approach not yet found in literature. Furthermore the $T60$ reverberation time is a quantity that is traditionally used for measurement, characterizing and shaping room acoustics usually as a global or band-averaged parameter ~\cite{kuttruff2016}.
 Ratnam et al. provide the maximum-likelihood framework for single-channel blind $T60$ estimation \cite{ratnam2003}.
 To do the frequency bin specific modifications on the \textit{impulse response}, the necessary array of decay parameters is obtained by the following procedure.
 \\
@@ -405,7 +405,7 @@ The conclusion.
 %Interessant: Ein System, das ein sich wiederholendes Verhalten zeigen sollte, kann evtl. in das Reservoir "eingelernt" werden - NGRC. Wenn die Prediction und der Messwert größere Abweichungen zeigt, dann kann eine Benachrichtigung / Warnung gegeben werden, damit sich z.B. jemand das System genauer anschaut.
 
 \section{Supplements}
-The Python-code of the studied method and audio samples are to be found at: \href{https://git...}{https://git...}.
+The Python-code of the studied method and audio samples are to be found at \href{https://github.com/fanci90/Digital-Deconvolution-Audio-Filter-repo}{GitHub}.
 
 
 \section*{Acknowledgments}

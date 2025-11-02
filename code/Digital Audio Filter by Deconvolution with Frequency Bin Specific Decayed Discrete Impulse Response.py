@@ -192,7 +192,7 @@ def adjust_impulse_response(ir, test_signal, recorded_output, sample_rate, n_fft
     t60_recorded_output = calculate_t60(recorded_output, sample_rate, n_fft=n_fft, hop_length=hop_length)
     
     num_bins = min(stft_ir.shape[0], stft_test_signal.shape[0], stft_recorded_output.shape[0])
-    t60_diff = 1 * t60_recorded_output[:num_bins] / t60_test_signal[:num_bins] 
+    t60_diff = 1 * t60_recorded_output[:num_bins] / (t60_test_signal[:num_bins]+np.finfo(float).eps) 
 
     stft_ir_adjusted = apply_decay_function(stft_ir, sample_rate, hop_length, t60_diff)
     
@@ -313,15 +313,15 @@ def filter_signal_with_impulse_response(test_sig, impulse_response, gain_factor,
 
 # Objective Measurement:
 
-def snr_db(noisy_signal, filtered_signal):   
-    # calculate the SNR level of the filtered and the original Signal Power:
-    noise = noisy_signal - filtered_signal
-    Ps = np.mean(np.square(filtered_signal))
-    Pn = np.mean(np.square(noise))
-	
-    snr_db = 10 * np.log10(Ps / Pn)
-	
-    return snr_db
+def sr_db(original_signal, filtered_signal):   
+    Ps1 = np.mean(np.square((original_signal-np.mean(original_signal)))) # normazized without DC component
+    Ps2 = np.mean(np.square((filtered_signal-np.mean(filtered_signal)))) # normalized without DC component
+    Pn = Ps1 - Ps2 # implicates that noise = original_signal - filtered_signal
+    
+    # calculate the signal ratios of the filtered and the original Signal Power:
+    snr_db = 10 * (np.log10(Ps2) - np.log10(Pn))
+    lsd_db = 10 * (np.log10(Ps2) - np.log10(Ps1))
+    return snr_db, lsd_db
 
 
 def calculate_room_volume(echo_time):
@@ -364,7 +364,7 @@ def process_files(input_file1, input_file2, test_file, output_folder, sample_rat
     #plot_wavelet_transform(output_sig, sample_rate)
 
     # Determine FFT parameters
-    n_fft = int(5*(sample_rate+1))  # Example value, replace with actual n_fft
+    n_fft = int(5*(sample_rate))  # Example value, replace with actual n_fft
     hop_length = n_fft // 2  # 50% overlap
 
     # Calculate gain factor   # Optimize impulse response using NLMS adaptive filter
@@ -378,7 +378,7 @@ def process_files(input_file1, input_file2, test_file, output_folder, sample_rat
     impulse_response=adjust_impulse_response(impulse_response, test_sig, output_sig, sample_rate)
     
     # additional decay as needed
-    impulse_response = add_decay_to_impulse_response(impulse_response, decay_factor=0.001)
+    impulse_response = add_decay_to_impulse_response(impulse_response, decay_factor=0.01)
     #plot_impulse_response(impulse_response, sample_rate)   
 
     # Filter test signal with decayed impulse response
@@ -386,10 +386,10 @@ def process_files(input_file1, input_file2, test_file, output_folder, sample_rat
     filtered_sig = filtered_sig[:len(test_sig)]
 
     # calculate gain factor 
-    #filtered_sig_rms = calculate_rms(filtered_sig)
-    #test_sig_rms = calculate_rms(test_sig)
-    #gain_factor_sig = test_sig_rms / filtered_sig_rms # Aim for same RMS
-    #filtered_sig *= gain_factor_sig
+    filtered_sig_rms = calculate_rms(filtered_sig)
+    test_sig_rms = calculate_rms(test_sig)
+    gain_factor_sig = test_sig_rms / filtered_sig_rms # Aim for same RMS
+    filtered_sig *= gain_factor_sig
     if np.max(np.abs(filtered_sig)) > 1: #strictly preventing clipping
         filtered_sig /= np.max(np.abs(filtered_sig))
 
@@ -405,8 +405,8 @@ def process_files(input_file1, input_file2, test_file, output_folder, sample_rat
     print(f"Calculation time: {end_time - start_time:.2f} seconds")
 
     # The SNR is relevant if the filter only filtered undesired early reflections and maybe other noise.
-    print("the snr in db is:") 
-    print( snr_db(test_sig,filtered_sig) )
+    print("the signal to noise ratio (snr) and the signal to signal ratio (lsd) in db are:") 
+    print( sr_db(test_sig,filtered_sig) )
     
     # Find the most relevant echo time (example: 60 dB decay)
     t60=calculate_t60(test_sig, sample_rate, n_fft=2048, hop_length=512)
@@ -442,22 +442,22 @@ def main():
     periods = 10
     
     # Define directory
-    input_dir = 'D:\PRIVAT\Musik Projekte\python\Digital Convolution Audio Filter by Frequency Bin Specific Decayed Discrete Impulse Response'
+    input_dir = 'C:/Users/Stefan/Documents/GitHub/Digital-Deconvolution-Audio-Filter-repo/data'
 
     # Generate periodic sine sweep
     periodic_sweep = generate_periodic_sine_sweep(start_freq, end_freq, duration_sec, sample_rate, periods)
-    sweep_file = os.path.join(input_dir, 'periodic_sine_sweep.wav')
+    sweep_file = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
     sf.write(sweep_file, periodic_sweep, sample_rate)
 
     # Input and output files
-    input_file1 = os.path.join(input_dir, 'periodic_sine_sweep.wav')
-    input_file2 = os.path.join(input_dir, 'periodic_sine_sweep_beside_the_drums.wav')
-    test_file = os.path.join(input_dir, 'Record.wav')
+    input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
+    input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_beside_the_drums.wav')
+    test_file = os.path.join(input_dir, 'z/Record.wav')
     
-    #input_file1 = os.path.join(input_dir, 'periodic_sine_sweep.wav')
-    #input_file2 = os.path.join(input_dir, 'periodic_sine_sweep_Schreibtisch hinten im Eck 1.wav')
-    #input_file2 = os.path.join(input_dir, 'periodic_sine_sweep_Schreibtisch hinten im Eck 2.wav')
-    #test_file = os.path.join(input_dir, 'speech.wav')
+    #input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
+    #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 1.wav')
+    #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 2.wav')
+    #test_file = os.path.join(input_dir, 'z/speech.wav')
     
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     output_folder = os.path.join(input_dir, f"output_{timestamp}")
