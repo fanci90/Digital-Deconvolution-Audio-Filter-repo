@@ -43,23 +43,10 @@
 
 \author{Stefan Ciba \\ \href{https://www.researchgate.net/profile/Stefan-Ciba}{https://www.researchgate.net/profile/Stefan-Ciba}
   %% examples of more authors
-  \And
-  %%\href{https://www.researchgate.net/profile/Manuel-Ciba}{Manuel Ciba} \\
+  %%\And
+  %%\href{https://www.researchgate.net/profile/someresearcherwhowantstocontribute}{someresearcherwhowantstocontribute} \\
   %%\AND
-  %% Simon Ciba \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
-  %%\And
-  %% Raphael Schwirtlich \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
-  %%\And
-  %% Mathias Herbert \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
+  %%...
 }
 
 
@@ -76,7 +63,7 @@ This filter accounts for not optimal recording conditions and can be applied as 
 
 % keywords can be removed
 % Add most closely related keywords
-\keywords{Spectral impulse response modification \and digital early reflections and dereverberation convolution filter}
+\keywords{Spectral impulse response modification \and digital dereverberation filter}
 
 
 \section{Introduction}
@@ -274,15 +261,15 @@ A sine-sweep and a speech audio was recorded by integrated microphone from a \te
 In the same manner the sine-sweep and a drum-set groove have been recorded from the same location. The sine-sweep was played back on a \href{https://ia601909.us.archive.org/31/items/manualsbase-id-372739/372739.pdf}{Alesis Active M1 MKII (8N)} near-field monitor beside the drum-set. The goal was to have dry and clear studio-like raw recording quality despite poor recording-conditions.
 
 \subsection{Objective}
-Several objective measures prove the applicability of the Method. They can be found in the Results section table \ref{tab:Objective}. 
+Several objective measures prove the applicability of the Method.
+Some Measures are used to compare the system impulse response with the filtered impulse response, and some are used to compare a filtered with a unfiltered signal.
+\\ \\
+The measures to compare the unfiltered and filtered signals can be found in the Results section table \ref{tab:Objective}. 
 The $T60$ of the \textit{impulse response}-filtered signal and the $T60$ of the filtered signal by modified \textit{impulse response} can be compared.
 \\ \\
-The logarithmic \textit{Signal to Noise Ratio} (SNR) \cite{Fliege1991} was used to indicate the efficiency of the filter by taking the original signal $z_n$ and the filtered audio signal $z''_n$ into account. The averages of signal and noise power are calculated by	
-    $S = \overline{z''_n^2}$ and
-    $N = \overline{(z_n - z''_n)^2}$.
-		The logarithmic fraction of them is:
+The \textit{Log-Spectral Distance} (LSD) was used to indicate the efficiency of the filter by taking the original signal $z_n$ and the filtered audio signal $z''_n$ into account:
 	\begin{equation}
-	SNR=10log_{10} \left(\frac{S}{N}\right).
+	LSD=10log_{10} \left(\frac{\overline{(z''_n-\overline{z''_n})^2}}{\overline{(z_n-\overline{z_n})^2}}\right).
 	\end{equation}
 \\ \\
 The STOI measures the speech intelligibility. It is only applicable to speech audio.
@@ -300,6 +287,7 @@ Zwicker’s time-varying \textit{loudness} model estimates how intense or loud a
 \\ \\
 The Algorithms to measure perceptive sound quality can be used from the \textit{Modular Sound Quality Index Toolbox} \href{https://github.com/Eomys/MoSQITo}{(MoSQITo)} \cite{mosqito2025}, \href{https://github.com/ludlows/python-pesq.git}{PESQ} \cite{pesq2025} and the \href{https://github.com/mpariente/pystoi}{STOI} \cite{stoi2025}, respectively. Further measures have been evaluated by proprietary software, namely the Cubase 5.0.1 build 147 (\href{https://o.steinberg.net/index.php?id=1782&L=1}{Steinberg Media Technologies GmbH}) \cite{cubase501}.
 
+The definition ratio, D50, is the ratio of early to total energy within 50 ms. It was used to indicate if early reverberations are present in the impulse response.
 
 \subsection{Subjective}
 Furthermore subjective hearing tests where performed. 
@@ -329,52 +317,100 @@ Some listener notice the difference of acoustic signal with less reverb, at leas
 %Roughness           0.23022       0.22802        0.21995      0.21946
 %Sharpness           3.26095       3.50446        3.09846      3.16039
 
-
 \begin{table}[ht]
 \centering
 \caption{Objective measures. Statistics with asterisk (\textit{name}$^*$) derived from Cubase 5.0.1 build 147.}
 \label{tab:Objective}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\multirow{2}{*}{ } & \multirow{2}{*}{\makecell{Drum-Set \\ degraded ($z_n$)}} & \multirow{2}{*}{\makecell{Drum-Set \\ filtered ($z''_n$)}} & \multirow{2}{*}{\makecell{Speech \\ degraded ($z_n$)}} & \multirow{2}{*}{\makecell{Speech \\ filtered ($z''_n$)}} \\
+\multirow{2}{*}{ } & \multirow{2}{*}{\makecell{Drum Record \\ degraded ($z_n$)}} & \multirow{2}{*}{\makecell{Drum Record \\ filtered ($z''_n$)}} & \multirow{2}{*}{\makecell{Speech \\ degraded ($z_n$)}} & \multirow{2}{*}{\makecell{Speech \\ filtered ($z''_n$)}} \\
 &       &       &       &       \\
 \hline
-\textit{min sample value}$^*$ &   -1    &   -0.961    &   -0.045   &    -0.052   \\
+\textit{min sample value}$^*$ &   -1    &   -0.919    &   -0.045   &    -0.045   \\
 \hline
-\textit{max sample value}$^*$ &   +1    &    +1       &    0.046   &     0.045   \\
+\textit{max sample value}$^*$ &   +1    &    +0.948    &    0.046   &     0.043   \\
 \hline
-\textit{peak amplitude}$^*$ &   0dB    &    0dB   &   -26.75dB    &    -25.73dB     \\
+\textit{peak amplitude}$^*$ &   0dB    &    -0.46dB   &   -26.75dB    &    -27.43dB     \\
 \hline
-\textit{DC offset}$^*$ &   -87.70dB    &    -91.67dB    &    -85.31dB   &    -88.32dB   \\
+\textit{DC offset}$^*$ &   -$\infty$dB    &    -$\infty$dB    &    -85.30dB   &    -86.44dB   \\
 \hline
-\textit{Estimated Pitch}$^*$ &    2207.5Hz / C\#6    &    5057.2Hz / D\#7   &    1452.2Hz / F\#5    &    1834.9Hz / A\#5   \\
+\textit{Estimated Pitch}$^*$ &    2248.0Hz / C\#6    &    9649.6Hz / D8   &    1445.2Hz / F\#5    &    1530.5Hz / G5   \\
 \hline
-\textit{Min RMS Power}$^*$ &   -67.68dB    &    -96.45dB    &    -61.02dB    &    -63.10dB   \\
+\textit{Min RMS Power}$^*$ &   -$\infty$dB    &    -$\infty$dB    &    -61.03dB    &    -63.28dB   \\
 \hline
-\textit{Max RMS Power}$^*$ &    -4.58dB    &    -11.67dB   &    -32.82dB   &    -32.08dB   \\
+\textit{Max RMS Power}$^*$ &    -1.84dB    &    -12.54dB   &    -32.82dB   &    -32.61dB   \\
 \hline
-\textit{Average}$^*$  &   -19.92dB    &    -24.63dB    &    -41.34dB   &    -41.29dB   \\
+\textit{Average}$^*$  &   -14.38dB    &    -28.84dB    &    -41.34dB   &    -41.27dB   \\
 \hline
-SNR &       \multicolumn{2}{c|}{-9.648dB}       &     \multicolumn{2}{c|}{-9.507dB}      \\
+LSD &       \multicolumn{2}{c|}{-16.29dB}       &     \multicolumn{2}{c|}{ $7.63\cdot 10^{-5}$dB}      \\
 \hline
-T60  &    31.537ms   &   26.679ms    &    23.793ms   &    20.655dB   \\
+T60  &    5.475ms   &   0.186ms    &    0.1816ms   &    0ms  \\
 \hline
-STOI &    N/A   &    N/A   &   0.9807    &    0.9807   \\
+STOI &    N/A   &    N/A   &   0.9978    &    0.9978   \\
 \hline
 $\Delta$ STOI   &    \multicolumn{2}{c|}{N/A}       &      \multicolumn{2}{c|}{0}      \\
 \hline
-PESQ &    3.6052   &    4.1774    &    4.4319    &    4.4410   \\
+PESQ &    4.4202   &    4.5314    &    4.6308    &    4.6337   \\
 \hline
-$\Delta$ PESQ &      \multicolumn{2}{c|}{0.5722}      &      \multicolumn{2}{c|}{9.1E-3}       \\
+$\Delta$ PESQ &      \multicolumn{2}{c|}{$0.1112$}      &      \multicolumn{2}{c|}{$2.9 \cdot 10^{-3}$}       \\
 \hline
-\textit{Loudness}  &    0.90320   &    0.60329   &    0.14764   &    0.14393   \\
+\textit{Loudness}  &    0.90320   &    0.30145   &    0.14764   &    0.14393   \\
 \hline
-\textit{Roughness} &    0.23022   &    0.22802   &    0.21995    &   0.21946    \\
+\textit{Roughness} &    0.23022   &    0.22169   &    0.21995    &   0.21946    \\
 \hline
-\textit{Sharpness} &    3.26095   &    3.50446   &    3.09846   &    3.16039   \\
+\textit{Sharpness} &    3.26095   &    3.95266   &    3.09846   &    3.16039   \\
+\hline
+D50 							& 		$42.9\%$				&			$100.0\%$		&			$71.7\%$				&				$100.0\%$			\\
 \hline
 \end{tabular}
 \end{table}
+
+%
+%\begin{table}[ht]
+%\centering
+%\caption{Objective measures. Statistics with asterisk (\textit{name}$^*$) derived from Cubase 5.0.1 build 147.}
+%\label{tab:Objective}
+%\begin{tabular}{|c|c|c|c|c|}
+%\hline
+%\multirow{2}{*}{ } & \multirow{2}{*}{\makecell{Drum-Set \\ degraded ($z_n$)}} & \multirow{2}{*}{\makecell{Drum-Set \\ filtered ($z''_n$)}} & \multirow{2}{*}{\makecell{Speech \\ degraded ($z_n$)}} & \multirow{2}{*}{\makecell{Speech \\ filtered ($z''_n$)}} \\
+%&       &       &       &       \\
+%\hline
+%\textit{min sample value}$^*$ &   -1    &   -0.961    &   -0.045   &    -0.052   \\
+%\hline
+%\textit{max sample value}$^*$ &   +1    &    +1       &    0.046   &     0.045   \\
+%\hline
+%\textit{peak amplitude}$^*$ &   0dB    &    0dB   &   -26.75dB    &    -25.73dB     \\
+%\hline
+%\textit{DC offset}$^*$ &   -87.70dB    &    -91.67dB    &    -85.31dB   &    -88.32dB   \\
+%\hline
+%\textit{Estimated Pitch}$^*$ &    2207.5Hz / C\#6    &    5057.2Hz / D\#7   &    1452.2Hz / F\#5    &    1834.9Hz / A\#5   \\
+%\hline
+%\textit{Min RMS Power}$^*$ &   -67.68dB    &    -96.45dB    &    -61.02dB    &    -63.10dB   \\
+%\hline
+%\textit{Max RMS Power}$^*$ &    -4.58dB    &    -11.67dB   &    -32.82dB   &    -32.08dB   \\
+%\hline
+%\textit{Average}$^*$  &   -19.92dB    &    -24.63dB    &    -41.34dB   &    -41.29dB   \\
+%\hline
+%SNR &       \multicolumn{2}{c|}{-9.648dB}       &     \multicolumn{2}{c|}{-9.507dB}      \\
+%\hline
+%T60  &    31.537ms   &   26.679ms    &    23.793ms   &    20.655dB   \\
+%\hline
+%STOI &    N/A   &    N/A   &   0.9807    &    0.9807   \\
+%\hline
+%$\Delta$ STOI   &    \multicolumn{2}{c|}{N/A}       &      \multicolumn{2}{c|}{0}      \\
+%\hline
+%PESQ &    3.6052   &    4.1774    &    4.4319    &    4.4410   \\
+%\hline
+%$\Delta$ PESQ &      \multicolumn{2}{c|}{0.5722}      &      \multicolumn{2}{c|}{9.1E-3}       \\
+%\hline
+%\textit{Loudness}  &    0.90320   &    0.60329   &    0.14764   &    0.14393   \\
+%\hline
+%\textit{Roughness} &    0.23022   &    0.22802   &    0.21995    &   0.21946    \\
+%\hline
+%\textit{Sharpness} &    3.26095   &    3.50446   &    3.09846   &    3.16039   \\
+%\hline
+%\end{tabular}
+%\end{table}
 
 
 
@@ -405,11 +441,12 @@ The conclusion.
 %Interessant: Ein System, das ein sich wiederholendes Verhalten zeigen sollte, kann evtl. in das Reservoir "eingelernt" werden - NGRC. Wenn die Prediction und der Messwert größere Abweichungen zeigt, dann kann eine Benachrichtigung / Warnung gegeben werden, damit sich z.B. jemand das System genauer anschaut.
 
 \section{Supplements}
-The Python-code of the studied method and audio samples are to be found at \href{https://github.com/fanci90/Digital-Deconvolution-Audio-Filter-repo}{GitHub}.
+The Python-code of the studied method and audio samples are to be found at GitHub: \href{https://github.com/fanci90/Digital-Deconvolution-Audio-Filter-repo.git}{https://github.com/fanci90/Digital-Deconvolution-Audio-Filter-repo.git}.
 
 
 \section*{Acknowledgments}
-The author(s) acknowledge the use of the AI language model \href{https://www.perplexity.ai/search/dear-perple-how-are-you-today}{Perplexity}, developed by Perplexity AI, for assistance in literature and code review in this work.
+The author gratefully acknowledges Simon Ciba, M.A., known from e.g. "WhisPER – A New Tool for Performing Listening Tests", for his careful review of this work and his valuable comments. \\ \\
+Furthermore the author acknowledges the use of the AI language model \href{https://www.perplexity.ai/search/dear-perple-how-are-you-today-n3Wo9yiyTA.1AhBDL5yGyA}{Perplexity}, developed by Perplexity AI, for assistance in literature and code review in this work.
 
 %\section{This is how Perplexity would write the whole theory part for the Paper at once:}
 %Here is a scientific "Theory" section in LaTeX that systematically covers the core algorithms from your code, including periodic sine sweep generation, impulse response estimation via cepstral deconvolution, T60 estimation, frequency-dependent decay processing, and signal filtering. All equations are referenced to open-access literature where possible.

@@ -10,16 +10,16 @@ import soundfile as sf
 
 # Install these with:
 # pip install pystoi pesq mosqito
-#import PIL
+import PIL
 import matplotlib as mpl
 import os
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
-try:
-    data_path = mpl.get_data_path()
-except AttributeError:
-    # Newer matplotlib versions
-    data_path = os.path.join(mpl.get_configdir(), 'mpl-data')
+#try:
+#    data_path = mpl.get_data_path()
+#except AttributeError:
+#    # Newer matplotlib versions
+#    data_path = os.path.join(mpl.get_configdir(), 'mpl-data')
     
 from pystoi import stoi
 import torchaudio
@@ -177,10 +177,10 @@ def compute_metrics(ref_path, deg_path):
 
 
 if __name__ == "__main__":
-    #ref_file = "D:\PRIVAT\Musik Projekte\python\Digital Convolution Audio Filter by Frequency Bin Specific Decayed Discrete Impulse Response\speech.wav"
-    #deg_file = "D:\PRIVAT\Musik Projekte\python\Digital Convolution Audio Filter by Frequency Bin Specific Decayed Discrete Impulse Response\speech_filtered.wav"
-    ref_file = "D:\PRIVAT\Musik Projekte\python\Digital Convolution Audio Filter by Frequency Bin Specific Decayed Discrete Impulse Response\Record.wav"
-    deg_file = "D:\PRIVAT\Musik Projekte\python\Digital Convolution Audio Filter by Frequency Bin Specific Decayed Discrete Impulse Response\Record_filtered_bareIR.wav"
+    #deg_file = "C:/Users/Stefan/Documents/GitHub/Digital-Deconvolution-Audio-Filter-repo/data/z/Record.wav"
+    #ref_file = "C:/Users/Stefan/Documents\GitHub/Digital-Deconvolution-Audio-Filter-repo/data/output_2025-11-15_14-57-16/filtered_signal.wav"
+    deg_file = "C:/Users/Stefan/Documents/GitHub/Digital-Deconvolution-Audio-Filter-repo/data/z/Speech.wav"
+    ref_file = "C:/Users/Stefan/Documents/GitHub/Digital-Deconvolution-Audio-Filter-repo/data/output_2025-11-16_13-52-14/filtered_signal.wav"
 
     stoi_score, overall_pesq, avg_mosqito_metrics = compute_metrics(ref_file, deg_file)
     print(f"STOI: {stoi_score:.4f}")

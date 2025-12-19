@@ -1,130 +1,142 @@
-output_2025-08-10_19-14-00:
-speech.wav
-periodic_sine_sweep_Schreibtisch hinten im Eck 1
-
-Calculation time: 8.32 seconds
-the snr in db is:
-9.507624388490033
-Initial Room vomlume in square-meter (oversimplified room shape):
-67.94142092900151
-Most relevant initial echo time in seconds:
-0.02379290209044369
-Filtered Room vomlume in square-meter (oversimplified room shape):
-44.451599356451496
-Most relevant filtered echo time in seconds:
-0.020655307878270763
-
-
-STOI of original recording (degraded), and the filtered recording (reference): the original recording has same STOI compared to filtered recording
-STOI: 0.9807
-STOI of filtered recodring (degraded), and the original recording (reference): the filtered recording has same STOI compared to original recording
-STOI: 0.9807
-
-PESQ of original recording (degraded), and the filtered recording (reference): the original recording has fair quality compared to the filtered recording
-PESQ: 4.4410
-PESQ of filtered recodring (degraded), and the original recording (reference): the filtered recording has excellent quality compared to original recording
-PESQ: 4.4319
-
-mosqito metrics: {
-'loudness_ref': 0.1439289212568009, 
-'loudness_deg': 0.14764052364049463, 
-
-'roughness_ref': 0.2194618357356162, 
-'roughness_deg': 0.21995197218551255,
-
-'sharpness_ref': 3.1603852000980934, 
-'sharpness_deg': 3.0984598257012053, 
-}
-
-output_2025-08-10_19-15-00:
-speech.wav
-periodic_sine_sweep_Schreibtisch hinten im Eck 2 (same as first one)
-
-Calculation time: 7.92 seconds
-the snr in db is:
-7.642407367740105
-Initial Room vomlume in square-meter (oversimplified room shape):
-67.94142092900151
-Most relevant initial echo time in seconds:
-0.02379290209044369
-Filtered Room vomlume in square-meter (oversimplified room shape):
-62.186826156381045
-Most relevant filtered echo time in seconds:
-0.02310124253412969
-
-
-output_2025-08-10_19-16-01:
+output_2025-11-15_14-57-16:
 Record.wav
 periodic_sine_sweep_beside_the_drums.wav
 
-Calculation time: 11.72 seconds
-the snr in db is:
--9.648152271236404
-Initial Room vomlume in square-meter (oversimplified room shape):
-95.78550701561915
+Calculation time: 19.72 seconds
+the signal to noise ratio (snr) and the signal to signal ratio (lsd) in db are:
+(-16.181142330169678, -16.28453493118286)
+Experimental but not valid..Initial Room volume in square-meter estimate (oversimplified room shape):
+0.8277564047864726
 Most relevant initial echo time in seconds:
-0.026678975185358358
-Filtered Room vomlume in square-meter (oversimplified room shape):
-158.22011651465377
+0.0054748226950354605
+Experimental but not valid..Filtered Room volume in square-meter estimate (oversimplified room shape):
+3.226971324706175e-05
 Most relevant filtered echo time in seconds:
-0.03153719830561307
+0.00018563829787234041
+normalized_energy of the system
+[1.00000000e+00 9.93196833e-01 9.90966509e-01 ... 3.14462239e-09
+ 2.08847132e-09 1.08059677e-09]
+EDT is the time taken for the energy to drop by 10 dB.
+8.225678959076603
+Clarity index 80 ms:
+-0.011845500468678953
+Clarity index 50 ms:
+-1.234478025927905
+Ratio of early to total energy within 50 ms:
+0.4294123692474556
+Energy assumed reverberant:
+-5.098077191326128
+normalized_energy of the filtered impulse response
+[1.         0.9415599  0.92259728 ... 0.         0.         0.        ]
+Filtered EDT is the time taken for the energy to drop by 10 dB of the filtered impulse response.
+0.007846469356482538
+Filtered clarity index 80 ms:
+349.5152994522715
+Filtered clarity index 50 ms:
+230.80759730475694
+Filtered ratio of early to total energy within 50 ms:
+1.0000000000000002
+Remaining energy assumed reverberant for the filtered impulse response:
+35.912197760003195
 
-STOI compares Speech intelligibility and does not really apply to Drum Records:
-STOI Score	Interpretation
-~1.0		Excellent intelligibility
-0.8 â€“ 1.0	Good intelligibility
-0.6 â€“ 0.8	Fair intelligibility
-< 0.6		Poor intelligibility
-STOI of original recording (degraded), and the filtered recording (reference): the original recording has slightly lower STOI compared to filtered recording
-0.9956
-STOI of filtered recodring (degraded), and the original recording (reference): the filtered recording has slightly higher STOI compared to original recording
-0.9960
+Overall PESQ score (averaged over chunks): 4.5314 (deg=filtered, ref=unfiltered)
+Overall PESQ score (averaged over chunks): 4.4202 (ref=filtered, deg=unfiltered)
 
-PESQ measures clarity of a audio channel. 
-Higher PESQ scores indicate better (speech) quality.
-It models human auditory perception, capturing effects like distortion, background noise, clipping, and delay.
-Widely used in telecom, VoIP, and audio processing to measure speech enhancement or degradation.
-Higher PESQ = better perceived audio quality
-PESQ â‰ˆ 4.5 means near-perfect clarity.
-PESQ < 2.0 means very poor or unintelligible speech.
-PESQ Score	MOS Value	Quality Category
-4.0 - 4.5	4 - 5		Excellent (No noticeable defects)
-3.0 - 3.99	3		Fair
-2.0 - 2.99	2		Poor
-  < 2.0		1		Bad
-PESQ of original recording (degraded), and the filtered recording (reference): the original recording has fair quality compared to the filtered recording
-3.6052
-PESQ of filtered recodring (degraded), and the original recording (reference): the filtered recording has excellent quality compared to original recording
-4.1774
-
-
+(ref=filtered, deg=unfiltered)
 mosqito metrics: {
-'loudness_ref': 0.6032870693534635, durch das Filtern nimmt die LaufstÃ¤rke ab (maximale Amplitude weiterhin auf 1 normaliesiert)
+'loudness_ref': 0.3014501941752078, 
+'sharpness_ref': 3.9526615864014105, 
+'roughness_ref': 0.22169187813590055
 'loudness_deg': 0.9031945889737392, 
-
-'sharpness_ref': 3.5044575475109614, durch das Filtern wird der Klang schÃ¤rfer / klarer
 'sharpness_deg': 3.260948639769844, 
-
-'roughness_ref': 0.2280222122268355, durch das Filtern wird der Klang wniger rauh
-'roughness_deg': 0.23021562221729847
+'roughness_deg': 0.23021562221729847, 
 }
 
 
 
-output_2025-08-27_20-51-52 bare impulse response:
-Record.wav
-periodic_sine_sweep_beside_the_drums.wav
+output_2025-11-16_13-52-14:
+Speech.wav
+periodic_sine_sweep_Schreibtisch hinten im Eck 1.wav
 
--10.655416250228882
-d:\privat\musik projekte\python\digital convolution audio filter by frequency bin specific decayed discrete impulse response\digital convolution audio filter by frequency bin specific decayed discrete impulse response.py:91: RuntimeWarning: invalid value encountered in divide
-  cumulative_energy /= cumulative_energy[0, :]
-Initial Room vomlume in square-meter (oversimplified room shape):
-95.7854920270615
+Calculation time: 7.52 seconds
+the signal to noise ratio (snr) and the signal to signal ratio (lsd) in db are:
+(nan, 7.62939453125e-05)
+Experimental but not valid..Initial Room volume in square-meter estimate (oversimplified room shape):
+3.0189431239015395e-05
 Most relevant initial echo time in seconds:
-0.026678973793779082
-Filtered Room vomlume in square-meter (oversimplified room shape):
-141.7391250617723
+0.00018156028368794324
+Experimental but not valid..Filtered Room volume in square-meter estimate (oversimplified room shape):
+0.0
 Most relevant filtered echo time in seconds:
-0.03040178790105315
+0.0
+normalized_energy of the system
+[1.00000000e+00 9.69289947e-01 9.65034222e-01 ... 1.74599650e-11
+ 1.16817990e-11 5.74379408e-12]
+EDT is the time taken for the energy to drop by 10 dB.
+7.733870407086897
+Clarity index 80 ms:
+4.374876893872354
+Clarity index 50 ms:
+4.03298869939011
+Ratio of early to total energy within 50 ms:
+0.7167972526409111
+Energy assumed reverberant:
+-0.3464933243480867
+normalized_energy of the filtered impulse response
+[1.         0.85110436 0.83072348 ... 0.         0.         0.        ]
+Filtered EDT is the time taken for the energy to drop by 10 dB of the filtered impulse response.
+0.008652657879793609
+Filtered clarity index 80 ms:
+367.9731127380992
+Filtered clarity index 50 ms:
+232.6998797670541
+Filtered ratio of early to total energy within 50 ms:
+0.9999999999999999
+Remaining energy assumed reverberant for the filtered impulse response:
+28.53324390467391
 
-Overall PESQ score (averaged over chunks): 1.9293
+Overall PESQ score (averaged over chunks): 4.6337 (deg=filtered, ref=unfiltered)
+Overall PESQ score (averaged over chunks): 4.6308 (ref=filtered, deg=unfiltered)
+STOI: 0.9978 (deg=filtered, ref=unfiltered)
+STOI: 0.9978 (ref=filtered, deg=unfiltered)
+
+
+(ref=filtered, deg=unfiltered)
+mosqito metrics: {
+'loudness_ref': 0.13626706152553766, 
+'sharpness_ref': 3.1205260538043147, 
+'roughness_ref': 0.2196996696518491, 
+'loudness_deg': 0.14764052364049463, 
+'sharpness_deg': 3.0984598257012053, 
+'roughness_deg': 0.21995197218551255
+}
+
+Your observation is correct: the very highest and lowest frequencies in your system's impulse response not decaying significantly will strongly influence and likely distort reverberation metrics, leading to unrealistic results in overall measurements.
+
+### Explanation:
+- **Frequency-dependent decay:** Acoustic energy decay behaves differently across frequency bands, especially in room acoustics. Low and high frequencies often exhibit slower or complex decay due to modal behavior, absorption characteristics, and source/receiver interactions.
+- **Implications for broadband metrics:** Overall reverberation parameters like T60, EDT, and clarity indices assume or approximate uniform decay, which becomes invalid if parts of the spectrum decay very slowly or hardly at all.
+- **Aggressive filtering effect:** Your aggressive filter removing reverberation (aiming to isolate direct path) drastically alters the frequency response by suppressing lingering energy components. This causes an artificially short decay and exaggerated clarity indices as you observed.
+- **Frequency analysis necessity:** To understand and interpret measurements properly, it is advisable to analyze the impulse response decay **per frequency band**—using octave or third-octave band filters followed by decay curve analysis per band. This reveals whether and where decay anomalies occur.
+- **Standard practices:** Room acoustics studies and standards (such as ISO 3382) emphasize frequency-dependent decay time measurement for precisely this reason.
+
+### Recommendations:
+- Perform **bandpass filtering** on the impulse responses into standard frequency bands.
+- Compute decay time and clarity metrics per band to localize frequency ranges with abnormal decays.
+- Use those results to interpret your broadband-averaged values or adjust filter design.
+
+### Conclusion:
+Your filter’s effect and the system’s natural frequency-dependent decay cause the unrealistic broadband reverberation metrics. Detailed frequency-dependent analyses will yield a valid and actionable understanding of your impulse response and system behavior.
+
+Let me know if you want help implementing frequency band decomposition and per-band decay analysis in Python to improve your measurements and conclusions.[1][2][3]
+
+[1](https://www.sciencedirect.com/science/article/abs/pii/S0263224122004730)
+[2](https://pub.dega-akustik.de/DAGA_2023/data/articles/000386.pdf)
+[3](https://www.dafx.de/paper-archive/2024/papers/DAFx24_paper_22.pdf)
+[4](https://www.klippel.de/fileadmin/klippel/Bilder/Our_Products/R-D_System/PDF/S61_TFA_Time_Frequency_Analysis.pdf)
+[5](https://download.spsc.tugraz.at/thesis/MA_Muralter.pdf)
+[6](https://www.uni-weimar.de/kunst-und-gestaltung/wiki/images/ExpoChirpToolbox-_a_Pd_implementation_of_ESS_impulse_response_measurement.pdf)
+[7](https://www.roomeqwizard.com/help/help_en-GB/html/impulseresponse.html)
+[8](https://dael.euracoustics.org/confs/fa2023/data/articles/000480.pdf)
+[9](https://optics.ansys.com/hc/en-us/articles/360034915813-Impulse-Analysis-Calculating-the-response-to-an-arbitrary-time-signal-using-the-impulse-response)
+[10](https://ieeexplore.ieee.org/document/4512091/)

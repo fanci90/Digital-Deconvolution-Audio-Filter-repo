@@ -23,7 +23,7 @@ def generate_periodic_sine_sweep(start_freq, end_freq, duration_sec, sample_rate
 def calculate_rms(signal):
     return np.sqrt(np.mean(signal**2))
 
-
+# the Sine Sweep and the recorded Sine Sweep can be off phase, so it appears, that especially in the lowest frequency range periodic signal appear instead of decayed response.
 def calculate_impulse_response(input_sig, output_sig, n_fft, hop_length):
     # Perform cross-correlation to align input and output signals
     corr = sp_signal.correlate(output_sig, input_sig, mode='full')
@@ -65,9 +65,9 @@ def calculate_impulse_response(input_sig, output_sig, n_fft, hop_length):
 
         # Perform deconvolution in cepstral domain
         cepstrum_ir = cepstrum_output - cepstrum_input
-        
+
         # Inverse FFT to get time-domain impulse response frame
-        impulse_response_frame = (np.fft.fft(np.exp(np.fft.fft(cepstrum_ir).real), n_fft).real)
+        impulse_response_frame = (np.fft.ifft(np.exp(np.fft.fft(cepstrum_ir).real), n_fft).real)
         
         # Accumulate impulse response frame (overlap-add)
         impulse_response[:len(impulse_response_frame)] += impulse_response_frame
@@ -80,8 +80,23 @@ def calculate_impulse_response(input_sig, output_sig, n_fft, hop_length):
     
     # Normalize impulse response
     impulse_response /= impulse_response_max
+    
+    #Select valid Impulse Response
+    ir=impulse_response[:int(hop_length)-1]
+    
+    #Filter out artifacts that appear in the rear end of the impulse response, which is caused by transient in the time domain from Sine Sweep jump high to low frequency.
+    taper_start = int(len(ir) * 0.75)  # start of last 25%
+    taper_length = len(ir) - taper_start
 
-    return impulse_response[:int(hop_length)-1]
+    # Create soft taper from 1 to 0 to fade out last 25%
+    taper = np.exp(-0.00025*np.arange(taper_length))
+
+    # Apply taper
+    ir_tapered = np.copy(ir)
+    ir_tapered[taper_start:] *= taper
+    
+    ir=ir_tapered
+    return ir
 """
 def calculate_impulse_response(input_sig, output_sig, n_fft, hop_length): # uses complex cepstrum for correct back transformation
     corr = sp_signal.correlate(output_sig, input_sig, mode='full')
@@ -134,9 +149,9 @@ def calculate_t60(signal, sample_rate, n_fft=2048, hop_length=512):
     overlap_fac = n_fft/2 * 1/hop_length
     stft = np.abs(stft_custom(signal, n_fft, hop_length)) ** 2
     cumulative_energy = np.cumsum(stft[::-1], axis=0)[::-1]
-    cumulative_energy /= cumulative_energy[0, :]
+    cumulative_energy /= (cumulative_energy[0, :]+np.finfo(float).eps)
     threshold_index = np.argmax(cumulative_energy < 0.001, axis=0)
-    t60 = (overlap_fac* threshold_index / sample_rate) # originally: threshold_index * hp_length/ sample_rate
+    t60 = ((overlap_fac)* threshold_index / sample_rate) # overlap_fac originally: threshold_index * hp_length/ sample_rate
     return t60
 
 def apply_decay_function(stft_in, sample_rate, hop_length, t60_diff):
@@ -149,7 +164,7 @@ def apply_decay_function(stft_in, sample_rate, hop_length, t60_diff):
         decay_rate = t60_diff[freq_bin]
         if decay_rate != 0:
             decay_function = np.exp(-times/(decay_rate))
-            decay_function = decay_function#/np.max(decay_function)
+            decay_function = decay_function#/np.max(np.abs(decay_function))
             stft_out[freq_bin, :] *= decay_function  
            
             decay_functions[freq_bin, :] = decay_function
@@ -346,6 +361,74 @@ def calculate_room_volume(echo_time):
     
     return room_volume
 
+def schroeder_integration(impulse_response):
+    """Compute the backward energy decay curve using Schroeder integration."""
+    energy = impulse_response ** 2
+    cumulative_energy = np.cumsum(energy[::-1])[::-1]
+    normalized_energy = cumulative_energy / (np.max(cumulative_energy) + np.finfo(float).eps)
+    return normalized_energy
+
+def early_decay_time(impulse_response, fs):
+    """Calculate Early Decay Time (EDT) in seconds.
+    EDT is the time taken for the energy to drop by 10 dB."""
+    energy_decay = schroeder_integration(impulse_response)
+    # Convert to dB
+    decay_db = 10 * np.log10(energy_decay + np.finfo(float).eps)
+
+    # Find indices where decay crosses 0 dB and -10 dB
+    try:
+        idx_0 = np.where(decay_db <= 0)[0][0]
+        idx_10 = np.where(decay_db <= -10)[0][0]
+    except IndexError:
+        # If the signal does not decay enough, fallback
+        return np.nan
+
+    # Linear regression on decay between 0 and -10 dB, find slope in dB/s
+    x = np.array([idx_0, idx_10]) / fs
+    y = decay_db[[idx_0, idx_10]]
+
+    slope = (y[1] - y[0]) / (x[1] - x[0])
+
+    edt = -60 / slope  # Extrapolate time to 60 dB decay
+    return edt
+
+def clarity_index(impulse_response, fs, time_ms):
+    """
+    Calculate clarity index (C50 or C80).
+    time_ms: 50 for C50, 80 for C80
+    """
+    time_samples = int(time_ms * 1e-3 * fs)
+    energy_early = np.sum(impulse_response[:time_samples] ** 2)
+    energy_late = np.sum(impulse_response[time_samples:] ** 2)
+    if energy_late == 0:
+        return np.nan
+    clarity = 10 * np.log10(energy_early / energy_late)
+    return clarity
+
+def definition_index(impulse_response, fs):
+    """Calculate Definition (D50) index as ratio of early to total energy within 50 ms."""
+    time_samples = int(0.05 * fs)  # 50 ms
+    energy_early = np.sum(impulse_response[:time_samples] ** 2)
+    energy_total = np.sum(impulse_response ** 2)
+    if energy_total == 0:
+        return np.nan
+    definition = energy_early / energy_total
+    return definition
+
+def direct_to_reverberant_ratio(impulse_response, fs, direct_time_ms=5):
+    """
+    Calculate Direct-to-Reverberant Ratio (DRR).
+    direct_time_ms: Integration window for direct sound energy (default 5 ms).
+    Remaining energy assumed reverberant.
+    """
+    direct_samples = int(direct_time_ms * 1e-3 * fs)
+    energy_direct = np.sum(impulse_response[:direct_samples] ** 2)
+    energy_reverb = np.sum(impulse_response[direct_samples:] ** 2)
+    if energy_reverb == 0:
+        return np.nan
+    drr = 10 * np.log10(energy_direct / energy_reverb)
+    return drr
+
 
 def process_files(input_file1, input_file2, test_file, output_folder, sample_rate):
     start_time = time.time()
@@ -385,7 +468,12 @@ def process_files(input_file1, input_file2, test_file, output_folder, sample_rat
     filtered_sig = filter_signal_with_impulse_response(test_sig, impulse_response[:int(1*len(impulse_response))], 1)
     filtered_sig = filtered_sig[:len(test_sig)]
 
-    # calculate gain factor 
+    # Filter Sine Sweep for benchmarking and comparability
+    filtered_sweep = filter_signal_with_impulse_response(output_sig, impulse_response[:int(1*len(impulse_response))], 1)
+    filtered_sweep = filtered_sweep[:len(output_sig)]
+    impulse_response_system = calculate_impulse_response(input_sig, output_sig, n_fft, hop_length)
+
+    # calculate gain factor test signal
     filtered_sig_rms = calculate_rms(filtered_sig)
     test_sig_rms = calculate_rms(test_sig)
     gain_factor_sig = test_sig_rms / filtered_sig_rms # Aim for same RMS
@@ -393,13 +481,24 @@ def process_files(input_file1, input_file2, test_file, output_folder, sample_rat
     if np.max(np.abs(filtered_sig)) > 1: #strictly preventing clipping
         filtered_sig /= np.max(np.abs(filtered_sig))
 
+    # calculate gain factor sweep signal
+    filtered_sweep_rms = calculate_rms(filtered_sweep)
+    sweep_rms = calculate_rms(input_sig)
+    gain_factor_sweep = sweep_rms / filtered_sweep_rms # Aim for same RMS
+    filtered_sweep *= gain_factor_sweep
+    if np.max(np.abs(filtered_sweep)) > 1: #strictly preventing clipping
+        filtered_sweep /= np.max(np.abs(filtered_sweep))
 
     # Save files
-    impulse_response_file = os.path.join(output_folder, "average_impulse_response.wav")
+    impulse_response_system_file = os.path.join(output_folder, "average_impulse_response_system.wav")
+    impulse_response_file = os.path.join(output_folder, "average_impulse_response_filter.wav")
     filtered_signal_file = os.path.join(output_folder, "filtered_signal.wav")
+    filtered_sweep_file = os.path.join(output_folder, "filtered_sweep.wav")
 
+    sf.write(impulse_response_system_file, impulse_response_system.astype('float32'), sample_rate, subtype='FLOAT')
     sf.write(impulse_response_file, impulse_response.astype('float32'), sample_rate, subtype='FLOAT')
     sf.write(filtered_signal_file, filtered_sig.astype('float32'), sample_rate, subtype='FLOAT')
+    sf.write(filtered_sweep_file, filtered_sweep.astype('float32'), sample_rate, subtype='FLOAT')
     
     end_time = time.time()
     print(f"Calculation time: {end_time - start_time:.2f} seconds")
@@ -409,22 +508,69 @@ def process_files(input_file1, input_file2, test_file, output_folder, sample_rat
     print( sr_db(test_sig,filtered_sig) )
     
     # Find the most relevant echo time (example: 60 dB decay)
-    t60=calculate_t60(test_sig, sample_rate, n_fft=2048, hop_length=512)
+    t60=calculate_t60(impulse_response_system , sample_rate, n_fft=2048, hop_length=512)
     most_relevant_echo_time = np.mean(t60)
     room_volume=calculate_room_volume(most_relevant_echo_time)
-    print("Initial Room vomlume in square-meter (oversimplified room shape):")
+    print("Experimental but not valid..Initial Room volume in square-meter estimate (oversimplified room shape):")
     print(room_volume)
     print("Most relevant initial echo time in seconds:")
     print(most_relevant_echo_time)
     
     # Find the most relevant echo time (example: 60 dB decay)
-    t60=calculate_t60(filtered_sig, sample_rate, n_fft=2048, hop_length=512)
+    t60=calculate_t60(impulse_response, sample_rate, n_fft=2048, hop_length=512)
     most_relevant_echo_time = np.mean(t60)
     room_volume=calculate_room_volume(most_relevant_echo_time)
-    print("Filtered Room vomlume in square-meter (oversimplified room shape):")
+    print("Experimental but not valid..Filtered Room volume in square-meter estimate (oversimplified room shape):")
     print(room_volume)
     print("Most relevant filtered echo time in seconds:")
     print(most_relevant_echo_time)
+    
+    
+    normalized_energy_system = schroeder_integration(impulse_response_system)
+    print("normalized_energy of the system")
+    print(normalized_energy_system)
+    edt_system = early_decay_time(impulse_response_system, sample_rate)
+    print("EDT is the time taken for the energy to drop by 10 dB.")
+    print(edt_system)
+    clarity_80_system = clarity_index(impulse_response_system, sample_rate, time_ms=80)
+    print("Clarity index 80 ms:")
+    print(clarity_80_system)
+    clarity_50_system = clarity_index(impulse_response_system, sample_rate, time_ms=50)
+    print("Clarity index 50 ms:")
+    print(clarity_50_system)
+    def_index_system = definition_index(impulse_response_system, sample_rate)
+    print("Ratio of early to total energy within 50 ms:")
+    print(def_index_system)
+    drr_system = direct_to_reverberant_ratio(impulse_response_system, sample_rate, direct_time_ms=5)
+    print("Energy assumed reverberant:")
+    print(drr_system)
+    
+    normalized_energy_filtered = schroeder_integration(impulse_response)
+    print("normalized_energy of the filtered impulse response")
+    print(normalized_energy_filtered)
+    edt_filtered = early_decay_time(impulse_response, sample_rate)
+    print("Filtered EDT is the time taken for the energy to drop by 10 dB of the filtered impulse response.")
+    print(edt_filtered)
+    clarity_80_filtered = clarity_index(impulse_response, sample_rate, time_ms=80)
+    print("Filtered clarity index 80 ms:")
+    print(clarity_80_filtered)
+    clarity_50_filtered = clarity_index(impulse_response, sample_rate, time_ms=50)
+    print("Filtered clarity index 50 ms:")
+    print(clarity_50_filtered)
+    def_index_filtered = definition_index(impulse_response, sample_rate)
+    print("Filtered ratio of early to total energy within 50 ms:")
+    print(def_index_filtered)
+    drr_filtered = direct_to_reverberant_ratio(impulse_response, sample_rate, direct_time_ms=5)
+    print("Remaining energy assumed reverberant for the filtered impulse response:")
+    print(drr_filtered)
+
+# Example usage with impulse response signal `ir` and sampling rate `fs`:
+# edt = early_decay_time(ir, fs)
+# c50 = clarity_index(ir, fs, 50)
+# c80 = clarity_index(ir, fs, 80)
+# d50 = definition_index(ir, fs)
+# drr = direct_to_reverberant_ratio(ir, fs)
+    
     
     sd.play(filtered_sig, samplerate=sample_rate)
     sd.wait()
@@ -450,14 +596,14 @@ def main():
     sf.write(sweep_file, periodic_sweep, sample_rate)
 
     # Input and output files
-    input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
-    input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_beside_the_drums.wav')
-    test_file = os.path.join(input_dir, 'z/Record.wav')
-    
     #input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
-    #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 1.wav')
+    #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_beside_the_drums.wav')
+    #test_file = os.path.join(input_dir, 'z/Record.wav')
+    
+    input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
+    input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 1.wav')
     #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 2.wav')
-    #test_file = os.path.join(input_dir, 'z/speech.wav')
+    test_file = os.path.join(input_dir, 'z/speech.wav')
     
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     output_folder = os.path.join(input_dir, f"output_{timestamp}")
