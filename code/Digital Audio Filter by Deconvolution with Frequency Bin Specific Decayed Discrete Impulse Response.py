@@ -596,14 +596,14 @@ def main():
     sf.write(sweep_file, periodic_sweep, sample_rate)
 
     # Input and output files
-    #input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
-    #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_beside_the_drums.wav')
-    #test_file = os.path.join(input_dir, 'z/Record.wav')
-    
     input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
-    input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 1.wav')
+    input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_beside_the_drums.wav')
+    test_file = os.path.join(input_dir, 'z/Record.wav')
+    
+    #input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
+    #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 1.wav')
     #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 2.wav')
-    test_file = os.path.join(input_dir, 'z/speech.wav')
+    #test_file = os.path.join(input_dir, 'z/speech.wav')
     
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     output_folder = os.path.join(input_dir, f"output_{timestamp}")

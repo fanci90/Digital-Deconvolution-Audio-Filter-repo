@@ -140,3 +140,84 @@ Let me know if you want help implementing frequency band decomposition and per-b
 [8](https://dael.euracoustics.org/confs/fa2023/data/articles/000480.pdf)
 [9](https://optics.ansys.com/hc/en-us/articles/360034915813-Impulse-Analysis-Calculating-the-response-to-an-arbitrary-time-signal-using-the-impulse-response)
 [10](https://ieeexplore.ieee.org/document/4512091/)
+
+
+
+output_2025-12-21_23-50-37_filtered_with_unmodified_impulse_response
+Calculation time: 7.19 seconds
+the signal to noise ratio (snr) and the signal to signal ratio (lsd) in db are:
+(-1.188197135925293, -3.6449050903320312)
+Experimental but not valid..Initial Room volume in square-meter estimate (oversimplified room shape):
+3.0189431239015395e-05
+Most relevant initial echo time in seconds:
+0.00018156028368794324
+Experimental but not valid..Filtered Room volume in square-meter estimate (oversimplified room shape):
+3.0189431239015395e-05
+Most relevant filtered echo time in seconds:
+0.00018156028368794324
+normalized_energy of the system
+[1.00000000e+00 9.69289947e-01 9.65034222e-01 ... 1.74599650e-11
+ 1.16817990e-11 5.74379408e-12]
+EDT is the time taken for the energy to drop by 10 dB.
+7.733870407086897
+Clarity index 80 ms:
+4.374876893872354
+Clarity index 50 ms:
+4.03298869939011
+Ratio of early to total energy within 50 ms:
+0.7167972526409111
+Energy assumed reverberant:
+-0.3464933243480867
+normalized_energy of the filtered impulse response
+[1.00000000e+00 9.69289947e-01 9.65034222e-01 ... 1.74599650e-11
+ 1.16817990e-11 5.74379408e-12]
+Filtered EDT is the time taken for the energy to drop by 10 dB of the filtered impulse response.
+7.733870407086897
+Filtered clarity index 80 ms:
+4.374876893872354
+Filtered clarity index 50 ms:
+4.03298869939011
+Filtered ratio of early to total energy within 50 ms:
+0.7167972526409111
+Remaining energy assumed reverberant for the filtered impulse response:
+-0.3464933243480867
+
+
+output_2025-12-21_23-54-00_filtered_with_unmodified_impulse_response
+Calculation time: 17.23 seconds
+the signal to noise ratio (snr) and the signal to signal ratio (lsd) in db are:
+(-46.68998718261719, -46.69008255004883)
+Experimental but not valid..Initial Room volume in square-meter estimate (oversimplified room shape):
+0.8277564047864726
+Most relevant initial echo time in seconds:
+0.0054748226950354605
+Experimental but not valid..Filtered Room volume in square-meter estimate (oversimplified room shape):
+0.8277564047864726
+Most relevant filtered echo time in seconds:
+0.0054748226950354605
+normalized_energy of the system
+[1.00000000e+00 9.93196833e-01 9.90966509e-01 ... 3.14462239e-09
+ 2.08847132e-09 1.08059677e-09]
+EDT is the time taken for the energy to drop by 10 dB.
+8.225678959076603
+Clarity index 80 ms:
+-0.011845500468678953
+Clarity index 50 ms:
+-1.234478025927905
+Ratio of early to total energy within 50 ms:
+0.4294123692474556
+Energy assumed reverberant:
+-5.098077191326128
+normalized_energy of the filtered impulse response
+[1.00000000e+00 9.93196833e-01 9.90966509e-01 ... 3.14462239e-09
+ 2.08847132e-09 1.08059677e-09]
+Filtered EDT is the time taken for the energy to drop by 10 dB of the filtered impulse response.
+8.225678959076603
+Filtered clarity index 80 ms:
+-0.011845500468678953
+Filtered clarity index 50 ms:
+-1.234478025927905
+Filtered ratio of early to total energy within 50 ms:
+0.4294123692474556
+Remaining energy assumed reverberant for the filtered impulse response:
+-5.098077191326128

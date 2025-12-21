@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  13 DEC 2025 21:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  21 DEC 2025 23:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -619,7 +619,7 @@ deleted material, e.g., by typing `I$}'.
 <argument> HP ZBook Studio x360 G5 (6TW61EA##
                                              ABD)
 l.259 ...5}{HP ZBook Studio x360 G5 (6TW61EA#ABD)}
-                                                   ), on a desk, located in ...
+                                                  ), on a desk, located in a...
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
 If you're in the wrong mode, you might be able to
@@ -641,76 +641,81 @@ Underfull \hbox (badness 10000) in paragraph at lines 264--271
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 273--289
+Underfull \hbox (badness 10000) in paragraph at lines 273--291
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--289
+Underfull \hbox (badness 10000) in paragraph at lines 273--291
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--289
+Underfull \hbox (badness 10000) in paragraph at lines 273--291
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--289
+Underfull \hbox (badness 10000) in paragraph at lines 273--291
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--289
+Underfull \hbox (badness 10000) in paragraph at lines 273--291
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--289
+Underfull \hbox (badness 10000) in paragraph at lines 273--291
 
  []
 
-<diagrams/DecayMatrix.png, id=153, 590.205pt x 388.45125pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--291
+
+ []
+
+<diagrams/DecayMatrix.png, id=154, 590.205pt x 388.45125pt>
 File: diagrams/DecayMatrix.png Graphic file (type png)
 <use diagrams/DecayMatrix.png>
-Package pdftex.def Info: diagrams/DecayMatrix.png  used on input line 421.
+Package pdftex.def Info: diagrams/DecayMatrix.png  used on input line 423.
 (pdftex.def)             Requested size: 328.82706pt x 216.4228pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<diagrams/impulse response.png, id=154, 731.73375pt x 388.45125pt>
+<diagrams/impulse response.png, id=155, 731.73375pt x 388.45125pt>
 File: diagrams/impulse response.png Graphic file (type png)
 <use diagrams/impulse response.png>
-Package pdftex.def Info: diagrams/impulse response.png  used on input line 428.
+Package pdftex.def Info: diagrams/impulse response.png  used on input line 430.
 
 (pdftex.def)             Requested size: 422.77661pt x 224.4365pt.
-<diagrams/impulse response modified.png, id=156, 731.73375pt x 388.45125pt>
+<diagrams/impulse response modified.png, id=157, 731.73375pt x 388.45125pt>
 File: diagrams/impulse response modified.png Graphic file (type png)
 <use diagrams/impulse response modified.png>
 Package pdftex.def Info: diagrams/impulse response modified.png  used on input 
-line 430.
+line 432.
 (pdftex.def)             Requested size: 422.77661pt x 224.4365pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 437--442
+Underfull \hbox (badness 10000) in paragraph at lines 439--444
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 437--442
+Underfull \hbox (badness 10000) in paragraph at lines 439--444
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 448--450
+Underfull \hbox (badness 10000) in paragraph at lines 450--452
 
  []
 
 [5]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
-27.
+29.
  (c:/texlive/2020/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
@@ -718,6 +723,9 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
  [6 <./diagrams/DecayMatrix.png>] [7 <./diagrams/Impulse Response.png> <./diagr
 ams/Impulse Response modified.png>]
 
@@ -727,7 +735,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.616 \end{thebibliography}
+l.624 \end{thebibliography}
                            
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -736,7 +744,7 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.616 \end{thebibliography}
+l.624 \end{thebibliography}
                            
 Things are pretty mixed up, but I think the worst is over.
 
@@ -745,13 +753,13 @@ Package rerunfilecheck Info: File `templateArxiv.out' has not changed.
 (rerunfilecheck)             Checksum: 375E44CE96DD7738197D4AD21C05B76C;934.
  ) 
 Here is how much of TeX's memory you used:
- 9989 strings out of 479917
- 153230 string characters out of 5886664
+ 9997 strings out of 479917
+ 153301 string characters out of 5886664
  645947 words of memory out of 5000000
- 26121 multiletter control sequences out of 15000+600000
- 593466 words of font info for 183 fonts, out of 8000000 for 9000
+ 26122 multiletter control sequences out of 15000+600000
+ 593821 words of font info for 187 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,19n,77p,1031b,449s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 72i,19n,77p,1027b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texl
 ive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2020/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/
@@ -769,10 +777,10 @@ fb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/202
 0/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2020/texmf-dist/font
 s/type1/urw/times/utmr8a.pfb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/
 utmri8a.pfb>
-Output written on templateArxiv.pdf (8 pages, 307930 bytes).
+Output written on templateArxiv.pdf (8 pages, 308728 bytes).
 PDF statistics:
- 286 PDF objects out of 1000 (max. 8388607)
- 251 compressed objects within 3 object streams
- 69 named destinations out of 1000 (max. 500000)
+ 288 PDF objects out of 1000 (max. 8388607)
+ 253 compressed objects within 3 object streams
+ 70 named destinations out of 1000 (max. 500000)
  27264 words of extra memory for PDF output out of 29859 (max. 10000000)
 

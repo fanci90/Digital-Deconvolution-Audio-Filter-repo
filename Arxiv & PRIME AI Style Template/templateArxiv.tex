@@ -71,7 +71,7 @@ The field of digital audio signal processing has undergone significant developme
 
 Modeling and modification of the acoustic characteristics of room and recording setups, based on convolution with \textit{impulse response}, is a key technique in digital audio processing. The Linear Time Invariant (LTI) system approach consisting of convolution of a audio signal with a measured or synthesized \textit{impulse response}, makes it possible to e.g. simulate reverberation, filter out early reflections, and compensate for coloration introduced by the recording chain~\cite{smith2011spectral,moorer1979reverberation}.
 
-Traditional methods for reverberation and dereverberation often rely on parametric models or sparse representations of the \textit{impulse response}~\cite{moorer1979reverberation,HabetsThesis2007}. However, convolution with a sparse, spectrally modified \textit{impulse response}, that explicitly incorporates the $T60$ decay through exponential functions offers a direct and flexible approach for single-channel audio filtering. This method enables targeted suppression of early reflections, reverberation, and undesired recording characteristics, based on established signal processing principles. This novel approach differs from closely related state of the art work such as "Speech Dereverberation in the Time-Frequency Domain" \cite{oyzerman2012}, "Approximation of Real Impulse Response Using IIR Structures" \cite{primavera2011} and "Representation and Identification of Systems in the Discrete-Time Wavelet Transform Domain" \cite{asm2007} and was not yet found in literature.
+Traditional methods for reverberation and dereverberation often rely on parametric models or sparse representations of the \textit{impulse response}~\cite{moorer1979reverberation,HabetsThesis2007}. However, convolution with a sparse, spectrally modified \textit{impulse response}, that explicitly incorporates the $T60$ decay through exponential functions offers a direct and flexible approach for single-channel audio filtering. This method enables targeted suppression of early reflections, reverberation, and undesired recording characteristics, based on established signal processing principles. This approach differs from closely related state of the art work such as "Speech Dereverberation in the Time-Frequency Domain" \cite{oyzerman2012}, "Approximation of Real Impulse Response Using IIR Structures" \cite{primavera2011} and "Representation and Identification of Systems in the Discrete-Time Wavelet Transform Domain" \cite{asm2007}.% and was not yet found in literature.
 
 \newpage
 \section{Signal processing}
@@ -157,11 +157,11 @@ To ensure the \textit{impulse response} has a consistent scale, with maximum abs
 \begin{equation}
    h_{\nu} = \frac{\overline{h}_{\nu}}{\max_{\nu} |\overline{h}_{\nu}|}. \label{eq:IR}
 \end{equation}
-This yields a single, normalized \textit{impulse response}, that is suitable as a good overall representation.
+These steps yield a single, normalized \textit{impulse response}, that is suitable as a good overall representation.
 
 
 \subsection{Spectral \textit{impulse response} modification}
-The time domain \textit{impulse response}, e.g. from equation \eqref{eq:IR}, is transformed by STFT, to add decay to certain frequency bins. 
+The time domain \textit{impulse response}, e.g. from equation \eqref{eq:IR}, is transformed by STFT, to decay certain frequency bins from blind $T60$ estimate. 
 
 
 \subsubsection{Blind estimation of $T60$ reverberation times for each bin}
@@ -256,7 +256,7 @@ Hann-windowing applies for STFT and iSTFT. The COLA method applies for iSTFT, re
 
 A sine-sweep and a speech audio was recorded by integrated microphone from a \textit{Convertible Workstation}
 %\href{https://doi-product-assets.s3.amazonaws.com/pub/Manufacturer-Brochure/1061215910.pdf}
-( \href{https://web.archive.org/web/20201031164451/https://h20195.www2.hp.com/v2/GetDocument.aspx?docname=c05939925}{HP ZBook Studio x360 G5 (6TW61EA#ABD)} ), on a desk, located in a pitched roof area corner of a living room, that has about 1 Ar. The sine-sweep sound was played back from the internal loudspeakers of the \textit{Convertible Workstation}. The integrated noise reduction was turned off. The goal was to improve the speech sound quality with the aim of having dry and clear sound when speaker sits in front of the \textit{Convertible Workstation}. A Futher assumption was, that degraded speech intelligibility could get better.
+(\href{https://web.archive.org/web/20201031164451/https://h20195.www2.hp.com/v2/GetDocument.aspx?docname=c05939925}{HP ZBook Studio x360 G5 (6TW61EA#ABD)}), on a desk, located in a pitched roof area corner of a living room, that has about 1 Ar. The sine-sweep sound was played back from the internal loudspeakers of the \textit{Convertible Workstation}. The integrated noise reduction was turned off. The goal was to improve the speech sound quality with the aim of having dry and clear sound when speaker sits in front of the \textit{Convertible Workstation}. A Futher assumption was, that degraded speech intelligibility could get better.
 \\ \\
 In the same manner the sine-sweep and a drum-set groove have been recorded from the same location. The sine-sweep was played back on a \href{https://ia601909.us.archive.org/31/items/manualsbase-id-372739/372739.pdf}{Alesis Active M1 MKII (8N)} near-field monitor beside the drum-set. The goal was to have dry and clear studio-like raw recording quality despite poor recording-conditions.
 
@@ -265,29 +265,29 @@ Several objective measures prove the applicability of the Method.
 Some Measures are used to compare the system impulse response with the filtered impulse response, and some are used to compare a filtered with a unfiltered signal.
 \\ \\
 The measures to compare the unfiltered and filtered signals can be found in the Results section table \ref{tab:Objective}. 
-The $T60$ of the \textit{impulse response}-filtered signal and the $T60$ of the filtered signal by modified \textit{impulse response} can be compared.
+%The $T60$ of the \textit{impulse response}-filtered signal and the $T60$ of the filtered signal by modified \textit{impulse response} can be compared.
 \\ \\
 The \textit{Log-Spectral Distance} (LSD) was used to indicate the efficiency of the filter by taking the original signal $z_n$ and the filtered audio signal $z''_n$ into account:
 	\begin{equation}
 	LSD=10log_{10} \left(\frac{\overline{(z''_n-\overline{z''_n})^2}}{\overline{(z_n-\overline{z_n})^2}}\right).
 	\end{equation}
 \\ \\
-The STOI measures the speech intelligibility. It is only applicable to speech audio.
+The \textit{short-time objective intelligibility measure} (STOI) measures the speech intelligibility\cite{stoi2010}. It is only applicable to speech audio.
 \\ \\
 The \textit{Perceptual Evaluation of Speech Quality} (PESQ) is an algorithm that models human auditory perception, capturing effects like distortion, background noise, clipping, and delay.
 It measures clarity of an audio channel, which is also necessary for non-speech audio channels. Higher PESQ scores indicate better quality of the audio channel.
 It is widely used in telecom, VoIP, and audio processing to measure speech enhancement or degradation cite{...}.
 The PESQs of the original signal and the filtered signal are compared due to their difference. Therein the PESQ from a degraded signal was estimated from its filtered signal as reference and vise versa. 
 \\ \\
-Zwicker’s time-varying \textit{loudness} model estimates how intense or loud a sound is perceived by human listeners cite{...}.
+Zwicker’s time-varying \textit{Loudness} model estimates how intense or loud a sound is perceived by human listeners cite{...}.
 \\ \\
 \textit{Sharpness} from DIN 45692 standard (Zwicker’s model) quantifies how piercing or shrill sound feels, based on how present the frequencies above 3kHz are cite{...}.
 \\ \\
 \textit{Roughness} measures how harsh or "fluttery" a sound feels, linked to rapid, audible amplitude fluctuations in the range most noticeable to human ears (20–300Hz modulation).
 \\ \\
+The \textit{Definition Ratio}, D50, is the ratio of early to total energy within 50 ms. It was used to indicate if early reverberations are present in the impulse response.
+\\ \\
 The Algorithms to measure perceptive sound quality can be used from the \textit{Modular Sound Quality Index Toolbox} \href{https://github.com/Eomys/MoSQITo}{(MoSQITo)} \cite{mosqito2025}, \href{https://github.com/ludlows/python-pesq.git}{PESQ} \cite{pesq2025} and the \href{https://github.com/mpariente/pystoi}{STOI} \cite{stoi2025}, respectively. Further measures have been evaluated by proprietary software, namely the Cubase 5.0.1 build 147 (\href{https://o.steinberg.net/index.php?id=1782&L=1}{Steinberg Media Technologies GmbH}) \cite{cubase501}.
-
-The definition ratio, D50, is the ratio of early to total energy within 50 ms. It was used to indicate if early reverberations are present in the impulse response.
 
 \subsection{Subjective}
 Furthermore subjective hearing tests where performed. 
@@ -415,6 +415,8 @@ D50 							& 		$42.9\%$				&			$100.0\%$		&			$71.7\%$				&				$100.0\%$			\\
 
 
 The results are shown in figure \ref{fig:results}. ....
+
+no noise was added or subtracted to the speech sample due to filtering, so the intelligibility stayed as good as originally recorded.
 
 \begin{figure}[h]
 \centering
@@ -603,6 +605,12 @@ Available at: \url{https://github.com/ludlows/python-pesq.git}
 \bibitem{stoi2025}
 M.~Pariente, pystoi: Short-Time Objective Intelligibility (STOI), 2025. \\
 Available at: \url{https://github.com/mpariente/pystoi}
+
+\bibitem{stoi2010}
+Taal, Cees H. and Hendriks, Richard C. and Heusdens, Richard and Jensen, Jesper,
+ \emph{A short-time objective intelligibility measure for time-frequency weighted noisy speech},
+2010 IEEE International Conference on Acoustics, Speech and Signal Processing. Pages 4214-4217,
+DOI: 10.1109/ICASSP.2010.5495701.
 
 \bibitem{cubase501}
 Steinberg Media Technologies GmbH, Cubase 5.0.1 build 147 [Computer Software], 2009. \\
