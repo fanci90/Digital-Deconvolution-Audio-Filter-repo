@@ -454,19 +454,20 @@ def process_files(input_file1, input_file2, test_file, output_folder, sample_rat
     # Smooth the optimized impulse response
     impulse_response = calculate_impulse_response(input_sig, output_sig, n_fft, hop_length)
     #plot_impulse_response(impulse_response, sample_rate)
- 
+    #impulse_response = impulse_response / np.max(impulse_response)
+
     # Calculate gain factor 
     #impulse_response_rms = calculate_rms(impulse_response)
     #output_sig_rms = calculate_rms(output_sig)
-    impulse_response=adjust_impulse_response(impulse_response, test_sig, output_sig, sample_rate)
+    #impulse_response=adjust_impulse_response(impulse_response, test_sig, output_sig, sample_rate)
     
     # additional decay as needed
-    impulse_response = add_decay_to_impulse_response(impulse_response, decay_factor=0.01)
+    #impulse_response = add_decay_to_impulse_response(impulse_response, decay_factor=0.01)
     #plot_impulse_response(impulse_response, sample_rate)   
 
     # Filter test signal with decayed impulse response
     filtered_sig = filter_signal_with_impulse_response(test_sig, impulse_response[:int(1*len(impulse_response))], 1)
-    filtered_sig = filtered_sig[:len(test_sig)]
+    filtered_sig = filtered_sig[10000:len(test_sig)]
 
     # Filter Sine Sweep for benchmarking and comparability
     filtered_sweep = filter_signal_with_impulse_response(output_sig, impulse_response[:int(1*len(impulse_response))], 1)
@@ -596,14 +597,14 @@ def main():
     sf.write(sweep_file, periodic_sweep, sample_rate)
 
     # Input and output files
-    input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
-    input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_beside_the_drums.wav')
-    test_file = os.path.join(input_dir, 'z/Record.wav')
-    
     #input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
-    #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 1.wav')
+    #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_beside_the_drums.wav')
+    #test_file = os.path.join(input_dir, 'z/Record.wav')
+    
+    input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
+    input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 1.wav')
     #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 2.wav')
-    #test_file = os.path.join(input_dir, 'z/speech.wav')
+    test_file = os.path.join(input_dir, 'z/speech.wav')
     
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     output_folder = os.path.join(input_dir, f"output_{timestamp}")

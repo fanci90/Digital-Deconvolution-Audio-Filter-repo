@@ -93,7 +93,7 @@ x_{n} = \bigoplus_{p=0}^{P-1} \acute{x}_{n - pN}.
 
 
 \subsection{impulse response estimation}
-Given discrete time series $x_n$ and its recorded signal $y_n$ with $N$ samples, their relation can be described by a discrete LTI System with $y_n=x_n*h_n$. Therein the \textit{impulse response} $h_n$ describes the signal chain, that can include unpleasant room characteristics that cause e.g. early reflections, reverberation, resonance and add non-linearity of the sensor and the loudspeaker.
+Given discrete time series $x_n$ and its recorded signal $y_n$ with $N$ samples, their relation can be described by a discrete LTI System with $y_n=x_n*h_n$ \cite{Fliege1991}. Therein the \textit{impulse response} $h_n$ describes the signal chain, that can include unpleasant room characteristics that cause e.g. early reflections, reverberation, resonance and add non-linearity of the sensor and the loudspeaker.
 \\
 The \textit{impulse response} can be decorrelated by deconvolution from the related signals for system identification:  
 \begin{equation}
@@ -167,7 +167,7 @@ The time domain \textit{impulse response}, e.g. from equation \eqref{eq:IR}, is 
 \subsubsection{Blind estimation of $T60$ reverberation times for each bin}
 The ISO 3382 standard \cite{iso3382} formally defines $T60$ as the time required for spatial sound energy to decay by 60 dB. 
 This work uniquely uses blind estimate of $T60$, despite the \textit{impulse response} is known, to shape the decay of each frequency bin in the \textit{impulse response}, targeting specific acoustic and system artifacts for convolution filter, which is an approach not yet found in literature. Furthermore the $T60$ reverberation time is a quantity that is traditionally used for measurement, characterizing and shaping room acoustics usually as a global or band-averaged parameter ~\cite{kuttruff2016}.
-Ratnam et al. provide the maximum-likelihood framework for single-channel blind $T60$ estimation \cite{ratnam2003}.
+Ratnam et al. propose an \textit{Maximum Likelihood} (ML) algorithm for a blind single-channel $T60$ estimate\cite{ratnam2003}.
 To do the frequency bin specific modifications on the \textit{impulse response}, the necessary array of decay parameters is obtained by the following procedure.
 \\
 The Power Spectral Density (PSD) for a discrete signal $x_n$ is its STFT magnitude squared:
@@ -260,43 +260,50 @@ A sine-sweep and a speech audio was recorded by integrated microphone from a \te
 \\ \\
 In the same manner the sine-sweep and a drum-set groove have been recorded from the same location. The sine-sweep was played back on a \href{https://ia601909.us.archive.org/31/items/manualsbase-id-372739/372739.pdf}{Alesis Active M1 MKII (8N)} near-field monitor beside the drum-set. The goal was to have dry and clear studio-like raw recording quality despite poor recording-conditions.
 
-\subsection{Objective}
+\section{Objectives}
 Several objective measures prove the applicability of the Method.
 Some Measures are used to compare the system impulse response with the filtered impulse response, and some are used to compare a filtered with a unfiltered signal.
 \\ \\
 The measures to compare the unfiltered and filtered signals can be found in the Results section table \ref{tab:Objective}. 
 %The $T60$ of the \textit{impulse response}-filtered signal and the $T60$ of the filtered signal by modified \textit{impulse response} can be compared.
 \\ \\
-The \textit{Log-Spectral Distance} (LSD) was used to indicate the efficiency of the filter by taking the original signal $z_n$ and the filtered audio signal $z''_n$ into account:
+A \textit{Logarithmic Signal-Power Distance} (LSD) was calculated to indicate the efficiency of the filter by taking the original signal $z_n$ and the filtered audio signal $z''_n$ into account:
 	\begin{equation}
 	LSD=10log_{10} \left(\frac{\overline{(z''_n-\overline{z''_n})^2}}{\overline{(z_n-\overline{z_n})^2}}\right).
 	\end{equation}
 \\ \\
-The \textit{short-time objective intelligibility measure} (STOI) measures the speech intelligibility\cite{stoi2010}. It is only applicable to speech audio.
+The \textit{Short-Time Objective Intelligibility Measure} (STOI) measures the speech intelligibility \cite{stoi2010}. It is only applicable to speech audio.
 \\ \\
-The \textit{Perceptual Evaluation of Speech Quality} (PESQ) is an algorithm that models human auditory perception, capturing effects like distortion, background noise, clipping, and delay.
-It measures clarity of an audio channel, which is also necessary for non-speech audio channels. Higher PESQ scores indicate better quality of the audio channel.
-It is widely used in telecom, VoIP, and audio processing to measure speech enhancement or degradation cite{...}.
-The PESQs of the original signal and the filtered signal are compared due to their difference. Therein the PESQ from a degraded signal was estimated from its filtered signal as reference and vise versa. 
+The \textit{Perceptual Evaluation of Speech Quality} (PESQ) is an algorithm that models human auditory perception, capturing effects like distortion, background noise, clipping, and delay. It measures \textit{Mean Opinion Score, Listening Quality Objective} (MOS-LQO), which is basically the clarity of an audio channel, which is also necessary for non-speech audio channels. Higher MOS-LQO indicate better quality of the audio channel.
+It is widely used in telecom, VoIP, and audio processing to measure speech enhancement or degradation \cite{pesq2001}.
+%The MOS-LQOs of the original signal and the filtered signal can be compared due to their difference $\Delta MOS-LQO$. %Therein the MOS-LQO from a degraded signal was estimated from its filtered signal as reference and vise versa. 
 \\ \\
-Zwicker’s time-varying \textit{Loudness} model estimates how intense or loud a sound is perceived by human listeners cite{...}.
+Zwicker’s time-varying \textit{Loudness} model estimates how intense or loud a sound is perceived by human listeners \cite{ISO5322}.
 \\ \\
-\textit{Sharpness} from DIN 45692 standard (Zwicker’s model) quantifies how piercing or shrill sound feels, based on how present the frequencies above 3kHz are cite{...}.
+\textit{Sharpness} from DIN 45692 standard (Zwicker’s model) quantifies how piercing or shrill sound feels, based on how present the frequencies above 3kHz are \cite{DIN45692Free}.
 \\ \\
-\textit{Roughness} measures how harsh or "fluttery" a sound feels, linked to rapid, audible amplitude fluctuations in the range most noticeable to human ears (20–300Hz modulation).
+\textit{Roughness} measures how harsh or "fluttery" a sound feels, linked to rapid, audible amplitude fluctuations in the range most noticeable to human ears (20–300Hz modulation) \cite{Fastl2006}.
 \\ \\
-The \textit{Definition Ratio}, D50, is the ratio of early to total energy within 50 ms. It was used to indicate if early reverberations are present in the impulse response.
+The \textit{Definition Ratio}, D50, is the ratio of early to total energy within 50 ms \cite{HoutgastSteeneken1985}. It was used to indicate if early reverberations are present in the impulse response.
 \\ \\
-The Algorithms to measure perceptive sound quality can be used from the \textit{Modular Sound Quality Index Toolbox} \href{https://github.com/Eomys/MoSQITo}{(MoSQITo)} \cite{mosqito2025}, \href{https://github.com/ludlows/python-pesq.git}{PESQ} \cite{pesq2025} and the \href{https://github.com/mpariente/pystoi}{STOI} \cite{stoi2025}, respectively. Further measures have been evaluated by proprietary software, namely the Cubase 5.0.1 build 147 (\href{https://o.steinberg.net/index.php?id=1782&L=1}{Steinberg Media Technologies GmbH}) \cite{cubase501}.
+The Algorithms to measure perceptive sound quality can be used from the \textit{Modular Sound Quality Index Toolbox} \href{https://github.com/Eomys/MoSQITo}{(MoSQITo)} \cite{mosqito} \cite{mosqito2025}, \href{https://github.com/ludlows/python-pesq.git}{PESQ} \cite{pesq2025} and the \href{https://github.com/mpariente/pystoi}{STOI} \cite{stoi2025}, respectively. Further measures have been evaluated by proprietary software, namely the Cubase 5.0.1 build 147 (\href{https://o.steinberg.net/index.php?id=1782&L=1}{Steinberg Media Technologies GmbH}) \cite{cubase501}.
 
-\subsection{Subjective}
-Furthermore subjective hearing tests where performed. 
-Some listener notice the difference of acoustic signal with less reverb, at least the experts do. 
+%\subsection{Subjective}
+%Furthermore subjective hearing tests where performed. 
+%Some listener notice the difference of acoustic signal with less reverb, at least the experts do. The subjective test was not representative enough, but helped in the development phase.
 
 
 
 \section{Results}
 
+The filter has several well defined effects, which appear in the objective results table \ref{tab:Objective}.
+Because reverberations are filtered from the signal, the signal amplitude and power decreases. 
+The LSD measure shows that effect in one figure and gives it a name.
+The most significant estimated pitch of the audio increases, which is due to filtered room characteristic that allowed deeper frequencies to decay slowly.
+The filter decreases the T60 as expected, at least for those frequencies that showed reverberation.
+Loudness, which can be unpleasant, decreases, but sharpness increases, as result of the filter.
+Roughness is almost untouched by the filter, a slight decrease can be observed. 
+The D50 shows, that reflections after 50ms disappeared.
 %                    Drum-Set     Drum-Set       Speech       Speech
 %                    degraded     filtered       degraded     filtered
 %min sample value    -1           -0.961         -0.045       -0.052       
@@ -350,9 +357,9 @@ STOI &    N/A   &    N/A   &   0.9978    &    0.9978   \\
 \hline
 $\Delta$ STOI   &    \multicolumn{2}{c|}{N/A}       &      \multicolumn{2}{c|}{0}      \\
 \hline
-PESQ &    4.4202   &    4.5314    &    4.6308    &    4.6337   \\
+MOS-LQO &    4.4202   &    4.5314    &    4.6308    &    4.6337   \\
 \hline
-$\Delta$ PESQ &      \multicolumn{2}{c|}{$0.1112$}      &      \multicolumn{2}{c|}{$2.9 \cdot 10^{-3}$}       \\
+$\Delta$ MOS-LQO &      \multicolumn{2}{c|}{$0.1112$}      &      \multicolumn{2}{c|}{$2.9 \cdot 10^{-3}$}       \\
 \hline
 \textit{Loudness}  &    0.90320   &    0.30145   &    0.14764   &    0.14393   \\
 \hline
@@ -412,11 +419,12 @@ D50 							& 		$42.9\%$				&			$100.0\%$		&			$71.7\%$				&				$100.0\%$			\\
 %\end{tabular}
 %\end{table}
 
-
-
-The results are shown in figure \ref{fig:results}. ....
-
-no noise was added or subtracted to the speech sample due to filtering, so the intelligibility stayed as good as originally recorded.
+The original and the modified impulse response of the speech audio recording setup are shown in numerical plot \ref{fig:results}.
+A slow decay, early reflections and some unwanted behavior, that account for late reflections, can be seen in the original unmodified impulse response. 
+The filter decreases the unwanted behaviors selectively for the frequency bins by attenuation factor based on the T60 decay matrix in numerical plot \ref{fig:Decaymatrix}. 
+Because the impulse response from the speech record was different from the drum record, filter results differ.
+The STOI measure stays untouched by the filter: No speech enhancement and no speech degradation due to filtering: No noise was added or subtracted to the speech sample due to filtering.
+Unexpectedly, but for obvious reason, the T60 decreased to zero after filtering in the speech audio.
 
 \begin{figure}[h]
 \centering
@@ -436,7 +444,11 @@ no noise was added or subtracted to the speech sample due to filtering, so the i
 \end{figure}
 
 \section{Conclusion}
-The conclusion.
+
+The filter is designed aggressively on purpose and filters out reverberation and produces a dry sound with a minimum of room and recording setup characteristic, allowing the direct path signal to be dominant.
+It might be necessary to weight the output and mix it into the original signal, if it appears too sharp for the listener.
+However, as the filter does exactly what it should, the output might need further processing for more pleasant sound characteristic, but is obviously a excellent start for further audio processing.
+
 \\ \\
 %Future work will focus on a cepstral lifter approach during the \textit{impulse response} estimation.
 %Instead of the T60 coefficient estimation a artificial neural network might learn to optimize features from the impulse response.
@@ -519,102 +531,106 @@ Furthermore the author acknowledges the use of the AI language model \href{https
 %Time-frequency representations (STFT, CWT, cepstrum) are visualized as described in \cite{smith2011spectral}.
 
 \begin{thebibliography}{9}
-
-%\bibitem{rosseel2025},
-% H.~Rosseel, T.~van Waterschoot, ``Accelerated Interactive Auralization of Highly Reverberant Spaces using Graphics Hardware,'' 2025.\\
-% \url{https://arxiv.org/abs/2509.04390}
-
-\bibitem{farina2000}
-A.~Farina, ``Simultaneous measurement of impulse response and distortion with a swept-sine technique,'' \emph{AES Convention 108}, 2000.\\
-\url{https://www.aes.org/e-lib/browse.cfm?elib=10211}
-
-
-%\bibitem{oppenheim1999discrete}
-%A.~V.~Oppenheim and R.~W.~Schafer, \emph{Discrete-Time Signal Processing}, 2nd~ed., Prentice Hall, 1999. ISBN: 978-0137549207.
-
-
-\bibitem{moorer1979reverberation}
-J.~A.~Moorer, ``About this reverberation business,'' \emph{Computer Music Journal}, vol.~3, no.~2, pp.~13--28, 1979. doi:10.2307/3680287.
-
-%\bibitem{habets2010single}
-%E.~A.~P.~Habets, I.~Cohen, and S.~Gannot, ``Single-channel speech dereverberation using spectral enhancement,'' in \emph{Speech %Dereverberation}, Springer, 2010, pp.~229--254. doi:10.1007/978-1-4419-6114-3\_9.
-
-\bibitem{HabetsThesis2007}
-E.~A.~P. Habets,
-\newblock ``Single- and multi-microphone speech dereverberation using spectral enhancement,''
-\newblock Ph.D. dissertation, Technische Universiteit Eindhoven, The Netherlands, 2007.
-\newblock [Online]. Available: \url{https://research.tue.nl/files/1972985/200710970.pdf}
-
-%%%%%%%%%%%%% Related work (This work itself can be considered noval approach)
-\bibitem{oyzerman2012}
-A. Oyzerman, I. Cohen, ``Speech Dereverberation in the Time-Frequency Domain,'' M.Sc. Thesis, Technion, 2012. \url{https://israelcohen.com/wp-content/uploads/2018/05/AnnaOyzerman_MSc_2012.pdf}
-
-\bibitem{primavera2011}
-A. Primavera et al., ``Approximation of Real impulse response Using IIR Structures,'' Proc. EUSIPCO, 2011. \url{https://www.eurasip.org/Proceedings/Eusipco/Eusipco2011/papers/1569422051.pdf}
-
-\bibitem{asm2007}
-I. Cohen, ``Representation and Identification of Systems in the Discrete-Time Wavelet Transform Domain,'' IEEE Trans. Signal Processing, 2007. \url{https://israelcohen.com/wp-content/uploads/2018/05/ASM2007.pdf}
-
-%%%%%%%%%%%%%% Signal Processing fundamentals
-\bibitem{Fliege1991}
-N.~Fliege, \emph{Systemtheorie}. B. G. Teubner Stuttgart 1991 (Informationstechnik).  \\ 
-ISBN: 3-519-06140-6
-
-\bibitem{oppenheim1989frequency}
+ 
+\bibitem{oppenheim1989frequency} %1
 A.~V.~Oppenheim, R.~W.~Schafer, \emph{Discrete-Time Signal Processing}, Prentice Hall, 1989.\\
 ISBN: 0-13-216292-X
 
-\bibitem{smith2011spectral}
+\bibitem{smith2011spectral} %2
 Julius O. Smith III, \emph{Spectral Audio Signal Processing}, W3K Publishing, 2011.\\
-Available online: \url{https://ccrma.stanford.edu/~jos/sasp/}
+Available online: \url{https://ccrma.stanford.edu/~jos/sasp/}.
+
+\bibitem{moorer1979reverberation} %3
+J.~A.~Moorer, ``About this reverberation business,'' \emph{Computer Music Journal}, vol.~3, no.~2, pp.~13--28, 1979. doi:10.2307/3680287.
+
+\bibitem{HabetsThesis2007} %4
+E.~A.~P. Habets, ``Single- and multi-microphone speech dereverberation using spectral enhancement,'' Ph.D. dissertation, Technische Universität Eindhoven, The Netherlands, 2007. \\
+\url{https://research.tue.nl/files/1972985/200710970.pdf}.
+
+\bibitem{oyzerman2012} %5
+A. Oyzerman, I. Cohen, ``Speech Dereverberation in the Time-Frequency Domain,'' M.Sc. Thesis, Technion, 2012. \\
+\url{https://israelcohen.com/wp-content/uploads/2018/05/AnnaOyzerman_MSc_2012.pdf}.
+
+\bibitem{primavera2011} %6
+A. Primavera et al., ``Approximation of Real impulse response Using IIR Structures,'' Proc. EUSIPCO, 2011. \\
+\url{https://www.eurasip.org/Proceedings/Eusipco/Eusipco2011/papers/1569422051.pdf}.
+
+\bibitem{asm2007} %7
+I. Cohen, ``Representation and Identification of Systems in the Discrete-Time Wavelet Transform Domain,'' IEEE Trans. Signal Processing, 2007. \\
+\url{https://israelcohen.com/wp-content/uploads/2018/05/ASM2007.pdf}.
+
+\bibitem{farina2000} %8
+A.~Farina, ``Simultaneous measurement of impulse response and distortion with a swept-sine technique,'' \emph{AES Convention 108}, 2000.\\
+\url{https://www.aes.org/e-lib/browse.cfm?elib=10211}.
 
 %%%%%%%%%%%%%% T60 related
-\bibitem{ratnam2003}
-R.~Ratnam et al., \emph{Blind Estimation of Reverberation Time}, J. Acoust. Soc. Am., 114(5), pp. 2877-2892, 2003. \\
-\url{https://www.ee.columbia.edu/~dpwe/papers/Ratnam03-reverb.pdf}
+\bibitem{Fliege1991} %9
+N.~Fliege, \emph{Systemtheorie}. B. G. Teubner Stuttgart 1991 (Informationstechnik).  \\ 
+ISBN: 3-519-06140-6
 
-\bibitem{doire2015}
-C.~Doire et al., \emph{Single-Channel Blind Estimation of Reverberation Parameters}, Proc. EUSIPCO, 2015. \\
-\url{https://www.commsp.ee.ic.ac.uk/~sap/wp-content/uploads/2015/07/Doire2015.pdf}
+\bibitem{iso3382} %10
+ISO 3382-1:2009, \emph{Acoustics -- Measurement of room acoustic parameters -- Part 1: Performance spaces}. \\
+\url{https://www.iso.org/standard/40979.html} (Standard available for purchase, but methods widely referenced in open literature).
 
-\bibitem{liu2023}
-Y.~Liu et al., \emph{A Composite T60 Regression and Classification Approach for Speech Dereverberation}, arXiv:2302.04932, 2023. \\
-\url{https://arxiv.org/abs/2302.04932}
-
-\bibitem{kuttruff2016}
+\bibitem{kuttruff2016} %11
 H.~Kuttruff, \emph{Room Acoustics} (6th ed.), CRC Press, 2016. (Open access chapters available) \\
 ISBN: 978-1498740436
 
-\bibitem{iso3382}
-ISO 3382-1:2009, \emph{Acoustics -- Measurement of room acoustic parameters -- Part 1: Performance spaces}. \\
-\url{https://www.iso.org/standard/40979.html} (Standard available for purchase, but methods widely referenced in open literature)
+\bibitem{ratnam2003} %12
+R.~Ratnam et al., \emph{Blind Estimation of Reverberation Time}, J. Acoust. Soc. Am., 114(5), pp. 2877-2892, 2003. \\
+\url{https://www.ee.columbia.edu/~dpwe/papers/Ratnam03-reverb.pdf}
 
-%%%%%%
-
-\bibitem{mosqito}
-Green Forge Coop. MOSQITO (Version 1.1.1). \url{https://doi.org/10.5281/zenodo.10629475}
-
-\bibitem{mosqito2025}
-Eomys Engineering, Modular Sound Quality Index Toolbox (MoSQITo), 2025. \\ 
-Available at: \url{https://github.com/Eomys/MoSQITo}
-
-\bibitem{pesq2025}
-C.~Ludlow, python-pesq: Perceptual Evaluation of Speech Quality (PESQ), 2025. \\
-Available at: \url{https://github.com/ludlows/python-pesq.git}
-
-\bibitem{stoi2025}
-M.~Pariente, pystoi: Short-Time Objective Intelligibility (STOI), 2025. \\
-Available at: \url{https://github.com/mpariente/pystoi}
-
-\bibitem{stoi2010}
+\bibitem{stoi2010} %13
 Taal, Cees H. and Hendriks, Richard C. and Heusdens, Richard and Jensen, Jesper,
  \emph{A short-time objective intelligibility measure for time-frequency weighted noisy speech},
 2010 IEEE International Conference on Acoustics, Speech and Signal Processing. Pages 4214-4217,
 DOI: 10.1109/ICASSP.2010.5495701.
 
-\bibitem{cubase501}
+\bibitem{pesq2001}  %14
+(ITU), I. T. U.: Rec. p.862: Perceptual evaluation of speech quality(pesq): An objective
+method for end-to-end speech quality assessment of narrow-band telephone networks and
+speechcodecs. 2001.
+
+\bibitem{ISO5322} %15 %Loudness
+ISO~532-2:2017(E),
+\textit{Acoustics — Methods for calculating loudness — Part 2: Moore-Glasberg method},
+International Organization for Standardization, Geneva, 2017. \\
+\url{https://cdn.standards.iteh.ai/samples/63078/a42f5c5bd7014d5f99cc3a7d4fa0c0c9/ISO-532-2-2017.pdf}.
+
+\bibitem{DIN45692Free} %16
+HEAD Acoustics, ``Psychoacoustic Analyses I: Loudness and Sharpness Calculation,'' Application Note, 201x. \\
+\url{https://cdn.head-acoustics.com/fileadmin/data/global/Application-Notes/SVP/Psychoacoustic-Analyses-I_e.pdf}.
+
+\bibitem{Fastl2006} %17
+H.~Fastl, ``Psychoacoustic Basis of Sound Quality Evaluation,'' Technical University of Munich, 2006. \\
+\url{https://mediatum.ub.tum.de/doc/1138486/729841.pdf}.  
+(Free TUM repository source covering roughness and fluctuation strength models.)
+
+\bibitem{HoutgastSteeneken1985} %18
+T.~Houtgast and H.~J.~M.~Steeneken,
+``A review of the MTF concept in room acoustics and its use for estimating speech intelligibility,''
+\textit{Journal of the Acoustical Society of America},
+vol.~77, no.~3, pp.~1069–1077, 1985.
+
+\bibitem{mosqito} %19
+Green Forge Coop. MOSQITO (Version 1.1.1). \\
+\url{https://doi.org/10.5281/zenodo.10629475}
+
+\bibitem{mosqito2025} %20
+Eomys Engineering, Modular Sound Quality Index Toolbox (MoSQITo), 2025. \\ 
+\url{https://github.com/Eomys/MoSQITo}
+
+\bibitem{pesq2025} %21
+C.~Ludlow, python-pesq: Perceptual Evaluation of Speech Quality (PESQ), 2025. \\
+\url{https://github.com/ludlows/python-pesq.git}
+
+\bibitem{stoi2025} %22
+M.~Pariente, pystoi: Short-Time Objective Intelligibility (STOI), 2025. \\
+\url{https://github.com/mpariente/pystoi}
+
+\bibitem{cubase501} %24
 Steinberg Media Technologies GmbH, Cubase 5.0.1 build 147 [Computer Software], 2009. \\
-Available at: \url{https://o.steinberg.net/index.php?id=1782&L=1}
+\url{https://o.steinberg.net/index.php?id=1782&L=1}
 
 
 \end{thebibliography}

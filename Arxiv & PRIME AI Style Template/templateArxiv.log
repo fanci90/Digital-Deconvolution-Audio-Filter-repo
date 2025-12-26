@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  21 DEC 2025 23:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  26 DEC 2025 14:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -640,82 +640,103 @@ Underfull \hbox (badness 10000) in paragraph at lines 264--271
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--290
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--290
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--290
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--290
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--290
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--290
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--290
+
+ []
+
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 273--291
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 273--291
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 273--291
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 273--291
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 273--291
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 273--291
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 273--291
-
- []
-
-<diagrams/DecayMatrix.png, id=154, 590.205pt x 388.45125pt>
+<diagrams/DecayMatrix.png, id=161, 590.205pt x 388.45125pt>
 File: diagrams/DecayMatrix.png Graphic file (type png)
 <use diagrams/DecayMatrix.png>
-Package pdftex.def Info: diagrams/DecayMatrix.png  used on input line 423.
+Package pdftex.def Info: diagrams/DecayMatrix.png  used on input line 431.
 (pdftex.def)             Requested size: 328.82706pt x 216.4228pt.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<diagrams/impulse response.png, id=155, 731.73375pt x 388.45125pt>
+<diagrams/impulse response.png, id=162, 731.73375pt x 388.45125pt>
 File: diagrams/impulse response.png Graphic file (type png)
 <use diagrams/impulse response.png>
-Package pdftex.def Info: diagrams/impulse response.png  used on input line 430.
+Package pdftex.def Info: diagrams/impulse response.png  used on input line 438.
 
 (pdftex.def)             Requested size: 422.77661pt x 224.4365pt.
-<diagrams/impulse response modified.png, id=157, 731.73375pt x 388.45125pt>
+<diagrams/impulse response modified.png, id=164, 731.73375pt x 388.45125pt>
 File: diagrams/impulse response modified.png Graphic file (type png)
 <use diagrams/impulse response modified.png>
 Package pdftex.def Info: diagrams/impulse response modified.png  used on input 
-line 432.
+line 440.
 (pdftex.def)             Requested size: 422.77661pt x 224.4365pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 439--444
+! LaTeX Error: There's no line here to end.
 
- []
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.452 \\ \\
+           
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 439--444
+! LaTeX Error: There's no line here to end.
 
- []
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.456 
+      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 450--452
+Underfull \hbox (badness 10000) in paragraph at lines 462--464
 
  []
 
 [5]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6 <./diagrams/DecayMatrix.png>]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
-29.
+41.
  (c:/texlive/2020/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
@@ -724,10 +745,273 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[7 <./diagrams/Impulse Response.png> <./diagrams/Impulse Response modified.png>
+]
+Underfull \hbox (badness 10000) in paragraph at lines 595--599
+[]$\T1/cmtt/m/n/10 https : / / cdn . standards . iteh . ai / samples / 63078 / 
+a42f5c5bd7014d5f99cc3a7d4fa0c0c9 /
+ []
 
- [6 <./diagrams/DecayMatrix.png>] [7 <./diagrams/Impulse Response.png> <./diagr
-ams/Impulse Response modified.png>]
+
+Underfull \hbox (badness 10000) in paragraph at lines 601--603
+[]$\T1/cmtt/m/n/10 https : / / cdn . head-[]acoustics . com / fileadmin / data 
+/ global / Application-[]Notes / SVP /
+ []
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.605 H.~Fastl, ``Psychoacoustic 
+                                   Basis of Sound Quality Evaluation...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.605 H.~Fastl, ``Psychoacoustic Basis 
+                                           of Sound Quality Evaluation...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.605 H.~Fastl, ``Psychoacoustic Basis of 
+                                                Sound Quality Evaluation...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.605 ... ``Psychoacoustic Basis of Sound 
+                                                  Quality Evaluation,'' Te...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.605 ...coustic Basis of Sound Quality 
+                                                  Evaluation,'' Technical ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.605 ...nd Quality Evaluation,'' Technical 
+                                                  University of Munich,�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.605 ...��Evaluation,'' Technical University 
+                                                  of Munich, 2006. \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.605 ...luation,'' Technical University of 
+                                                  Munich, 2006. \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.605 ... Technical University of Munich, 
+                                                  2006. \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.607 (Free 
+              TUM repository source covering roughness and fluct...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.607 (Free TUM 
+                    repository source covering roughness and fluct...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.607 (Free TUM repository 
+                                 source covering roughness and fluct...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.607 (Free TUM repository source 
+                                          covering roughness and fluct...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.607 ...��TUM repository source covering 
+                                                  roughness and fluctuat...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.607 ...sitory source covering roughness 
+                                                  and fluctuation streng...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.607 ... source covering roughness and 
+                                                  fluctuation strength m...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.607 ...vering roughness and fluctuation 
+                                                  strength models.)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character   (U+202F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.607 ...ughness and fluctuation strength 
+                                                  models.)
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Underfull \hbox (badness 2142) in paragraph at lines 605--608
+[]$\T1/cmtt/m/n/10 https : / / mediatum . ub . tum . de / doc / 1138486 / 72984
+1 . pdf$[]\T1/ptm/m/n/10 (+20) . (Free-TUM-repos-i-to-rysource-cov-er-ingrough-
+nes-
+ []
+
 
 ! LaTeX Error: \begin{document} ended by \end{thebibliography}.
 
@@ -735,7 +1019,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.624 \end{thebibliography}
+l.640 \end{thebibliography}
                            
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -744,22 +1028,22 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.624 \end{thebibliography}
+l.640 \end{thebibliography}
                            
 Things are pretty mixed up, but I think the worst is over.
 
 [8] (./templateArxiv.aux)
 Package rerunfilecheck Info: File `templateArxiv.out' has not changed.
-(rerunfilecheck)             Checksum: 375E44CE96DD7738197D4AD21C05B76C;934.
+(rerunfilecheck)             Checksum: 447F7E5F0D993B3029D585A980C5E2C8;861.
  ) 
 Here is how much of TeX's memory you used:
- 9997 strings out of 479917
- 153301 string characters out of 5886664
- 645947 words of memory out of 5000000
- 26122 multiletter control sequences out of 15000+600000
- 593821 words of font info for 187 fonts, out of 8000000 for 9000
+ 10005 strings out of 479917
+ 153400 string characters out of 5886664
+ 646947 words of memory out of 5000000
+ 26125 multiletter control sequences out of 15000+600000
+ 594141 words of font info for 189 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,19n,77p,1027b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 72i,19n,77p,1027b,449s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texl
 ive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2020/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/
@@ -777,10 +1061,10 @@ fb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/202
 0/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2020/texmf-dist/font
 s/type1/urw/times/utmr8a.pfb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/
 utmri8a.pfb>
-Output written on templateArxiv.pdf (8 pages, 308728 bytes).
+Output written on templateArxiv.pdf (8 pages, 311334 bytes).
 PDF statistics:
- 288 PDF objects out of 1000 (max. 8388607)
- 253 compressed objects within 3 object streams
- 70 named destinations out of 1000 (max. 500000)
- 27264 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 298 PDF objects out of 1000 (max. 8388607)
+ 263 compressed objects within 3 object streams
+ 72 named destinations out of 1000 (max. 500000)
+ 27256 words of extra memory for PDF output out of 29859 (max. 10000000)
 
