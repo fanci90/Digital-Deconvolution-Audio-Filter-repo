@@ -161,7 +161,7 @@ These steps yield a single, normalized \textit{impulse response}, that is suitab
 
 
 \subsection{Spectral \textit{impulse response} modification}
-The time domain \textit{impulse response}, e.g. from equation \eqref{eq:IR}, is transformed by STFT, to decay certain frequency bins from blind $T60$ estimate. 
+The time domain \textit{impulse response}, e.g. from equation \eqref{eq:IR}, is transformed by STFT, to decay frequency bins basef on blind $T60$ estimate. 
 
 
 \subsubsection{Blind estimation of $T60$ reverberation times for each bin}
@@ -198,26 +198,6 @@ the $T60$ estimate in seconds for every frequency bin is:
 \begin{equation}
 T60_{\mu} = \frac{o \cdot \eta^{\text{(T60)}}_{\mu} }{f_s}. \label{eq:T60mu}
 \end{equation}
-
-
-%---
-%
-%
-%## 3. Summary Table of Variables
-%
-%| Symbol               | Description                        |
-%|----------------------|------------------------------------|
-%| $$ S(k, m) $$        | STFT power at bin $$ k $$, frame $$ m $$ |
-%| $$ E_{\text{cum}} $$ | Cumulative normalized energy       |
-%| $$ m_{T_{60}}(k) $$  | Frame index where energy < 0.001   |
-%| $$ T_{60}(k) $$      | T60 time for bin $$ k $$           |
-%| $$ d_k(m) $$         | Decay function for bin $$ k $$     |
-%| $$ S'(k, m) $$       | Decay-modified STFT                |
-%| $$ f_s $$            | Sample rate                        |
-%| $$ n_{\text{FFT}} $$ | FFT size                           |
-%| $$ \text{hop\_length} $$ | STFT hop size                  |
-%
-%---
 
 
 \subsubsection{Application of the decay function}
@@ -304,25 +284,6 @@ The filter decreases the T60 as expected, at least for those frequencies that sh
 Loudness, which can be unpleasant, decreases, but sharpness increases, as result of the filter.
 Roughness is almost untouched by the filter, a slight decrease can be observed. 
 The D50 shows, that reflections after 50ms disappeared.
-%                    Drum-Set     Drum-Set       Speech       Speech
-%                    degraded     filtered       degraded     filtered
-%min sample value    -1           -0.961         -0.045       -0.052       
-%max sample value    +1            +1             0.046        0.045        
-%peak amplitude      0dB           0dB           -26.75dB     -25.73dB     
-%DC offset          -87.70dB      -91.67dB       -85.31dB     -88.32dB
-%Estimated Pitch    2207.5Hz/C#6  5057.2Hz/D#7  1452.2Hz/F#5  1834.9Hz/A#5
-%Min RMS Power      -67.68dB      -96.45dB       -61.02dB     -63.10dB
-%Max RMS Power       -4.58dB      -11.67dB       -32.82dB     -32.08dB
-%Average            -19.92dB      -24.63dB       -41.34dB     -41.29dB
-%SNR                        9.648dB                     9.507dB
-%T60                 31.537ms      26.679ms       23.793ms     20.655dB
-%STOI                   -             -           0.9807       0.9807
-%$\Delta$ STOI                   -                           0
-%PESQ                3.6052        4.1774         4.4319       4.4410
-%$\DELTA$ PESQ
-%Loudness            0.90320       0.60329        0.14764      0.14393
-%Roughness           0.23022       0.22802        0.21995      0.21946
-%Sharpness           3.26095       3.50446        3.09846      3.16039
 
 \begin{table}[ht]
 \centering
@@ -372,53 +333,6 @@ D50 							& 		$42.9\%$				&			$100.0\%$		&			$71.7\%$				&				$100.0\%$			\\
 \end{tabular}
 \end{table}
 
-%
-%\begin{table}[ht]
-%\centering
-%\caption{Objective measures. Statistics with asterisk (\textit{name}$^*$) derived from Cubase 5.0.1 build 147.}
-%\label{tab:Objective}
-%\begin{tabular}{|c|c|c|c|c|}
-%\hline
-%\multirow{2}{*}{ } & \multirow{2}{*}{\makecell{Drum-Set \\ degraded ($z_n$)}} & \multirow{2}{*}{\makecell{Drum-Set \\ filtered ($z''_n$)}} & \multirow{2}{*}{\makecell{Speech \\ degraded ($z_n$)}} & \multirow{2}{*}{\makecell{Speech \\ filtered ($z''_n$)}} \\
-%&       &       &       &       \\
-%\hline
-%\textit{min sample value}$^*$ &   -1    &   -0.961    &   -0.045   &    -0.052   \\
-%\hline
-%\textit{max sample value}$^*$ &   +1    &    +1       &    0.046   &     0.045   \\
-%\hline
-%\textit{peak amplitude}$^*$ &   0dB    &    0dB   &   -26.75dB    &    -25.73dB     \\
-%\hline
-%\textit{DC offset}$^*$ &   -87.70dB    &    -91.67dB    &    -85.31dB   &    -88.32dB   \\
-%\hline
-%\textit{Estimated Pitch}$^*$ &    2207.5Hz / C\#6    &    5057.2Hz / D\#7   &    1452.2Hz / F\#5    &    1834.9Hz / A\#5   \\
-%\hline
-%\textit{Min RMS Power}$^*$ &   -67.68dB    &    -96.45dB    &    -61.02dB    &    -63.10dB   \\
-%\hline
-%\textit{Max RMS Power}$^*$ &    -4.58dB    &    -11.67dB   &    -32.82dB   &    -32.08dB   \\
-%\hline
-%\textit{Average}$^*$  &   -19.92dB    &    -24.63dB    &    -41.34dB   &    -41.29dB   \\
-%\hline
-%SNR &       \multicolumn{2}{c|}{-9.648dB}       &     \multicolumn{2}{c|}{-9.507dB}      \\
-%\hline
-%T60  &    31.537ms   &   26.679ms    &    23.793ms   &    20.655dB   \\
-%\hline
-%STOI &    N/A   &    N/A   &   0.9807    &    0.9807   \\
-%\hline
-%$\Delta$ STOI   &    \multicolumn{2}{c|}{N/A}       &      \multicolumn{2}{c|}{0}      \\
-%\hline
-%PESQ &    3.6052   &    4.1774    &    4.4319    &    4.4410   \\
-%\hline
-%$\Delta$ PESQ &      \multicolumn{2}{c|}{0.5722}      &      \multicolumn{2}{c|}{9.1E-3}       \\
-%\hline
-%\textit{Loudness}  &    0.90320   &    0.60329   &    0.14764   &    0.14393   \\
-%\hline
-%\textit{Roughness} &    0.23022   &    0.22802   &    0.21995    &   0.21946    \\
-%\hline
-%\textit{Sharpness} &    3.26095   &    3.50446   &    3.09846   &    3.16039   \\
-%\hline
-%\end{tabular}
-%\end{table}
-
 The original and the modified impulse response of the speech audio recording setup are shown in numerical plot \ref{fig:results}.
 A slow decay, early reflections and some unwanted behavior, that account for late reflections, can be seen in the original unmodified impulse response. 
 The filter decreases the unwanted behaviors selectively for the frequency bins by attenuation factor based on the T60 decay matrix in numerical plot \ref{fig:Decaymatrix}. 
@@ -445,14 +359,12 @@ Unexpectedly, but for obvious reason, the T60 decreased to zero after filtering 
 
 \section{Conclusion}
 
-The filter is designed aggressively on purpose and filters out reverberation and produces a dry sound with a minimum of room and recording setup characteristic, allowing the direct path signal to be dominant.
-It might be necessary to weight the output and mix it into the original signal, if it appears too sharp for the listener.
-However, as the filter does exactly what it should, the output might need further processing for more pleasant sound characteristic, but is obviously a excellent start for further audio processing.
+The filter is designed aggressively on purpose and filters out reverberation and produces a dry and clear sound with a minimum of room and recording setup characteristic, allowing the direct path signal to be dominant.
+However, as the filter does exactly what it should, the output might need further processing for more pleasant sound characteristic, but is obviously a excellent start for further audio processing. %good idea to weight the output and mix it into the original signal, if it appears too sharp or unrealistic for the listener. Bur room characteristic also can be synthesized and added to that dry signal.
 
-\\ \\
-%Future work will focus on a cepstral lifter approach during the \textit{impulse response} estimation.
+%Future work could focus on a cepstral lifter approach during the \textit{impulse response} estimation, making procedure as short as possible for better real time applicability.
 %Instead of the T60 coefficient estimation a artificial neural network might learn to optimize features from the impulse response.
-%Interessant: Ein System, das ein sich wiederholendes Verhalten zeigen sollte, kann evtl. in das Reservoir "eingelernt" werden - NGRC. Wenn die Prediction und der Messwert größere Abweichungen zeigt, dann kann eine Benachrichtigung / Warnung gegeben werden, damit sich z.B. jemand das System genauer anschaut.
+%Interessant: Ein System, das ein sich wiederholendes Verhalten zeigen sollte, kann evtl. in das Reservoir "eingelernt" werden - NGRC. 
 
 \section{Supplements}
 The Python-code of the studied method and audio samples are to be found at GitHub: \href{https://github.com/fanci90/Digital-Deconvolution-Audio-Filter-repo.git}{https://github.com/fanci90/Digital-Deconvolution-Audio-Filter-repo.git}.
@@ -563,7 +475,6 @@ I. Cohen, ``Representation and Identification of Systems in the Discrete-Time Wa
 A.~Farina, ``Simultaneous measurement of impulse response and distortion with a swept-sine technique,'' \emph{AES Convention 108}, 2000.\\
 \url{https://www.aes.org/e-lib/browse.cfm?elib=10211}.
 
-%%%%%%%%%%%%%% T60 related
 \bibitem{Fliege1991} %9
 N.~Fliege, \emph{Systemtheorie}. B. G. Teubner Stuttgart 1991 (Informationstechnik).  \\ 
 ISBN: 3-519-06140-6
@@ -631,10 +542,6 @@ M.~Pariente, pystoi: Short-Time Objective Intelligibility (STOI), 2025. \\
 \bibitem{cubase501} %24
 Steinberg Media Technologies GmbH, Cubase 5.0.1 build 147 [Computer Software], 2009. \\
 \url{https://o.steinberg.net/index.php?id=1782&L=1}
-
-
-\end{thebibliography}
-
 
 
 \end{thebibliography}
