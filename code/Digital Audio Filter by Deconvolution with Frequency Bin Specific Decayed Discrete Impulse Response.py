@@ -459,7 +459,7 @@ def process_files(input_file1, input_file2, test_file, output_folder, sample_rat
     # Calculate gain factor 
     #impulse_response_rms = calculate_rms(impulse_response)
     #output_sig_rms = calculate_rms(output_sig)
-    #impulse_response=adjust_impulse_response(impulse_response, test_sig, output_sig, sample_rate)
+    impulse_response=adjust_impulse_response(impulse_response, test_sig, output_sig, sample_rate)
     
     # additional decay as needed
     #impulse_response = add_decay_to_impulse_response(impulse_response, decay_factor=0.01)
