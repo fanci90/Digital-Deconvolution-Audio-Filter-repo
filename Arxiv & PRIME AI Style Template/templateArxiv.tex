@@ -57,7 +57,7 @@
 \begin{abstract} 
 This work introduces a robust single-channel post-processing filter for non-ideal recordings, validated on real audio.
 The developed method focuses on the calculation and modification of a discrete \textit{impulse response} in order to filter the characteristics from a known digital single channel recording setup and room characteristics such as early reflections and reverberations. The aim is a dryer and clearer signal reconstruction, which ideally would be the direct-path signal. The time domain \textit{impulse response} is calculated from the cepstral domain and modified by means of frequency bin specific exponential decay in the spectrum. The decay rates are obtained by using the blind estimates of reverberation time ratio between recorded output and test signals for each frequency bin. The modified \textit{impulse response} does filter a recorded audio-signal by deconvolution. The blind estimation is well known and stands out for its robustness to noise and non-idealities.
-By applying the blind estimates for impulse response modification in order to filter characteristics by deconvolution, offer advantages in scenarios, where adjustment for frequency bin specific reverberation and other characteristics is crucial, such as in audio production, acoustic simulation, or virtual reality applications. %where acoustic characteristics don't change significantly during the record. %Simply spoken, the method consists of an equalizer that fades resonant frequencies out the \textit{impulse response} spectrum. 
+Application of the blind estimates for impulse response modification, in order to filter characteristics by deconvolution, offer advantages in scenarios, where adjustment for frequency bin specific reverberation and other characteristics is crucial, such as in audio production, acoustic simulation, or virtual reality applications. %where acoustic characteristics don't change significantly during the record. %Simply spoken, the method consists of an equalizer that fades resonant frequencies out the \textit{impulse response} spectrum. 
 This filter accounts for not optimal recording conditions and can be applied as one of the first steps in post-processing of a single audio channel. Some real-time applications can benefit from this method, but some might need to have real-time or spatial adaption, when the \textit{impulse response} changes during the record and manual recalibration process would not be an option. %The proposed method shows less early and late reflections and less reverberation compared to deconvolution with non modified \textit{impulse response}. 
 Estimation of a direct path signal is key to many applications. %\cite{rosseel2025}% and also improves the \textit{Signal to Noise Ratio} (SNR). % ( To do: compare SNR)  % e.g. because listeners enter or leave the room or the microphone was moved...
 \end{abstract}
@@ -163,7 +163,7 @@ These steps yield a single, normalized \textit{impulse response}, that is suitab
 
 
 \subsection{Spectral \textit{impulse response} modification}
-The time domain \textit{impulse response}, e.g. from equation \eqref{eq:IR}, is transformed by STFT, to decay frequency bins basef on blind $T60$ estimate. 
+The time domain \textit{impulse response}, e.g. from equation \eqref{eq:IR}, is transformed by STFT, to decay frequency bins based on blind $T60$ estimate. 
 
 
 \subsubsection{Blind estimation of $T60$ reverberation times for each bin}
@@ -265,7 +265,7 @@ Zwicker’s time-varying \textit{Loudness} model estimates how intense or loud a
 \\ \\
 \textit{Roughness} measures how harsh or "fluttery" a sound feels, linked to rapid, audible amplitude fluctuations in the range most noticeable to human ears (20–300Hz modulation) \cite{Fastl2006}.
 \\ \\
-The \textit{Definition Ratio}, D50, is the ratio of early to total energy within 50 ms \cite{HoutgastSteeneken1985}. It was used to indicate if early reverberations are present in the impulse response.
+The \textit{Definition Ratio}, D50, is the ratio of early to total energy within 50 ms \cite{HoutgastSteeneken1985}. It was used to indicate how present reverberations and late reflexions are in the impulse response.
 \\ \\
 The Algorithms to measure perceptive sound quality can be used from the \textit{Modular Sound Quality Index Toolbox} \href{https://github.com/Eomys/MoSQITo}{(MoSQITo)} \cite{mosqito} \cite{mosqito2025}, \href{https://github.com/ludlows/python-pesq.git}{PESQ} \cite{pesq2025} and the \href{https://github.com/mpariente/pystoi}{STOI} \cite{stoi2025}, respectively. Further measures have been evaluated by proprietary software, namely the Cubase 5.0.1 build 147 (\href{https://o.steinberg.net/index.php?id=1782&L=1}{Steinberg Media Technologies GmbH}) \cite{cubase501}.
 \\ \\

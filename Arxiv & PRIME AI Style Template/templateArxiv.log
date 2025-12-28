@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  28 DEC 2025 10:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  28 DEC 2025 12:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1002,11 +1002,11 @@ Package rerunfilecheck Info: File `templateArxiv.out' has not changed.
 (rerunfilecheck)             Checksum: 447F7E5F0D993B3029D585A980C5E2C8;861.
  ) 
 Here is how much of TeX's memory you used:
- 9921 strings out of 479917
- 152190 string characters out of 5886664
+ 9927 strings out of 479917
+ 152247 string characters out of 5886664
  647947 words of memory out of 5000000
  26073 multiletter control sequences out of 15000+600000
- 580947 words of font info for 149 fonts, out of 8000000 for 9000
+ 581302 words of font info for 153 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,19n,77p,1027b,449s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texl
@@ -1025,7 +1025,7 @@ sftt1000.pfb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/t
 exlive/2020/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2020/texmf
 -dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2020/texmf-dist/fonts/type1/
 urw/times/utmri8a.pfb>
-Output written on templateArxiv.pdf (8 pages, 302966 bytes).
+Output written on templateArxiv.pdf (8 pages, 302935 bytes).
 PDF statistics:
  294 PDF objects out of 1000 (max. 8388607)
  260 compressed objects within 3 object streams
