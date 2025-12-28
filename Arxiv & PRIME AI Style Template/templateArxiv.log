@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  27 DEC 2025 14:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.14)  28 DEC 2025 10:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -599,14 +599,14 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 {c:/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 167.
+(hyperref)                removing `math shift' on input line 169.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 167.
+(hyperref)                removing `math shift' on input line 169.
 
 ! Extra }, or forgotten $.
-l.193 o = 1- \frac{N_{hop}}{N_{\text{DFT}}}}
+l.195 o = 1- \frac{N_{hop}}{N_{\text{DFT}}}}
                                             ,
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -615,93 +615,104 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 [3]
-! You can't use `macro parameter character #' in horizontal mode.
-<argument> HP ZBook Studio x360 G5 (6TW61EA##
-                                             ABD)
-l.239 ...5}{HP ZBook Studio x360 G5 (6TW61EA#ABD)}
-                                                  ), on a desk, located in a...
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 237--242
+Underfull \hbox (badness 10000) in paragraph at lines 239--244
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 244--251
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.250 \\ \\
+           
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.251 A
+        \textit{Logarithmic Signal-Power Attenuation} (LPA) was calculated t...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 254--273
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 244--251
+Underfull \hbox (badness 10000) in paragraph at lines 254--273
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 253--270
+Underfull \hbox (badness 10000) in paragraph at lines 254--273
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 253--270
+Underfull \hbox (badness 10000) in paragraph at lines 254--273
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 253--270
+Underfull \hbox (badness 10000) in paragraph at lines 254--273
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 253--270
+Underfull \hbox (badness 10000) in paragraph at lines 254--273
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 253--270
+Underfull \hbox (badness 10000) in paragraph at lines 254--273
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 253--270
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 253--270
+Underfull \hbox (badness 10000) in paragraph at lines 254--273
 
  []
 
 [4]
-<diagrams/DecayMatrix.png, id=161, 590.205pt x 388.45125pt>
+<diagrams/DecayMatrix.png, id=159, 590.205pt x 388.45125pt>
 File: diagrams/DecayMatrix.png Graphic file (type png)
 <use diagrams/DecayMatrix.png>
-Package pdftex.def Info: diagrams/DecayMatrix.png  used on input line 345.
+Package pdftex.def Info: diagrams/DecayMatrix.png  used on input line 348.
 (pdftex.def)             Requested size: 328.82706pt x 216.4228pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<diagrams/impulse response.png, id=162, 731.73375pt x 388.45125pt>
+<diagrams/impulse response.png, id=160, 731.73375pt x 388.45125pt>
 File: diagrams/impulse response.png Graphic file (type png)
 <use diagrams/impulse response.png>
-Package pdftex.def Info: diagrams/impulse response.png  used on input line 352.
+Package pdftex.def Info: diagrams/impulse response.png  used on input line 355.
 
 (pdftex.def)             Requested size: 422.77661pt x 224.4365pt.
-<diagrams/impulse response modified.png, id=164, 731.73375pt x 388.45125pt>
+<diagrams/impulse response modified.png, id=162, 731.73375pt x 388.45125pt>
 File: diagrams/impulse response modified.png Graphic file (type png)
 <use diagrams/impulse response modified.png>
 Package pdftex.def Info: diagrams/impulse response modified.png  used on input 
-line 354.
+line 357.
 (pdftex.def)             Requested size: 422.77661pt x 224.4365pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 374--376
+Underfull \hbox (badness 10000) in paragraph at lines 377--379
 
  []
 
@@ -710,7 +721,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [6 <./diagrams/DecayMatrix.png>]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 4
-53.
+56.
  (c:/texlive/2020/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
@@ -721,13 +732,13 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 [7 <./diagrams/Impulse Response.png> <./diagrams/Impulse Response modified.png>
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 506--510
+Underfull \hbox (badness 10000) in paragraph at lines 509--513
 []$\T1/cmtt/m/n/10 https : / / cdn . standards . iteh . ai / samples / 63078 / 
 a42f5c5bd7014d5f99cc3a7d4fa0c0c9 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 512--514
+Underfull \hbox (badness 10000) in paragraph at lines 515--517
 []$\T1/cmtt/m/n/10 https : / / cdn . head-[]acoustics . com / fileadmin / data 
 / global / Application-[]Notes / SVP /
  []
@@ -740,7 +751,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.516 H.~Fastl, ``Psychoacoustic 
+l.519 H.~Fastl, ``Psychoacoustic 
                                    Basis of Sound Quality Evaluation...
 
 You may provide a definition with
@@ -754,7 +765,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.516 H.~Fastl, ``Psychoacoustic Basis 
+l.519 H.~Fastl, ``Psychoacoustic Basis 
                                            of Sound Quality Evaluation...
 
 You may provide a definition with
@@ -768,7 +779,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.516 H.~Fastl, ``Psychoacoustic Basis of 
+l.519 H.~Fastl, ``Psychoacoustic Basis of 
                                                 Sound Quality Evaluation...
 
 You may provide a definition with
@@ -782,7 +793,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.516 ... ``Psychoacoustic Basis of Sound 
+l.519 ... ``Psychoacoustic Basis of Sound 
                                                   Quality Evaluation,'' Te...
 
 You may provide a definition with
@@ -796,7 +807,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.516 ...coustic Basis of Sound Quality 
+l.519 ...coustic Basis of Sound Quality 
                                                   Evaluation,'' Technical ...
 
 You may provide a definition with
@@ -810,7 +821,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.516 ...nd Quality Evaluation,'' Technical 
+l.519 ...nd Quality Evaluation,'' Technical 
                                                   University of Munich,�...
 
 You may provide a definition with
@@ -824,7 +835,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.516 ...��Evaluation,'' Technical University 
+l.519 ...��Evaluation,'' Technical University 
                                                   of Munich, 2006. \\
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -837,7 +848,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.516 ...luation,'' Technical University of 
+l.519 ...luation,'' Technical University of 
                                                   Munich, 2006. \\
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -850,7 +861,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.516 ... Technical University of Munich, 
+l.519 ... Technical University of Munich, 
                                                   2006. \\
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -863,7 +874,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.518 (Free 
+l.521 (Free 
               TUM repository source covering roughness and fluct...
 
 You may provide a definition with
@@ -877,7 +888,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.518 (Free TUM 
+l.521 (Free TUM 
                     repository source covering roughness and fluct...
 
 You may provide a definition with
@@ -891,7 +902,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.518 (Free TUM repository 
+l.521 (Free TUM repository 
                                  source covering roughness and fluct...
 
 You may provide a definition with
@@ -905,7 +916,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.518 (Free TUM repository source 
+l.521 (Free TUM repository source 
                                           covering roughness and fluct...
 
 You may provide a definition with
@@ -919,7 +930,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.518 ...��TUM repository source covering 
+l.521 ...��TUM repository source covering 
                                                   roughness and fluctuat...
 
 You may provide a definition with
@@ -933,7 +944,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.518 ...sitory source covering roughness 
+l.521 ...sitory source covering roughness 
                                                   and fluctuation streng...
 
 You may provide a definition with
@@ -947,7 +958,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.518 ... source covering roughness and 
+l.521 ... source covering roughness and 
                                                   fluctuation strength m...
 
 You may provide a definition with
@@ -961,7 +972,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.518 ...vering roughness and fluctuation 
+l.521 ...vering roughness and fluctuation 
                                                   strength models.)
 You may provide a definition with
 \DeclareUnicodeCharacter 
@@ -974,13 +985,13 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.518 ...ughness and fluctuation strength 
+l.521 ...ughness and fluctuation strength 
                                                   models.)
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
 
-Underfull \hbox (badness 2142) in paragraph at lines 516--519
+Underfull \hbox (badness 2142) in paragraph at lines 519--522
 []$\T1/cmtt/m/n/10 https : / / mediatum . ub . tum . de / doc / 1138486 / 72984
 1 . pdf$[]\T1/ptm/m/n/10 (+20) . (Free-TUM-repos-i-to-rysource-cov-er-ingrough-
 nes-
@@ -991,11 +1002,11 @@ Package rerunfilecheck Info: File `templateArxiv.out' has not changed.
 (rerunfilecheck)             Checksum: 447F7E5F0D993B3029D585A980C5E2C8;861.
  ) 
 Here is how much of TeX's memory you used:
- 10002 strings out of 479917
- 153379 string characters out of 5886664
- 646947 words of memory out of 5000000
- 26125 multiletter control sequences out of 15000+600000
- 594011 words of font info for 187 fonts, out of 8000000 for 9000
+ 9921 strings out of 479917
+ 152190 string characters out of 5886664
+ 647947 words of memory out of 5000000
+ 26073 multiletter control sequences out of 15000+600000
+ 580947 words of font info for 149 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,19n,77p,1027b,449s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texl
@@ -1009,16 +1020,15 @@ exlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2020
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2020/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2020/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmsy6.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sftt1000.p
-fb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/202
-0/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2020/texmf-dist/font
-s/type1/urw/times/utmr8a.pfb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/
-utmri8a.pfb>
-Output written on templateArxiv.pdf (8 pages, 310486 bytes).
+/amsfonts/cm/cmsy7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/
+sftt1000.pfb><c:/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/t
+exlive/2020/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2020/texmf
+-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2020/texmf-dist/fonts/type1/
+urw/times/utmri8a.pfb>
+Output written on templateArxiv.pdf (8 pages, 302966 bytes).
 PDF statistics:
- 298 PDF objects out of 1000 (max. 8388607)
- 263 compressed objects within 3 object streams
+ 294 PDF objects out of 1000 (max. 8388607)
+ 260 compressed objects within 3 object streams
  72 named destinations out of 1000 (max. 500000)
- 27256 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 20600 words of extra memory for PDF output out of 20736 (max. 10000000)
 

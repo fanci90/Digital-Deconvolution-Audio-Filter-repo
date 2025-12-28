@@ -37,8 +37,8 @@
 \title{Digital Audio Filter by Deconvolution with Frequency Bin Specific Decayed Impulse Response
 %%%% Cite as
 %%%% Update your official citation here when published 
-\thanks{\textit{\underline{Citation}}: 
-\textbf{Authors. Title. Pages.... DOI:000000/11111.}} 
+%\thanks{\textit{\underline{Citation}}: 
+%\textbf{Authors. Title. Pages.... DOI:000000/11111.}} 
 }
 
 \author{Stefan Ciba \\ \href{https://www.researchgate.net/profile/Stefan-Ciba}{https://www.researchgate.net/profile/Stefan-Ciba}
@@ -52,12 +52,14 @@
 
 \begin{document}
 \maketitle
-%  “Essentially, all models are wrong, but some are useful.”- George E.P. Box (1919-present
+%  “Essentially, all models are wrong, but some are useful.”- George E.P. Box (1919-present)
 
-\begin{abstract}
-The developed method focuses on the calculation and modification of a discrete \textit{impulse response} in order to filter the characteristics from a known digital single channel recording setup and room characteristics such as early reflections and reverberations. The aim is a dryer and clearer signal reconstruction, which ideally would be the direct-path signal. The time domain \textit{impulse response} is calculated from the cepstral domain and modified by means of frequency bin specific exponential decay in the spectrum. The decay rates are obtained by using the blind estimates of reverberation time ratio between recorded output and test signals for each frequency bin. The modified \textit{impulse response} does filter a recorded audio-signal by deconvolution. The blind estimation stands out for its robustness to noise and non-idealities.
-This simple, yet powerful method, could potentially offer advantages in scenarios, where adjustment for early reflections and frequency bin specific reverberation characteristics is crucial, such as in audio production, acoustic simulation, or virtual reality applications, where acoustic characteristics don't change significantly during the record. %Simply spoken, the method consists of an equalizer that fades resonant frequencies out the \textit{impulse response} spectrum. 
-This filter accounts for not optimal recording conditions and can be applied as one of the first steps in post-processing of a single audio channel. Some real-time applications can benefit from this method, but some might need to have real-time or spatial adaption, when the \textit{impulse response} changes during the record and manual recalibration process would not be an option. The proposed method shows less early reflections and less reverberation compared to deconvolution with non modified \textit{impulse response}. Estimation of a direct path signal is key to many applications. %\cite{rosseel2025}% and also improves the \textit{Signal to Noise Ratio} (SNR). % ( To do: compare SNR)  % e.g. because listeners enter or leave the room or the microphone was moved...
+\begin{abstract} 
+This work introduces a robust single-channel post-processing filter for non-ideal recordings, validated on real audio.
+The developed method focuses on the calculation and modification of a discrete \textit{impulse response} in order to filter the characteristics from a known digital single channel recording setup and room characteristics such as early reflections and reverberations. The aim is a dryer and clearer signal reconstruction, which ideally would be the direct-path signal. The time domain \textit{impulse response} is calculated from the cepstral domain and modified by means of frequency bin specific exponential decay in the spectrum. The decay rates are obtained by using the blind estimates of reverberation time ratio between recorded output and test signals for each frequency bin. The modified \textit{impulse response} does filter a recorded audio-signal by deconvolution. The blind estimation is well known and stands out for its robustness to noise and non-idealities.
+By applying the blind estimates for impulse response modification in order to filter characteristics by deconvolution, offer advantages in scenarios, where adjustment for frequency bin specific reverberation and other characteristics is crucial, such as in audio production, acoustic simulation, or virtual reality applications. %where acoustic characteristics don't change significantly during the record. %Simply spoken, the method consists of an equalizer that fades resonant frequencies out the \textit{impulse response} spectrum. 
+This filter accounts for not optimal recording conditions and can be applied as one of the first steps in post-processing of a single audio channel. Some real-time applications can benefit from this method, but some might need to have real-time or spatial adaption, when the \textit{impulse response} changes during the record and manual recalibration process would not be an option. %The proposed method shows less early and late reflections and less reverberation compared to deconvolution with non modified \textit{impulse response}. 
+Estimation of a direct path signal is key to many applications. %\cite{rosseel2025}% and also improves the \textit{Signal to Noise Ratio} (SNR). % ( To do: compare SNR)  % e.g. because listeners enter or leave the room or the microphone was moved...
 \end{abstract}
 
 
@@ -69,7 +71,7 @@ This filter accounts for not optimal recording conditions and can be applied as 
 \section{Introduction}
 The field of digital audio signal processing has undergone significant development since the advent of digital techniques in the 1960s and 1970s, which enabled to manipulate sound with unprecedented precision and flexibility~\cite{oppenheim1989frequency,smith2011spectral}. %Early work in digital filtering provided the foundation for subsequent innovations in audio effects, artificial reverberation, and room acoustics simulation~\cite{moorer1979reverberation}.
 
-Modeling and modification of the acoustic characteristics of room and recording setups, based on convolution with \textit{impulse response}, is a key technique in digital audio processing. The Linear Time Invariant (LTI) system approach consisting of convolution of a audio signal with a measured or synthesized \textit{impulse response}, makes it possible to e.g. simulate reverberation, filter out early reflections, and compensate for coloration introduced by the recording chain~\cite{smith2011spectral,moorer1979reverberation}.
+Modeling and modification of the acoustic characteristics of room and recording setups, based on convolution with \textit{impulse response}, is a key technique in digital audio processing. The \textit{Linear Time Invariant} (LTI) system approach consisting of convolution of a audio signal with a measured or synthesized \textit{impulse response}, makes it possible to e.g. simulate reverberation, filter out early reflections, and compensate for coloration introduced by the recording chain~\cite{smith2011spectral,moorer1979reverberation}.
 
 Traditional methods for reverberation and dereverberation often rely on parametric models or sparse representations of the \textit{impulse response}~\cite{moorer1979reverberation,HabetsThesis2007}. However, convolution with a sparse, spectrally modified \textit{impulse response}, that explicitly incorporates the $T60$ decay through exponential functions offers a direct and flexible approach for single-channel audio filtering. This method enables targeted suppression of early reflections, reverberation, and undesired recording characteristics, based on established signal processing principles. This approach differs from closely related state of the art work such as "Speech Dereverberation in the Time-Frequency Domain" \cite{oyzerman2012}, "Approximation of Real Impulse Response Using IIR Structures" \cite{primavera2011} and "Representation and Identification of Systems in the Discrete-Time Wavelet Transform Domain" \cite{asm2007}.% and was not yet found in literature.
 
@@ -93,7 +95,7 @@ x_{n} = \bigoplus_{p=0}^{P-1} \acute{x}_{n - pN}.
 
 
 \subsection{impulse response estimation}
-Given discrete time series $x_n$ and its recorded signal $y_n$ with $N$ samples, their relation can be described by a discrete LTI System with $y_n=x_n*h_n$ \cite{Fliege1991}. Therein the \textit{impulse response} $h_n$ describes the signal chain, that can include unpleasant room characteristics that cause e.g. early reflections, reverberation, resonance and add non-linearity of the sensor and the loudspeaker.
+Given discrete time series $x_n$ and its recorded signal $y_n$ with $N$ samples, their relation can be described by a discrete LTI system with $y_n=x_n*h_n$ \cite{Fliege1991}. Therein the \textit{impulse response} $h_n$ describes the signal chain, that can include unpleasant room characteristics that cause e.g. early reflections, reverberation, resonance and add non-linearity of the sensor and the loudspeaker.
 \\
 The \textit{impulse response} can be decorrelated by deconvolution from the related signals for system identification:  
 \begin{equation}
@@ -226,7 +228,7 @@ h'_n = \sum_{\substack{\eta \\ 0 \leq n - \eta N_{hop} < N_{\text{DFT}}}}{\omega
 
 
 \subsection{Filterbank application}
-Finally, additional overall exponential decay $dk$ can be applied to the modified \textit{impulse response} $h''_n= h'_n \cdot e^{-dk \cdot n}$ to avoid echoes. The \textit{impulse response} is applied as spectral filter bank $\underline{H}''_{\mu,\eta}$ for any recorded signal spectrum $\underline{Z}_{\mu,\eta}$ by deconvolution:
+Additional overall exponential decay $dk$ can be applied to the modified \textit{impulse response} $h''_n= h'_n \cdot e^{-dk \cdot n}$ to avoid echoes. Finally, the modified \textit{impulse response} is applied as spectral filter bank $\underline{H}''_{\mu,\eta}$ for any recorded signal spectrum $\underline{Z}_{\mu,\eta}$ by deconvolution:
 \begin{equation}
 \underline{Z}''_{\mu,\eta}=\frac{\underline{Z}_{\mu,\eta}}{\underline{H}''_{\mu,\eta}}. \label{eq:system}
 \end{equation}
@@ -236,20 +238,19 @@ Hann-windowing applies for STFT and iSTFT. The COLA method applies for iSTFT, re
 
 A sine-sweep and a speech audio was recorded by integrated microphone from a \textit{Convertible Workstation}
 %\href{https://doi-product-assets.s3.amazonaws.com/pub/Manufacturer-Brochure/1061215910.pdf}
-(\href{https://web.archive.org/web/20201031164451/https://h20195.www2.hp.com/v2/GetDocument.aspx?docname=c05939925}{HP ZBook Studio x360 G5 (6TW61EA#ABD)}), on a desk, located in a pitched roof area corner of a living room, that has about 1 Ar. The sine-sweep sound was played back from the internal loudspeakers of the \textit{Convertible Workstation}. The integrated noise reduction was turned off. The goal was to improve the speech sound quality with the aim of having dry and clear sound when speaker sits in front of the \textit{Convertible Workstation}. A Futher assumption was, that degraded speech intelligibility could get better.
+(\href{https://web.archive.org/web/20201031164451/https://h20195.www2.hp.com/v2/GetDocument.aspx?docname=c05939925}{HP ZBook Studio x360 G5 (6TW61EA\#ABD)}), on a desk, located in a pitched roof area corner of a living room, that has about 1 Ar. The sine-sweep sound was played back from the internal loudspeakers of the \textit{Convertible Workstation}. The integrated noise reduction was turned off. The goal was to improve the speech sound quality with the aim of having dry and clear sound when speaker sits in front of the \textit{Convertible Workstation}. A Futher assumption was, that degraded speech intelligibility could get better.
 \\ \\
 In the same manner the sine-sweep and a drum-set groove have been recorded from the same location. The sine-sweep was played back on a \href{https://ia601909.us.archive.org/31/items/manualsbase-id-372739/372739.pdf}{Alesis Active M1 MKII (8N)} near-field monitor beside the drum-set. The goal was to have dry and clear studio-like raw recording quality despite poor recording-conditions.
 
 \section{Objectives}
 Several objective measures prove the applicability of the Method.
 Some Measures are used to compare the system impulse response with the filtered impulse response, and some are used to compare a filtered with a unfiltered signal.
-\\ \\
-The measures to compare the unfiltered and filtered signals can be found in the Results section table \ref{tab:Objective}. 
+
 %The $T60$ of the \textit{impulse response}-filtered signal and the $T60$ of the filtered signal by modified \textit{impulse response} can be compared.
 \\ \\
-A \textit{Logarithmic Signal-Power Distance} (LSD) was calculated to indicate the efficiency of the filter by taking the original signal $z_n$ and the filtered audio signal $z''_n$ into account:
+A \textit{Logarithmic Signal-Power Attenuation} (LPA) was calculated to indicate the efficiency of the filter by taking the original signal $z_n$ and the filtered audio signal $z''_n$ into account:
 	\begin{equation}
-	LSD=10log_{10} \left(\frac{\overline{(z''_n-\overline{z''_n})^2}}{\overline{(z_n-\overline{z_n})^2}}\right).
+	LPA=10log_{10} \left(\frac{\overline{(z''_n-\overline{z''_n})^2}}{\overline{(z_n-\overline{z_n})^2}}\right).
 	\end{equation}
 \\ \\
 The \textit{Short-Time Objective Intelligibility Measure} (STOI) measures the speech intelligibility \cite{stoi2010}. It is only applicable to speech audio.
@@ -267,6 +268,8 @@ Zwicker’s time-varying \textit{Loudness} model estimates how intense or loud a
 The \textit{Definition Ratio}, D50, is the ratio of early to total energy within 50 ms \cite{HoutgastSteeneken1985}. It was used to indicate if early reverberations are present in the impulse response.
 \\ \\
 The Algorithms to measure perceptive sound quality can be used from the \textit{Modular Sound Quality Index Toolbox} \href{https://github.com/Eomys/MoSQITo}{(MoSQITo)} \cite{mosqito} \cite{mosqito2025}, \href{https://github.com/ludlows/python-pesq.git}{PESQ} \cite{pesq2025} and the \href{https://github.com/mpariente/pystoi}{STOI} \cite{stoi2025}, respectively. Further measures have been evaluated by proprietary software, namely the Cubase 5.0.1 build 147 (\href{https://o.steinberg.net/index.php?id=1782&L=1}{Steinberg Media Technologies GmbH}) \cite{cubase501}.
+\\ \\
+The measures to compare the unfiltered and filtered signals can be found in the Results section table \ref{tab:Objective}. 
 
 %\subsection{Subjective}
 %Furthermore subjective hearing tests where performed. 
@@ -278,9 +281,9 @@ The Algorithms to measure perceptive sound quality can be used from the \textit{
 
 The filter has several well defined effects, which appear in the objective results table \ref{tab:Objective}.
 Because reverberations are filtered from the signal, the signal amplitude and power decreases. 
-The LSD measure shows that effect in one figure and gives it a name.
+The LPA measure shows that effect in one figure and gives it a name.
 The most significant estimated pitch of the audio increases, which is due to filtered room characteristic that allowed deeper frequencies to decay slowly.
-The filter decreases the T60 as expected, at least for those frequencies that showed reverberation.
+The filter decreases the $T60$ as expected, at least for those frequencies that showed reverberation.
 Loudness, which can be unpleasant, decreases, but sharpness increases, as result of the filter.
 Roughness is almost untouched by the filter, a slight decrease can be observed. 
 The D50 shows, that reflections after 50ms disappeared.
@@ -310,9 +313,9 @@ The D50 shows, that reflections after 50ms disappeared.
 \hline
 \textit{Average}$^*$  &   -14.38dB    &    -28.84dB    &    -41.34dB   &    -41.27dB   \\
 \hline
-LSD &       \multicolumn{2}{c|}{-16.29dB}       &     \multicolumn{2}{c|}{ $7.63\cdot 10^{-5}$dB}      \\
+LPA &       \multicolumn{2}{c|}{-16.29dB}       &     \multicolumn{2}{c|}{ $7.63\cdot 10^{-5}$dB}      \\
 \hline
-T60  &    5.475ms   &   0.186ms    &    0.1816ms   &    0ms  \\
+$T60$  &    5.475ms   &   0.186ms    &    0.1816ms   &    0ms  \\
 \hline
 STOI &    N/A   &    N/A   &   0.9978    &    0.9978   \\
 \hline
@@ -335,10 +338,10 @@ D50 							& 		$42.9\%$				&			$100.0\%$		&			$71.7\%$				&				$100.0\%$			\\
 
 The original and the modified impulse response of the speech audio recording setup are shown in numerical plot \ref{fig:results}.
 A slow decay, early reflections and some unwanted behavior, that account for late reflections, can be seen in the original unmodified impulse response. 
-The filter decreases the unwanted behaviors selectively for the frequency bins by attenuation factor based on the T60 decay matrix in numerical plot \ref{fig:Decaymatrix}. 
+The filter decreases the unwanted behaviors selectively for the frequency bins based on the $T60$ decay matrix in numerical plot \ref{fig:Decaymatrix}. 
 Because the impulse response from the speech record was different from the drum record, filter results differ.
 The STOI measure stays untouched by the filter: No speech enhancement and no speech degradation due to filtering: No noise was added or subtracted to the speech sample due to filtering.
-Unexpectedly, but for obvious reason, the T60 decreased to zero after filtering in the speech audio.
+Unexpectedly, but for obvious reason, the $T60$ decreased to zero after filtering in the speech audio.
 
 \begin{figure}[h]
 \centering
@@ -371,7 +374,7 @@ The Python-code of the studied method and audio samples are to be found at GitHu
 
 
 \section*{Acknowledgments}
-The author gratefully acknowledges Simon Ciba, M.A., known from e.g. "WhisPER – A New Tool for Performing Listening Tests", for his careful review of this work and his valuable comments. \\ \\
+The author gratefully acknowledges Simon Ciba, M.A., known for e.g. "WhisPER – A New Tool for Performing Listening Tests", from the Audio Communication Group, TU Berlin, for his careful review of this work and his valuable comments. \\ \\
 Furthermore the author acknowledges the use of the AI language model \href{https://www.perplexity.ai/search/dear-perple-how-are-you-today-n3Wo9yiyTA.1AhBDL5yGyA}{Perplexity}, developed by Perplexity AI, for assistance in literature and code review in this work.
 
 %\section{This is how Perplexity would write the whole theory part for the Paper at once:}
