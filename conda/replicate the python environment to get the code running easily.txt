@@ -1,1 +1,8 @@
-conda env create -f environment.yml
+#conda env export --from-history > environment.yml     # Human-readable, minimal
+#conda list --explicit > spec-file.txt                 # Complete, exact match
+
+conda install --file spec-file.txt --name new_env # Create new environment from spec-file.txt
+
+# Example installation:
+# 1. Quick setup: conda env create -f environment.yml
+# 2. Exact replica: conda install --file spec-file.txt -n audio-filter-env
