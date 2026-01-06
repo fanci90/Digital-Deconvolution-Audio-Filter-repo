@@ -34,7 +34,7 @@
 
   
 %% Title
-\title{Dereverberation Filter by Deconvolution with Frequency Bin Specific Decayed Impulse Response
+\title{Dereverberation Filter by Deconvolution with Frequency Bin Specific Faded Impulse Response
 %%%% Cite as
 %%%% Update your official citation here when published 
 %\thanks{\textit{\underline{Citation}}: 
@@ -56,7 +56,7 @@
 
 \begin{abstract} 
 This work introduces a robust single-channel inverse filter for dereverberation of non-ideal recordings, validated on real audio.
-The developed method focuses on the calculation and modification of a discrete \textit{impulse response} in order to filter the characteristics from a known digital single channel recording setup and room characteristics such as early reflections and reverberations. The aim is a dryer and clearer signal reconstruction, which ideally would be the direct-path signal. The time domain \textit{impulse response} is calculated from the cepstral domain and modified by means of frequency bin specific exponential decay in the spectrum. The decay rates are obtained by using the blind estimates of reverberation time ratio between recorded output and test signals for each frequency bin. The modified \textit{impulse response} does filter a recorded audio-signal by deconvolution. The blind estimation is well known and stands out for its robustness to noise and non-idealities.
+The developed method focuses on the calculation and modification of a discrete \textit{impulse response} in order to filter the characteristics from a known digital single channel recording setup and room characteristics such as early reflections and reverberations. The aim is a dryer and clearer signal reconstruction, which ideally would be the direct-path signal. The time domain \textit{impulse response} is calculated from the cepstral domain and faded by means of frequency bin specific exponential decay in the spectrum. The decay rates are obtained by using the blind estimates of reverberation time ratio between recorded output and test signals for each frequency bin. The modified \textit{impulse response} does filter a recorded audio-signal by deconvolution. The blind estimation is well known and stands out for its robustness to noise and non-idealities.
 Application of the blind estimates for impulse response modification, in order to filter characteristics by deconvolution, offer advantages in scenarios, where adjustment for frequency bin specific reverberation and other characteristics is crucial, such as in audio production, acoustic simulation, or virtual reality applications. %where acoustic characteristics don't change significantly during the record. %Simply spoken, the method consists of an equalizer that fades resonant frequencies out the \textit{impulse response} spectrum. 
 This filter accounts for not optimal recording conditions and can be applied as one of the first steps in processing of a single audio channel. Some real-time applications can benefit from this method, but some might need to have real-time or spatial adaption, when the \textit{impulse response} changes during the record and manual recalibration process would not be an option. %The proposed method shows less early and late reflections and less reverberation compared to deconvolution with non modified \textit{impulse response}. 
 Estimation of a direct path signal is key to many applications. %\cite{rosseel2025}% and also improves the \textit{Signal to Noise Ratio} (SNR). % ( To do: compare SNR)  % e.g. because listeners enter or leave the room or the microphone was moved...
@@ -73,7 +73,7 @@ The field of digital audio signal processing has undergone significant developme
 
 Modeling and modification of the acoustic characteristics of room and recording setups, based on convolution with \textit{impulse response}, is a key technique in digital audio processing. The \textit{Linear Time Invariant} (LTI) system approach consisting of convolution of a audio signal with a measured or synthesized \textit{impulse response}, makes it possible to e.g. simulate reverberation, filter out early reflections, and compensate for coloration introduced by the recording chain~\cite{smith2011spectral,moorer1979reverberation}.
 
-Traditional methods for reverberation and dereverberation often rely on parametric models or sparse representations of the \textit{impulse response}~\cite{moorer1979reverberation,HabetsThesis2007}. However, convolution with a sparse, spectrally modified \textit{impulse response}, that explicitly incorporates the $T60$ decay through exponential functions offers a direct and flexible approach for single-channel audio filtering. This method enables targeted suppression of early reflections, reverberation, and undesired recording characteristics, based on established signal processing principles. This approach differs from closely related state of the art work such as "Speech Dereverberation in the Time-Frequency Domain" \cite{oyzerman2012}, "Approximation of Real Impulse Response Using IIR Structures" \cite{primavera2011} and "Representation and Identification of Systems in the Discrete-Time Wavelet Transform Domain" \cite{asm2007}.% and was not yet found in literature.
+Traditional methods for reverberation and dereverberation often rely on parametric models or sparse representations of the \textit{impulse response}~\cite{moorer1979reverberation,HabetsThesis2007}. However, convolution with a sparse, spectrally modified \textit{impulse response}, that explicitly incorporates the $T60$ through exponential decay function offers a direct and flexible approach for single-channel dereverberation. This method enables targeted suppression of early reflections, reverberation, and undesired recording characteristics, based on established signal processing principles. This approach differs from closely related state of the art work such as "Speech Dereverberation in the Time-Frequency Domain" \cite{oyzerman2012}, "Approximation of Real Impulse Response Using IIR Structures" \cite{primavera2011} and "Representation and Identification of Systems in the Discrete-Time Wavelet Transform Domain" \cite{asm2007}.% and was not yet found in literature.
 
 \newpage
 \section{Signal processing}
@@ -163,14 +163,14 @@ These steps yield a single, normalized \textit{impulse response}, that is suitab
 
 
 \subsection{Spectral \textit{impulse response} modification}
-The time domain \textit{impulse response}, e.g. from equation \eqref{eq:IR}, is transformed by STFT, to decay frequency bins based on blind $T60$ estimate. 
+The time domain \textit{impulse response}, e.g. from equation \eqref{eq:IR}, is transformed by STFT, to fade frequency bins based on blind $T60$ estimate. 
 
 
 \subsubsection{Blind estimation of $T60$ reverberation times for each bin}
 The ISO 3382 standard \cite{iso3382} formally defines $T60$ as the time required for spatial sound energy to decay by 60 dB. 
-This work uniquely uses blind estimate of $T60$, despite the \textit{impulse response} is known, to shape the decay of each frequency bin in the \textit{impulse response}, targeting specific acoustic and system artifacts for convolution filter, which is an approach not yet found in literature. Furthermore the $T60$ reverberation time is a quantity that is traditionally used for measurement, characterizing and shaping room acoustics usually as a global or band-averaged parameter ~\cite{kuttruff2016}.
+This work uniquely uses blind estimate of $T60$, despite the \textit{impulse response} is known, to shape the \textit{impulse response} for each frequency bin, targeting specific acoustic and system artifacts for deconvolution filter, which is an approach not yet found in literature. Furthermore the $T60$ reverberation time is a quantity that is traditionally used for measurement, characterizing and shaping room acoustics usually as a global or band-averaged parameter ~\cite{kuttruff2016}.
 Ratnam et al. propose an \textit{Maximum Likelihood} (ML) algorithm for a blind single-channel $T60$ estimate\cite{ratnam2003}.
-To do the frequency bin specific modifications on the \textit{impulse response}, the necessary array of decay parameters is obtained by the following procedure.
+To do the frequency bin specific modifications on the \textit{impulse response}, the necessary array of decay is obtained by the following procedure.
 \\
 The Power Spectral Density (PSD) for a discrete signal $x_n$ is its STFT magnitude squared:
 
@@ -282,7 +282,7 @@ The measures to compare the unfiltered and filtered signals can be found in the 
 The filter has several well defined effects, which appear in the objective results table \ref{tab:Objective}.
 Because reverberations are filtered from the signal, the signal amplitude and power decreases. 
 The LPA measure shows that effect in one figure and gives it a name.
-The most significant estimated pitch of the audio increases, which is due to filtered room characteristic that allowed deeper frequencies to decay slowly.
+The most significant estimated pitch of the audio increases, which is due to filtered room characteristic that allowed deeper frequencies to fade slowly.
 The filter decreases the $T60$ as expected, at least for those frequencies that showed reverberation.
 Loudness, which can be unpleasant, decreases, but sharpness increases, as result of the filter.
 Roughness is almost untouched by the filter, a slight decrease can be observed. 
@@ -337,9 +337,9 @@ D50 							& 		$42.9\%$				&			$100.0\%$		&			$71.7\%$				&				$100.0\%$			\\
 \end{table}
 
 The original and the modified impulse response of the speech audio recording setup are shown in numerical plot \ref{fig:results}.
-A slow decay, early reflections and some unwanted behavior, that account for late reflections, can be seen in the original unmodified impulse response. 
+Slow fading, early reflections and some unwanted behavior, that account for late reflections, can be seen in the original unmodified impulse response. 
 The filter decreases the unwanted behaviors selectively for the frequency bins based on the $T60$ decay matrix in numerical plot \ref{fig:Decaymatrix}. 
-Because the impulse response from the speech record was different from the drum record, filter results differ.
+Because the impulse response from the speech record was different from the drum record, filter results differ a lot.
 The STOI measure stays untouched by the filter: No speech enhancement and no speech degradation due to filtering: No noise was added or subtracted to the speech sample due to filtering.
 Unexpectedly, but for obvious reason, the $T60$ decreased to zero after filtering in the speech audio.
 
