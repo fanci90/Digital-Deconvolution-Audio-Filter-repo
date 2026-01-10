@@ -112,16 +112,8 @@ The complex windowed short-time spectrum is:
 \label{eq:STFT}
 \underline{Y}_{\mu, \eta}=\sum_{\nu=0}^{N_{\text{DFT}}-1}y_{\eta N_{hop}-\nu} \cdot \omega^{\text{(rect)}}_\nu e^{-j\Omega \nu}.
 \end{equation}
-%A \textit{Fast Fourier Transform} (FFT) algorithm can be used to perform the spectral transformation which requires N_{dft} to be a power of two.
-%The conjugate complex spectral components get neglected by using $M=\frac{N_{\text{DFT}}}{2}+1$ bins, because of redundancy.
-%\\
-%The phase $\varphi_{\mu, \eta}$ of the complex spectrum $\underline{Y_{\mu, \eta}}=Y_{\mu, \eta}\cdot e^{j\varphi_{\mu, \eta}}$, wherein $Y_{\mu, \eta}$ is the magnitude spectrum, gets saved for back transformation later. \\
-%However this has to be taken into account by mirror the spectrum again for correct back transformation. 
-%For numerical efficiency a FFT algorithm is used to perform the spectral transformation which requires N_{dft} to be a power of two.
 
-
-
-The original signal short time spectrum is $\underline{X}_{\mu, \eta}$. %(reference the original sine-wave or chirp Signal which was used here, to respect the periodicity).
+The original signal short time spectrum is $\underline{X}_{\mu, \eta}$.
 The recorded short time spectrum is $\underline{Y}_{\mu, \eta}$. 
 They are regularized by $|\underline{X}_{\mu, \eta}|_{\varepsilon} = \max(|\underline{X}_{\mu, \eta}|, \varepsilon)$ for numerical stability.
 
@@ -192,7 +184,7 @@ The $T60$ time for each frequency bin is defined as the time it takes for the cu
 
 The overlap factor is:
 \begin{equation}
-o = 1- \frac{N_{hop}}{N_{\text{DFT}}}},
+o = 1- \frac{N_{hop}}{N_{\text{DFT}}},
 \end{equation}
 
 the $T60$ estimate in seconds for every frequency bin is:
@@ -205,7 +197,6 @@ T60_{\mu} = \frac{o \cdot \eta^{\text{(T60)}}_{\mu} }{f_s}. \label{eq:T60mu}
 \subsubsection{Application of the decay function}
 The ratio $\rho$ between the $T60$'s of the original test signal $x_n$ and its recorded signal $y_n$, weights the exponential decay for every frequency bin: $\rho^{\text{(T60's)}}_{\mu} =\frac{T60_{\mu}(y_n)}{T60_{ \mu}(x_n)}$.
 
-%By the ratio $\rho$ of $T60$ parameters from $x_n$ and $y_n$ \eqref{eq:T60mu}, exponential decay is applied on the \textit{impulse response} spectrum for every frequency bin $\rho T60_{\mu} =k \cdot \ \frac{T60_{\mu}(y_n)}{T60_{ \mu}(x_n)}$, with constant $k=1$ chosen to weight decay. 
 With the frame wise time duration $ \tau = \eta \cdot \frac{N_{hop}}{f_s} $, the exponential decay function is:
 \begin{equation}
 D_{\mu, \eta} = e^{\left(-\frac{\tau}{\rho^{\text{(T60's)}}_{\mu}}\right)}.
@@ -217,10 +208,6 @@ h'_{ \nu , \eta} = \frac{1}{N_{\text{DFT}}} \sum_{\mu=0}^{N_{\text{DFT}}-1}  \un
 \end{equation}
  
 The synthesis window (Hann) is applied by $\omega^{\text{(hann)}}_\nu$ \cite{smith2011spectral} and furthermore the overlap has to be handled, done by \textit{Constant Overlap Add Method} (COLA):
-% wherin the indicator function $\mathbb{I}_{[0,N_{\text{DFT}}-1]}(k)$ selects valid indexes (1 if $k \in [0, N_{\text{DFT}}-1]$, 0 otherwise): 
-%\begin{equation}
-%h'_n = \sum_{\eta=0}^{N_{\mathrm{frames}}-1} \omega_{n - \eta N_{hop}} \cdot x_{n - \eta N_{hop},\,\eta} \cdot \mathbb{I}_{[0,\,L-1]}(n - \eta N_{hop}).
-%\end{equation}
 
 \begin{equation}
 h'_n = \sum_{\substack{\eta \\ 0 \leq n - \eta N_{hop} < N_{\text{DFT}}}}{\omega^{\text{(hann)}}_{n - \eta N_{hop}} \cdot h'_{n - \eta N_{hop}, \eta} }.
@@ -239,7 +226,7 @@ Hann-windowing applies for STFT and iSTFT. The COLA method applies for iSTFT, re
 A sine-sweep and a speech audio was recorded by integrated microphone from a \textit{Convertible Workstation}
 %\href{https://doi-product-assets.s3.amazonaws.com/pub/Manufacturer-Brochure/1061215910.pdf}
 (\href{https://web.archive.org/web/20201031164451/https://h20195.www2.hp.com/v2/GetDocument.aspx?docname=c05939925}{HP ZBook Studio x360 G5 (6TW61EA\#ABD)}), on a desk, located in a pitched roof area corner of a living room, that has about 1 Ar. The sine-sweep sound was played back from the internal loudspeakers of the \textit{Convertible Workstation}. The integrated noise reduction was turned off. The goal was to improve the speech sound quality with the aim of having dry and clear sound when speaker sits in front of the \textit{Convertible Workstation}. A Futher assumption was, that degraded speech intelligibility could get better.
-\\ \\
+\vspace{1em}
 In the same manner the sine-sweep and a drum-set groove have been recorded from the same location. The sine-sweep was played back on a \href{https://ia601909.us.archive.org/31/items/manualsbase-id-372739/372739.pdf}{Alesis Active M1 MKII (8N)} near-field monitor beside the drum-set. The goal was to have dry and clear studio-like raw recording quality despite poor recording-conditions.
 
 \section{Objectives}
@@ -247,28 +234,26 @@ Several objective measures prove the applicability of the Method.
 Some Measures are used to compare the system impulse response with the filtered impulse response, and some are used to compare a filtered with a unfiltered signal.
 
 %The $T60$ of the \textit{impulse response}-filtered signal and the $T60$ of the filtered signal by modified \textit{impulse response} can be compared.
-\\ \\
+\vspace{1em}
 A \textit{Logarithmic Signal-Power Attenuation} (LPA) was calculated to indicate the efficiency of the filter by taking the original signal $z_n$ and the filtered audio signal $z''_n$ into account:
 	\begin{equation}
 	LPA=10log_{10} \left(\frac{\overline{(z''_n-\overline{z''_n})^2}}{\overline{(z_n-\overline{z_n})^2}}\right).
 	\end{equation}
-\\ \\
 The \textit{Short-Time Objective Intelligibility Measure} (STOI) measures the speech intelligibility \cite{stoi2010}. It is only applicable to speech audio.
-\\ \\
 The \textit{Perceptual Evaluation of Speech Quality} (PESQ) is an algorithm that models human auditory perception, capturing effects like distortion, background noise, clipping, and delay. It measures \textit{Mean Opinion Score, Listening Quality Objective} (MOS-LQO), which is basically the clarity of an audio channel, which is also necessary for non-speech audio channels. Higher MOS-LQO indicate better quality of the audio channel.
 It is widely used in telecom, VoIP, and audio processing to measure speech enhancement or degradation \cite{pesq2001}.
 %The MOS-LQOs of the original signal and the filtered signal can be compared due to their difference $\Delta MOS-LQO$. %Therein the MOS-LQO from a degraded signal was estimated from its filtered signal as reference and vise versa. 
-\\ \\
+\vspace{1em}
 Zwicker’s time-varying \textit{Loudness} model estimates how intense or loud a sound is perceived by human listeners \cite{ISO5322}.
-\\ \\
+\vspace{1em}
 \textit{Sharpness} from DIN 45692 standard (Zwicker’s model) quantifies how piercing or shrill sound feels, based on how present the frequencies above 3kHz are \cite{DIN45692Free}.
-\\ \\
+\vspace{1em}
 \textit{Roughness} measures how harsh or "fluttery" a sound feels, linked to rapid, audible amplitude fluctuations in the range most noticeable to human ears (20–300Hz modulation) \cite{Fastl2006}.
-\\ \\
+\vspace{1em}
 The \textit{Definition Ratio}, D50, is the ratio of early to total energy within 50 ms \cite{HoutgastSteeneken1985}. It was used to indicate how present reverberations and late reflexions are in the impulse response.
-\\ \\
+\vspace{1em}
 The Algorithms to measure perceptive sound quality can be used from the \textit{Modular Sound Quality Index Toolbox} \href{https://github.com/Eomys/MoSQITo}{(MoSQITo)} \cite{mosqito} \cite{mosqito2025}, \href{https://github.com/ludlows/python-pesq.git}{PESQ} \cite{pesq2025} and the \href{https://github.com/mpariente/pystoi}{STOI} \cite{stoi2025}, respectively. Further measures have been evaluated by proprietary software, namely the Cubase 5.0.1 build 147 (\href{https://o.steinberg.net/index.php?id=1782&L=1}{Steinberg Media Technologies GmbH}) \cite{cubase501}.
-\\ \\
+\vspace{1em}
 The measures to compare the unfiltered and filtered signals can be found in the Results section table \ref{tab:Objective}. 
 
 %\subsection{Subjective}
@@ -352,9 +337,9 @@ Unexpectedly, but for obvious reason, the $T60$ decreased to zero after filterin
 
 \begin{figure}[h]
      \centering
-     \subfigure[Original.]{\includegraphics[width=0.9\textwidth]{diagrams/impulse response.png}}
+     \subfigure[Original.]{\includegraphics[width=0.9\textwidth]{diagrams/Impulse_Response.png}}
      \hfill
-     \subfigure[Modified.]{\includegraphics[width=0.9\textwidth]{diagrams/impulse response modified.png}}
+     \subfigure[Modified.]{\includegraphics[width=0.9\textwidth]{diagrams/Impulse_Response_modified.png}}
 \\%[1ex]	
 \caption{\textit{Impulse response}.}
 	\label{fig:results}
@@ -374,76 +359,7 @@ The Python-code of the studied method and audio samples are to be found at GitHu
 
 
 \section*{Acknowledgments}
-The author gratefully acknowledges Simon Ciba, M.A., known for e.g. "WhisPER – A New Tool for Performing Listening Tests", from the Audio Communication Group, TU Berlin, for his careful review of this work and his valuable comments. \\ \\
-Furthermore the author acknowledges the use of the AI language model \href{https://www.perplexity.ai/search/dear-perple-how-are-you-today-n3Wo9yiyTA.1AhBDL5yGyA}{Perplexity}, developed by Perplexity AI, for assistance in literature and code review in this work.
-
-%\section{This is how Perplexity would write the whole theory part for the Paper at once:}
-%Here is a scientific "Theory" section in LaTeX that systematically covers the core algorithms from your code, including periodic sine sweep generation, impulse response estimation via cepstral deconvolution, T60 estimation, frequency-dependent decay processing, and signal filtering. All equations are referenced to open-access literature where possible.
-
-%```latex
-%\section{Theory}
-
-%\subsection{Periodic Sine Sweep Generation}
-
-%To characterize a system, a periodic linear sine sweep is generated as the test signal. The instantaneous frequency of the sweep increases linearly from $f_0$ to $f_1$ over a duration $T$:
-%\begin{equation}
-%    s(t) = \sin\left(2\pi \left[ f_0 t + \frac{f_1 - f_0}{2T} t^2 \right]\right), \quad t \in [0, T]
-%\end{equation}
-%The sweep is repeated $P$ times to form a periodic excitation:
-%\begin{equation}
-%    s_{\text{periodic}}(t) = \sum_{p=0}^{P-1} s(t - pT), \quad t \in [0, PT]
-%\end{equation}
-%(See \cite{farina2000} for sweep-based system identification.)
-
-%\subsection{Reverberation Time ($T_{60}$) Estimation}
-
-%The reverberation time $T_{60}$ is the time for the energy envelope to decay by 60 dB. For each frequency bin $k$, compute the energy decay curve:
-%\begin{align}
-%    P(k, m) &= |S(k, m)|^2 \\
-%    E_{\text{cum}}(k, m) &= \frac{\sum_{m' = m}^{M-1} P(k, m')}{\sum_{m' = 0}^{M-1} P(k, m')}
-%\end{align}
-%$T_{60}$ is estimated as the time where $E_{\text{cum}}(k, m)$ first drops below $0.001$:
-%\begin{equation}
-%    T_{60}(k) = m_{T_{60}}(k) \cdot \frac{H}{f_s}, \quad m_{T_{60}}(k) = \min \{m : E_{\text{cum}}(k, m) < 0.001\}
-%\end{equation}
-%(See \cite{ratnam2003} for blind T60 estimation.)
-
-%\subsection{Frequency-Dependent Decay Adjustment}
-
-%To spectrally modify the impulse response, a frequency-dependent exponential decay is applied in the time-frequency domain:
-%\begin{align}
-%    D_k(m) &= \exp\left(-\frac{t_m}{\Delta_{T_{60}}(k)}\right), \quad t_m = m \cdot \frac{H}{f_s} \\
-%    \Delta_{T_{60}}(k) &= \frac{0.1}{T_{60,\text{test}}(k)} \cdot T_{60,\text{recorded}}(k)
-%\end{align}
-%The adjusted STFT is
-%\begin{equation}
-%    S'_{\mathrm{IR}}(k, m) = S_{\mathrm{IR}}(k, m) \cdot D_k(m)
-%\end{equation}
-%and the adjusted impulse response is obtained by inverse STFT:
-%\begin{equation}
-%    h_{\text{adj}}[n] = \mathrm{ISTFT}\{ S'_{\mathrm{IR}}(k, m) \}
-%\end{equation}
-
-%\subsection{Signal Filtering and Processing}
-
-%The filtered signal is obtained by convolving the test signal $x_{\text{test}}[n]$ with the adjusted impulse response:
-%\begin{equation}
-%    y[n] = h_{\text{adj}}[n] * x_{\text{test}}[n]
-%\end{equation}
-%Optionally, a gain factor $\alpha$ is applied to match RMS levels:
-%\begin{equation}
-%    \alpha = \frac{\mathrm{RMS}(x_{\text{test}})}{\mathrm{RMS}(h_{\text{adj}})}
-%\end{equation}
-%and the result is $y[n] \leftarrow \alpha y[n]$.
-
-%\subsection{Smoothing and Visualization}
-
-%impulse responses may be smoothed using a moving average or low-pass filter:
-%\begin{align}
-%    h_{\text{smooth}}[n] &= \frac{1}{W} \sum_{i=0}^{W-1} h[n-i] \\
-%    h_{\text{smooth}}[n] &= \text{LPF}\{h[n]\}
-%\end{align}
-%Time-frequency representations (STFT, CWT, cepstrum) are visualized as described in \cite{smith2011spectral}.
+The author gratefully acknowledges Simon Ciba, M.A., known for e.g. "WhisPER – A New Tool for Performing Listening Tests", from the Audio Communication Group, TU Berlin, for his careful review of this work and his valuable comments.
 
 \begin{thebibliography}{9}
  
@@ -456,26 +372,26 @@ Julius O. Smith III, \emph{Spectral Audio Signal Processing}, W3K Publishing, 20
 Available online: \url{https://ccrma.stanford.edu/~jos/sasp/}.
 
 \bibitem{moorer1979reverberation} %3
-J.~A.~Moorer, ``About this reverberation business,'' \emph{Computer Music Journal}, vol.~3, no.~2, pp.~13--28, 1979. doi:10.2307/3680287.
+J.~A.~Moorer, About this reverberation business, \emph{Computer Music Journal}, vol.~3, no.~2, pp.~13--28, 1979. doi:10.2307/3680287.
 
 \bibitem{HabetsThesis2007} %4
-E.~A.~P. Habets, ``Single- and multi-microphone speech dereverberation using spectral enhancement,'' Ph.D. dissertation, Technische Universität Eindhoven, The Netherlands, 2007. \\
+E.~A.~P. Habets, Single- and multi-microphone speech dereverberation using spectral enhancement, Ph.D. dissertation, Technische Universität Eindhoven, The Netherlands, 2007. \\
 \url{https://research.tue.nl/files/1972985/200710970.pdf}.
 
 \bibitem{oyzerman2012} %5
-A. Oyzerman, I. Cohen, ``Speech Dereverberation in the Time-Frequency Domain,'' M.Sc. Thesis, Technion, 2012. \\
+A. Oyzerman, I. Cohen, Speech Dereverberation in the Time-Frequency Domain, M.Sc. Thesis, Technion, 2012. \\
 \url{https://israelcohen.com/wp-content/uploads/2018/05/AnnaOyzerman_MSc_2012.pdf}.
 
 \bibitem{primavera2011} %6
-A. Primavera et al., ``Approximation of Real impulse response Using IIR Structures,'' Proc. EUSIPCO, 2011. \\
+A. Primavera et al., Approximation of Real impulse response Using IIR Structures, Proc. EUSIPCO, 2011. \\
 \url{https://www.eurasip.org/Proceedings/Eusipco/Eusipco2011/papers/1569422051.pdf}.
 
 \bibitem{asm2007} %7
-I. Cohen, ``Representation and Identification of Systems in the Discrete-Time Wavelet Transform Domain,'' IEEE Trans. Signal Processing, 2007. \\
+I. Cohen, Representation and Identification of Systems in the Discrete-Time Wavelet Transform Domain, IEEE Trans. Signal Processing, 2007. \\
 \url{https://israelcohen.com/wp-content/uploads/2018/05/ASM2007.pdf}.
 
 \bibitem{farina2000} %8
-A.~Farina, ``Simultaneous measurement of impulse response and distortion with a swept-sine technique,'' \emph{AES Convention 108}, 2000.\\
+A.~Farina, Simultaneous measurement of impulse response and distortion with a swept-sine technique, \emph{AES Convention 108}, 2000.\\
 \url{https://www.aes.org/e-lib/browse.cfm?elib=10211}.
 
 \bibitem{Fliege1991} %9
@@ -512,17 +428,16 @@ International Organization for Standardization, Geneva, 2017. \\
 \url{https://cdn.standards.iteh.ai/samples/63078/a42f5c5bd7014d5f99cc3a7d4fa0c0c9/ISO-532-2-2017.pdf}.
 
 \bibitem{DIN45692Free} %16
-HEAD Acoustics, ``Psychoacoustic Analyses I: Loudness and Sharpness Calculation,'' Application Note, 201x. \\
+HEAD Acoustics, Psychoacoustic Analyses I: Loudness and Sharpness Calculation, Application Note, 201x. \\
 \url{https://cdn.head-acoustics.com/fileadmin/data/global/Application-Notes/SVP/Psychoacoustic-Analyses-I_e.pdf}.
 
 \bibitem{Fastl2006} %17
-H.~Fastl, ``Psychoacoustic Basis of Sound Quality Evaluation,'' Technical University of Munich, 2006. \\
-\url{https://mediatum.ub.tum.de/doc/1138486/729841.pdf}.  
-(Free TUM repository source covering roughness and fluctuation strength models.)
+H.~Fastl, Psychoacoustic Basis of Sound Quality Evaluation, Technical University of Munich, 2006.\\
+\url{https://mediatum.ub.tum.de/doc/1138486/729841.pdf}.
 
 \bibitem{HoutgastSteeneken1985} %18
 T.~Houtgast and H.~J.~M.~Steeneken,
-``A review of the MTF concept in room acoustics and its use for estimating speech intelligibility,''
+A review of the MTF concept in room acoustics and its use for estimating speech intelligibility,
 \textit{Journal of the Acoustical Society of America},
 vol.~77, no.~3, pp.~1069–1077, 1985.
 
