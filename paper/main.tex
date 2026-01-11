@@ -225,35 +225,34 @@ Hann-windowing applies for STFT and iSTFT. The COLA method applies for iSTFT, re
 
 A sine-sweep and a speech audio was recorded by integrated microphone from a \textit{Convertible Workstation}
 %\href{https://doi-product-assets.s3.amazonaws.com/pub/Manufacturer-Brochure/1061215910.pdf}
-(\href{https://web.archive.org/web/20201031164451/https://h20195.www2.hp.com/v2/GetDocument.aspx?docname=c05939925}{HP ZBook Studio x360 G5 (6TW61EA\#ABD)}), on a desk, located in a pitched roof area corner of a living room, that has about 1 Ar. The sine-sweep sound was played back from the internal loudspeakers of the \textit{Convertible Workstation}. The integrated noise reduction was turned off. The goal was to improve the speech sound quality with the aim of having dry and clear sound when speaker sits in front of the \textit{Convertible Workstation}. A Futher assumption was, that degraded speech intelligibility could get better.
-\vspace{1em}
+(\href{https://web.archive.org/web/20201031164451/https://h20195.www2.hp.com/v2/GetDocument.aspx?docname=c05939925}{HP ZBook Studio x360 G5 (6TW61EA\#ABD)}), on a desk, located in a pitched roof area corner of a living room, that has about 1 Ar. The sine-sweep sound was played back from the internal loudspeakers of the \textit{Convertible Workstation}. The integrated noise reduction was turned off. The goal was to improve the speech sound quality with the aim of having dry and clear sound when speaker sits in front of the \textit{Convertible Workstation}. A Futher assumption was, that degraded speech intelligibility could get better. \\ 
+
 In the same manner the sine-sweep and a drum-set groove have been recorded from the same location. The sine-sweep was played back on a \href{https://ia601909.us.archive.org/31/items/manualsbase-id-372739/372739.pdf}{Alesis Active M1 MKII (8N)} near-field monitor beside the drum-set. The goal was to have dry and clear studio-like raw recording quality despite poor recording-conditions.
 
 \section{Objectives}
 Several objective measures prove the applicability of the Method.
-Some Measures are used to compare the system impulse response with the filtered impulse response, and some are used to compare a filtered with a unfiltered signal.
+Some Measures are used to compare the system impulse response with the filtered impulse response, and some are used to compare a filtered with a unfiltered signal. \\
 
 %The $T60$ of the \textit{impulse response}-filtered signal and the $T60$ of the filtered signal by modified \textit{impulse response} can be compared.
-\vspace{1em}
 A \textit{Logarithmic Signal-Power Attenuation} (LPA) was calculated to indicate the efficiency of the filter by taking the original signal $z_n$ and the filtered audio signal $z''_n$ into account:
 	\begin{equation}
 	LPA=10log_{10} \left(\frac{\overline{(z''_n-\overline{z''_n})^2}}{\overline{(z_n-\overline{z_n})^2}}\right).
 	\end{equation}
 The \textit{Short-Time Objective Intelligibility Measure} (STOI) measures the speech intelligibility \cite{stoi2010}. It is only applicable to speech audio.
 The \textit{Perceptual Evaluation of Speech Quality} (PESQ) is an algorithm that models human auditory perception, capturing effects like distortion, background noise, clipping, and delay. It measures \textit{Mean Opinion Score, Listening Quality Objective} (MOS-LQO), which is basically the clarity of an audio channel, which is also necessary for non-speech audio channels. Higher MOS-LQO indicate better quality of the audio channel.
-It is widely used in telecom, VoIP, and audio processing to measure speech enhancement or degradation \cite{pesq2001}.
+It is widely used in telecom, VoIP, and audio processing to measure speech enhancement or degradation \cite{pesq2001}. \\
+
 %The MOS-LQOs of the original signal and the filtered signal can be compared due to their difference $\Delta MOS-LQO$. %Therein the MOS-LQO from a degraded signal was estimated from its filtered signal as reference and vise versa. 
-\vspace{1em}
-Zwicker’s time-varying \textit{Loudness} model estimates how intense or loud a sound is perceived by human listeners \cite{ISO5322}.
-\vspace{1em}
-\textit{Sharpness} from DIN 45692 standard (Zwicker’s model) quantifies how piercing or shrill sound feels, based on how present the frequencies above 3kHz are \cite{DIN45692Free}.
-\vspace{1em}
-\textit{Roughness} measures how harsh or "fluttery" a sound feels, linked to rapid, audible amplitude fluctuations in the range most noticeable to human ears (20–300Hz modulation) \cite{Fastl2006}.
-\vspace{1em}
-The \textit{Definition Ratio}, D50, is the ratio of early to total energy within 50 ms \cite{HoutgastSteeneken1985}. It was used to indicate how present reverberations and late reflexions are in the impulse response.
-\vspace{1em}
-The Algorithms to measure perceptive sound quality can be used from the \textit{Modular Sound Quality Index Toolbox} \href{https://github.com/Eomys/MoSQITo}{(MoSQITo)} \cite{mosqito} \cite{mosqito2025}, \href{https://github.com/ludlows/python-pesq.git}{PESQ} \cite{pesq2025} and the \href{https://github.com/mpariente/pystoi}{STOI} \cite{stoi2025}, respectively. Further measures have been evaluated by proprietary software, namely the Cubase 5.0.1 build 147 (\href{https://o.steinberg.net/index.php?id=1782&L=1}{Steinberg Media Technologies GmbH}) \cite{cubase501}.
-\vspace{1em}
+Zwicker’s time-varying \textit{Loudness} model estimates how intense or loud a sound is perceived by human listeners \cite{ISO5322}. \\
+
+\textit{Sharpness} from DIN 45692 standard (Zwicker’s model) quantifies how piercing or shrill sound feels, based on how present the frequencies above 3kHz are \cite{DIN45692Free}. \\
+
+\textit{Roughness} measures how harsh or "fluttery" a sound feels, linked to rapid, audible amplitude fluctuations in the range most noticeable to human ears (20–300Hz modulation) \cite{Fastl2006}. \\
+
+The \textit{Definition Ratio}, D50, is the ratio of early to total energy within 50 ms \cite{HoutgastSteeneken1985}. It was used to indicate how present reverberations and late reflexions are in the impulse response. \\
+
+The Algorithms to measure perceptive sound quality can be used from the \textit{Modular Sound Quality Index Toolbox} \href{https://github.com/Eomys/MoSQITo}{(MoSQITo)} \cite{mosqito} \cite{mosqito2025}, \href{https://github.com/ludlows/python-pesq.git}{PESQ} \cite{pesq2025} and the \href{https://github.com/mpariente/pystoi}{STOI} \cite{stoi2025}, respectively. Further measures have been evaluated by proprietary software, namely the Cubase 5.0.1 build 147 (\href{https://o.steinberg.net/index.php?id=1782&L=1}{Steinberg Media Technologies GmbH}) \cite{cubase501}. \\
+
 The measures to compare the unfiltered and filtered signals can be found in the Results section table \ref{tab:Objective}. 
 
 %\subsection{Subjective}
