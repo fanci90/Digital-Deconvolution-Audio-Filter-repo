@@ -24,6 +24,7 @@ def calculate_rms(signal):
     return np.sqrt(np.mean(signal**2))
 
 # the Sine Sweep and the recorded Sine Sweep can be off phase, so it appears, that especially in the lowest frequency range periodic signal appear instead of decayed response.
+### parameter remark: use any impulse response procedure. The suggested impulse response procedure showed good results on the test data and zero phase improves stability but won't account for phase shifts.
 def calculate_impulse_response(input_sig, output_sig, n_fft, hop_length):
     # Perform cross-correlation to align input and output signals
     corr = sp_signal.correlate(output_sig, input_sig, mode='full')
@@ -98,7 +99,7 @@ def calculate_impulse_response(input_sig, output_sig, n_fft, hop_length):
     ir=ir_tapered
     return ir
 """
-def calculate_impulse_response(input_sig, output_sig, n_fft, hop_length): # uses complex cepstrum for correct back transformation
+def calculate_impulse_response(input_sig, output_sig, n_fft, hop_length): # uses complex cepstrum for correct back transformation ### parameter remark: but imaginary cepstral component showed uncontrolled phase jumps.
     corr = sp_signal.correlate(output_sig, input_sig, mode='full')
     delay = np.argmax(corr) - len(input_sig) + 1
     if delay > 0:
@@ -272,9 +273,11 @@ def add_decay_to_impulse_response(impulse_response, decay_factor):
 """
 
 def filter_signal_with_impulse_response(test_sig, impulse_response, gain_factor, hop_factor=0.5):
-    n_fft = len(impulse_response)
+    n_fft = len(impulse_response) ### parameter remark - adjust n_fft-size: n_fft with max size n_fft = int(next_power_of_2(max(4096, 4 * len(impulse_response)))) if needed. 
     hop_size = int(n_fft * hop_factor)
     window = np.hanning(n_fft)
+	### parameter remark - use padding for test_sig: test_sig = np.pad(test_sig, (2*n_fft, 2*n_fft), mode='constant')
+	### parameter remark - use input_length to adjust for padding in the result: input_length=len(test_sig)
     filtered_sig = np.zeros(len(test_sig) + n_fft, dtype=np.float32)  # Zero-pad tail for overlap-add
     window_correction = np.zeros_like(filtered_sig)
 
@@ -318,7 +321,7 @@ def filter_signal_with_impulse_response(test_sig, impulse_response, gain_factor,
     filtered_sig[nonzero] /= window_correction[nonzero]
 
     # Truncate to original signal length
-    filtered_sig = filtered_sig[:len(test_sig)]
+    filtered_sig = filtered_sig[:len(test_sig)] ### parameter remark - adjust for padding: filtered_sig = filtered_sig[2*n_fft-1:input_length+2*n_fft]
 
     # Apply gain factor
     filtered_sig *= gain_factor
@@ -597,14 +600,14 @@ def main():
     sf.write(sweep_file, periodic_sweep, sample_rate)
 
     # Input and output files
-    #input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
-    #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_beside_the_drums.wav')
-    #test_file = os.path.join(input_dir, 'z/Record.wav')
-    
     input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
-    input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 1.wav')
+    input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_beside_the_drums.wav')
+    test_file = os.path.join(input_dir, 'z/Record.wav')
+    
+    #input_file1 = os.path.join(input_dir, 'x/periodic_sine_sweep.wav')
+    #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 1.wav')
     #input_file2 = os.path.join(input_dir, 'y/periodic_sine_sweep_Schreibtisch hinten im Eck 2.wav')
-    test_file = os.path.join(input_dir, 'z/speech.wav')
+    #test_file = os.path.join(input_dir, 'z/speech.wav')
     
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     output_folder = os.path.join(input_dir, f"output_{timestamp}")
